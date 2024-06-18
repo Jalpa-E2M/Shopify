@@ -1,0 +1,155 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "heading": {
+      "type": "heading",
+      "blocks": {
+        "54905fe4-3ac5-4472-88e8-a1096abc0dec": {
+          "type": "title",
+          "settings": {
+            "text": "<p>Contact<em> us<\/em><\/p>",
+            "title-size": "xl",
+            "style": "serif",
+            "tag": "h1",
+            "link": "",
+            "padding-top": "0",
+            "padding-bottom": "0"
+          }
+        }
+      },
+      "block_order": [
+        "54905fe4-3ac5-4472-88e8-a1096abc0dec"
+      ],
+      "settings": {
+        "text-alignment": "center",
+        "bg-color": "dark",
+        "container-width": "large",
+        "padding-top": "large",
+        "padding-bottom": "large",
+        "fade": "1",
+        "anchor-id": "",
+        "visibility": "show"
+      }
+    },
+    "feature": {
+      "type": "feature",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "1664775893eccef6c4": {
+      "type": "contact-form",
+      "settings": {
+        "info": "<p>Have a question or comment?<\/p><p>Enter your details and we'll be happy to get back to you.<\/p>",
+        "bg-color": "dark",
+        "container-width": "small",
+        "padding-top": "0",
+        "padding-bottom": "huge",
+        "fade": "1",
+        "anchor-id": "",
+        "visibility": "show"
+      }
+    },
+    "divider-line": {
+      "type": "divider-line",
+      "settings": {
+        "bg-color": "white",
+        "fade-in": "0"
+      }
+    },
+    "instagram": {
+      "type": "instagram",
+      "blocks": {
+        "7f425e14-d028-4455-9868-8ef4e0d64a1b": {
+          "type": "title",
+          "settings": {
+            "text": "<p>@eyeswoon<\/p>",
+            "title-size": "l",
+            "style": "serif",
+            "tag": "h1",
+            "link": "https:\/\/instagram.com\/eyeswoon",
+            "padding-top": "0",
+            "padding-bottom": "0"
+          }
+        },
+        "54c90959-ebb9-466d-a1db-889aaff6a2cb": {
+          "type": "instagram-images",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/63180fdaf1542b178db4c4ab_hero_img.webp",
+            "link": ""
+          }
+        },
+        "36d21035-e322-461b-bc2c-8adb0e8aa152": {
+          "type": "instagram-images",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Screenshot_2022-10-02_at_5.42.05_PM.png",
+            "link": ""
+          }
+        },
+        "7f477455-ca54-4408-93ea-b0ed9bf7191b": {
+          "type": "instagram-images",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/631d1f94bc22fcd43224b9c7_instagram06.webp",
+            "link": ""
+          }
+        },
+        "f0e6d20f-cd6b-41c4-a4b6-8d82ab4430b6": {
+          "type": "instagram-images",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/countershadow.jpg",
+            "link": ""
+          }
+        },
+        "a864e4b5-baa3-4393-93ef-60ea0b56c0bc": {
+          "type": "instagram-images",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/631d1f9360e214d17d36c258_instagram04.webp",
+            "link": ""
+          }
+        },
+        "023a1961-0d60-48e6-add9-05ef29f24e05": {
+          "type": "instagram-images",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/631ced0260e2143c9833fb2a_articleimgexample03.webp",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "7f425e14-d028-4455-9868-8ef4e0d64a1b",
+        "54c90959-ebb9-466d-a1db-889aaff6a2cb",
+        "36d21035-e322-461b-bc2c-8adb0e8aa152",
+        "7f477455-ca54-4408-93ea-b0ed9bf7191b",
+        "f0e6d20f-cd6b-41c4-a4b6-8d82ab4430b6",
+        "a864e4b5-baa3-4393-93ef-60ea0b56c0bc",
+        "023a1961-0d60-48e6-add9-05ef29f24e05"
+      ],
+      "settings": {
+        "carousel": true,
+        "text-alignment": "center",
+        "bg-color": "medium",
+        "container-width": "large",
+        "padding-top": "large",
+        "padding-bottom": "large",
+        "fade": "2",
+        "anchor-id": "",
+        "visibility": "show"
+      }
+    }
+  },
+  "order": [
+    "heading",
+    "feature",
+    "1664775893eccef6c4",
+    "divider-line",
+    "instagram"
+  ]
+}

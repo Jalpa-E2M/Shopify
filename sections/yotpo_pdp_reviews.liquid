@@ -1,0 +1,1001 @@
+<section id="pdp-reviews" style="margin-bottom:-1px;text-align:{{section.settings.text_align}};color:{{ section.settings.text-color }};background-color: {{ section.settings.background-color }};margin-top: {{ section.settings.margin-top }}vw;padding-top:{{ section.settings.padding-top }}vw;padding-bottom:{{ section.settings.padding-bottom }}vw;">
+  <div class="{% if section.settings.page_padding %}page-padding{% endif %}">
+    <div class="container-{{ section.settings.container_size }}"> 
+      <div class="reviews">
+        <div class="reviews_header"> 
+          <div class="reviews_header-left"> 
+            <h2 class="{{ section.settings.header-size }}" style="line-height:54px;margin-bottom:0;margin-top:0;margin-right:1rem;">Reviews</h2>
+            <div class="reviews_total-wrapper">
+              <div class="reviews_stars">
+                <div id="product-total-stars" class="reviews_stars-fg"></div> 
+                <div class="reviews_stars-bg"></div>
+              </div>
+              <div class="body-small" id="reviews-avg"></div>
+            </div>
+          </div>
+          <button id="write-review" href="#" class="button-text w-button">Write a Review</button>
+        </div>
+        <div class="reviews_filters">
+          <div class="reviews_filters-layout">
+            <div class="reviews_filters-layout">
+              <input
+                style="width:auto;display:inline-block;"
+                id="reviews-search-input"
+                class="reviews_search-input form-input"
+                type="text"
+                placeholder="Search Reviews"
+              >
+              <select id="reviews-filters" class="form-input is-select" style="border-bottom:none;line-height:calc(100% + 4px);width:auto;display:inline-block;">
+                <option value="most_relevant">Most Relevant</option>
+                <option value="top_rated">Top Rated</option>
+                <option value="most_recent">Most Recent</option>
+                <option value="with_media">With Photos</option>
+                <option value="verified_buyers">Verified Buyers</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="reviews_list" id="reviews-list"> 
+          <span
+            style="display:block;text-align:center;opacity:0.5;width:100%;padding-bottom:4rem;"
+            aria-label="Loading reviews"
+            >Loading Reviews...</span
+          >
+        </div>
+        <div class="reviews_read-all-wrapper" style="border-bottom:none;padding:0;">
+          <button id="load-more-reviews" class="button-text w-button" style="display:none;">Load More Reviews</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  
+
+var reviewsPage = 1;
+var reviewsPerPage = 4;
+var reviewsUrl = `https://api-cdn.yotpo.com/v1/widget/FpAmvotWhpWC80ACl8Pm5DhLrERshyfvWLI1Z0Om/products/{{product.id}}/reviews.json?per_page=${reviewsPerPage}&page=${reviewsPage}`;
+var reviewsUrlNext;
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  ////ASSIGN YOTPO REVIEW BUTTON TO PSEUDO CLICK
+  function yotpoClickListener() {
+    const createReviewBtn = document.querySelector("#yotpo-main-widget-btn");
+    // Check if createReviewBtn exists
+    if (!createReviewBtn) {
+      // If it does not exist, run the function again after 500ms
+      setTimeout(yotpoClickListener, 500);
+      return;
+    }
+    // Assign custom widget review button
+    const writeReviewBtn = document.getElementById("write-review");
+    writeReviewBtn.addEventListener("click", () => {
+      createReviewBtn.click();
+    });
+    const yotpoReviewsStarRatingsWidget = document.querySelector('#yotpo-reviews-star-ratings-widget');
+    const reviews = document.querySelector('.reviews');
+    
+    if (yotpoReviewsStarRatingsWidget) {
+      yotpoReviewsStarRatingsWidget.addEventListener('click', () => {
+        const topOffset = reviews.getBoundingClientRect().top + window.pageYOffset - 150;
+        window.scrollTo({ top: topOffset, behavior: 'smooth' });
+      });
+    }
+
+  }
+  yotpoClickListener();
+  
+ //get general review info
+  function InitReviews() {
+    reviewsPage = 1;
+    reviewsPerPage = 4;
+    reviewsUrl = `https://api-cdn.yotpo.com/v1/widget/FpAmvotWhpWC80ACl8Pm5DhLrERshyfvWLI1Z0Om/products/{{product.id}}/reviews.json?per_page=${reviewsPerPage}&page=${reviewsPage}`;
+    console.log(reviewsUrl);
+    fetch(reviewsUrl)
+      .then(response => response.json())
+      .then(reviewsJSON => {
+        
+        //TOTAL REVIEWS INFO STRING
+        const totalReviews = reviewsJSON.response.bottomline.total_review.toString();
+        const reviewsAvg = reviewsJSON.response.bottomline.average_score.toFixed(1).toString();
+        const reviewsAvgWidth = (reviewsJSON.response.bottomline.average_score / 5) * 100;
+        const reviewsAvgElement = document.getElementById("reviews-avg");
+        reviewsAvgElement.innerHTML = `<strong>${reviewsAvg}/5</strong> Based on <strong>${totalReviews} Reviews</strong>`;
+        
+        //AVG REVIEW STARS IMG
+        
+        const averageScorePercentage = (reviewsJSON.response.bottomline.average_score / 5) * 100;
+        const productTotalStars = document.querySelector("#product-total-stars");
+        productTotalStars.style.width = `${averageScorePercentage}%`;
+  
+        reviewsUrlNext = `https://api-cdn.yotpo.com/v1/widget/FpAmvotWhpWC80ACl8Pm5DhLrERshyfvWLI1Z0Om/products/{{product.id}}/reviews.json?per_page=${reviewsPerPage}&page=${reviewsPage + 1}`
+        
+        createNewReviewElements(reviewsJSON, false, true, false);
+  
+        
+        
+      })
+      .catch(error => console.error('Error fetching data:', error));
+    };
+  InitReviews();
+  window.InitReviews = InitReviews;
+  
+  });
+
+  
+
+//ADD READMORE BUTTON TO INDIVIDUAL REVIEWS
+function applyReadMoreLogic(reviewElement) {
+  function getLineHeight(element) {
+    const lineHeight = window.getComputedStyle(element).getPropertyValue("line-height");
+    return parseFloat(lineHeight);
+  }
+
+  const reviewParagraph = reviewElement.querySelector('.reviews_item-review');
+  const lineHeight = getLineHeight(reviewParagraph);
+  const maxHeight = lineHeight * 8;
+  const readMoreButton = reviewParagraph.parentElement.querySelector(".reviews_read-more");
+  const readLessButton = reviewParagraph.parentElement.querySelector(".reviews_read-less");
+  reviewParagraph.classList.remove("expanded");
+  if (reviewParagraph.offsetHeight > maxHeight && !reviewParagraph.classList.contains("expanded")) {
+    reviewParagraph.style.display = '-webkit-box';
+    reviewParagraph.style.webkitLineClamp = '8';
+    reviewParagraph.style.lineClamp = '8';
+    reviewParagraph.style.webkitBoxOrient = 'vertical';
+    function handleReadMoreClick() {
+      readMoreButton.style.display = "none";
+      readLessButton.style.display = "inline";
+      reviewParagraph.classList.add("expanded");
+      
+    }
+  
+    function handleReadLessClick() {
+      readLessButton.style.display = "none";
+      readMoreButton.style.display = "inline";
+      reviewParagraph.classList.remove("expanded");
+      
+    }
+  
+    if (readMoreButton) {
+      readMoreButton.style.display = "inline";
+      readMoreButton.addEventListener("click", handleReadMoreClick);
+    }
+  
+    if (readLessButton) {
+      readLessButton.addEventListener("click", handleReadLessClick);
+    }
+  }
+}
+
+
+  
+//ADD RELOADED OR PAGINATED REVIEWS
+function createNewReviewElements(reviewsJSON, isLoadMore, isReinit, isFilter) {
+
+  const container = document.querySelector("#reviews-list");
+  const reviews = reviewsJSON.response.reviews;
+  const isReviewsEmpty = reviews.length === 0;
+  
+  // FIRST CHECK IF NO RESULTS
+  if (isLoadMore == false && isReviewsEmpty && isFilter == false) {
+    container.innerHTML = `<span style="display:block;text-align:center;opacity:0.5;width:100%;padding-bottom:4rem;" aria-label="No reviews yet">No reviews yet. Be the first to share your thoughts about this product!</span>`;
+  } else if (isReinit == true && isReviewsEmpty) {
+    container.innerHTML = `<span style="display:block;text-align:center;opacity:0.5;width:100%;padding-bottom:4rem;" aria-label="No results to show">No results</span>`;
+  } else {
+    
+    if (isReinit == true) { 
+      //CLEAR ALL CONTENT 
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+    } else {
+      //ENSURE LOADING STATE IS REMOVED
+      Array.from(container.childNodes).forEach(child => {
+        if (child.nodeType === Node.ELEMENT_NODE && child.tagName === 'SPAN') {
+          container.removeChild(child);
+        }
+      });
+    }
+
+    reviews.forEach((review, index) => {
+      const reviewStarsWidth = ((review.score / 5) * 100).toString();
+      const reviewContent = review.content;
+      const reviewTitle = review.title;
+      const reviewName = review.user.display_name;
+
+      const reviewDate = review.created_at;
+      const date = new Date(reviewDate);
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const year = String(date.getFullYear()).substr(-2);
+      const reviewFormattedDate = `${month}/${day}/${year}`;
+
+      const reviewMedia = review.images_data;
+      var reviewMediaEl = "";
+      if (reviewMedia) {
+        reviewMedia.forEach(mediaData => {
+          const originalUrl = mediaData.original_url;
+          reviewMediaEl += `<div style="background-image:url('${originalUrl}');" loading="lazy" alt="Review image from ${reviewName}" class="reviews_media-item"></div>`
+        });
+      };
+      var isVerifiedBuyer = review.verified_buyer;
+      if (isVerifiedBuyer) {
+        isVerifiedBuyer = `&nbsp; | &nbsp; <div style="display:inline-block;"><svg style="width:16px;height:16px;display:inline-block;margin-bottom:3px;opacity:0.66;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.6 22.5L6.7 19.3L3.1 18.5L3.45 14.8L1 12L3.45 9.2L3.1 5.5L6.7 4.7L8.6 1.5L12 2.95L15.4 1.5L17.3 4.7L20.9 5.5L20.55 9.2L23 12L20.55 14.8L20.9 18.5L17.3 19.3L15.4 22.5L12 21.05L8.6 22.5ZM10.95 15.55L16.6 9.9L15.2 8.45L10.95 12.7L8.8 10.6L7.4 12L10.95 15.55Z" fill="black"/></svg>
+                          <span style="display:inline;opacity:0.5">Verified</span></div>`
+      } else { isVerifiedBuyer = ""}
+  
+      let newReviewHtml = "";
+      if (index == 0 && isLoadMore != true) { 
+        newReviewHtml = `
+          <div class="review_primary-item">
+            <div class="review_primary-content">
+              <div class="reviews_item-stars">
+                <div class="reviews_stars">
+                  <div id="product-total-stars" class="reviews_stars-fg" style="width: ${reviewStarsWidth}%;"></div>
+                  <div class="reviews_stars-bg"></div>
+                </div>
+              </div>
+              <div class="title-text">${reviewTitle}</div>
+              <div class="reviews_item-body">
+                <p class="reviews_item-review body-small">${reviewContent}</p>
+                <button aria-label="Click to read more review" class="text-link reviews_read-more body-small">Read more</button>
+                <button aria-label="Click to read more review" class="text-link reviews_read-less body-small">Read less</button>
+              </div>
+              <div class="reviews_item-media is-primary">
+                <div class="reviews_item-media-wrapper">${reviewMediaEl}</div>
+              </div>
+              <div class="reviews_item-bio body-small"><span class="reviews_item-bio-name">${reviewName}</span> &nbsp; | &nbsp; <span class="reviews_item-bio-date">${reviewFormattedDate}</span>${isVerifiedBuyer}</div>
+            </div>
+            <div class="review-primary_media">
+              <div class="reviews_item-media-wrapper">${reviewMediaEl}</div>
+            </div>`;
+      } else {
+        newReviewHtml = `
+            <div class="review_item">
+              <div class="reviews_item-layout">
+                <div class="reviews_item-stars">
+                  <div class="reviews_stars">
+                  <div id="product-total-stars" class="reviews_stars-fg" style="width: ${reviewStarsWidth}%;"></div>
+                  <div class="reviews_stars-bg"></div>
+                </div>
+                </div>
+                <div class="title-text">${reviewTitle}</div>
+                <div class="reviews_item-body">
+                  <p class="reviews_item-review body-small">${reviewContent}</p>
+                  <button class="text-link reviews_read-more body-small">Read more</button>
+                  <button class="text-link reviews_read-less body-small">Read less</button>
+                </div>
+                <div class="reviews_item-media">
+                  <div class="reviews_item-media-wrapper">${reviewMediaEl}</div>
+                </div>
+                <div class="reviews_item-bio body-small"><span class="reviews_item-bio-name">${reviewName}</span> &nbsp; | &nbsp; <span class="reviews_item-bio-date">${reviewFormattedDate}</span>${isVerifiedBuyer}</div>
+              </div>
+            </div>`;
+      }
+      container.insertAdjacentHTML("beforeend", newReviewHtml);
+      const newReviewElement = container.lastElementChild;
+      applyReadMoreLogic(newReviewElement);
+    
+    });
+  
+  };
+
+  createPopup();
+
+  reviewsPage += 1;
+  reviewsUrlNext = `https://api-cdn.yotpo.com/v1/widget/FpAmvotWhpWC80ACl8Pm5DhLrERshyfvWLI1Z0Om/products/{{product.id}}/reviews.json?per_page=${reviewsPerPage}&page=${reviewsPage}`;
+  checkLoadMore(reviewsUrlNext);
+}; 
+
+function createPopup() {
+  const mediaItems = document.querySelectorAll('.reviews_media-item');
+
+  mediaItems.forEach((item) => {
+    const newClickHandler = () => {
+      const newDiv = document.createElement('div');
+      newDiv.classList.add('reviews_popup');
+
+      const duplicatedItem = item.cloneNode(true);
+      newDiv.appendChild(duplicatedItem);
+
+      document.body.appendChild(newDiv);
+
+      newDiv.addEventListener('click', (e) => {
+         newDiv.remove();
+      });
+
+      window.addEventListener('scroll', () => {
+        newDiv.remove();
+      });
+ 
+      const closeOnEscape = (e) => {
+        if (e.key === 'Escape') {
+          newDiv.remove();
+          document.removeEventListener('keydown', closeOnEscape);
+        }
+      };
+
+      document.addEventListener('keydown', closeOnEscape);
+    };
+
+    // Remove existing event listener by replacing the item with a clone
+    const newItem = item.cloneNode(true);
+    item.replaceWith(newItem);
+
+    // Add new event listener
+    newItem.addEventListener('click', newClickHandler);
+  });
+}
+
+function checkLoadMore(reviewsUrlNext) {
+   fetch(reviewsUrlNext)
+    .then(response => response.json())
+    .then(reviewsJSON => {
+      const reviews = reviewsJSON.response.reviews;
+      const isReviewsEmpty = reviews.length === 0;
+      const loadMoreBtn = document.querySelector('#load-more-reviews');
+      const loadMoreWrapper = document.querySelector('.reviews_read-all-wrapper');
+      if (!isReviewsEmpty) {
+            loadMoreBtn.style.display = 'block';
+          loadMoreWrapper.style.padding = '1rem';
+          loadMoreWrapper.style.borderBottom = '1px solid #bfbfbf';
+          loadMoreBtn.addEventListener('click', function handleClick() {
+            // Remove the event listener
+            this.removeEventListener('click', handleClick);
+            
+            // Call the createNewReviewElements function
+            createNewReviewElements(reviewsJSON, true, false, false);
+          });
+      } else {
+        loadMoreBtn.style.display = 'none';
+        loadMoreWrapper.style.padding = '0rem';
+        loadMoreWrapper.style.borderBottom = 'none';
+            
+      }
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  
+  const searchInput = document.querySelector('#reviews-search-input');
+  searchInput.addEventListener('input', (event) => {
+    const searchText = event.target.value;
+    if (searchText == "") {
+      InitReviews();
+    } 
+    else {
+      fetch('https://api-cdn.yotpo.com/v1/reviews/FpAmvotWhpWC80ACl8Pm5DhLrERshyfvWLI1Z0Om/filter.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "domain_key": "{{ product.id }}",
+          "free_text_search": searchText
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+           createNewReviewElements(data, false, true, true);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+  });
+  
+  const reviewsFilters = document.getElementById('reviews-filters');
+  reviewsFilters.addEventListener('change', (event) => {
+      const selectedValue = reviewsFilters.value;
+      console.log(selectedValue);
+      if (selectedValue == "most_relevant") {
+        InitReviews();
+      } else if (selectedValue == "top_rated") {
+        fetch('https://api-cdn.yotpo.com/v1/reviews/FpAmvotWhpWC80ACl8Pm5DhLrERshyfvWLI1Z0Om/filter.json?per_page=25&page=1', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            "domain_key": "{{ product.id }}",
+            sortings: [{
+              sort_by: 'score',
+              ascending: false
+            }]
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+           createNewReviewElements(data, false, true, true);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      } else if (selectedValue == "most_recent") {
+        fetch('https://api-cdn.yotpo.com/v1/reviews/FpAmvotWhpWC80ACl8Pm5DhLrERshyfvWLI1Z0Om/filter.json?per_page=25&page=1', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "domain_key": "{{ product.id }}",
+          sortings: [{
+            sort_by: 'date',
+            ascending: false
+          }]
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+           createNewReviewElements(data, false, true, true);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      } else if (selectedValue == "with_media") {
+        fetch('https://api-cdn.yotpo.com/v1/reviews/FpAmvotWhpWC80ACl8Pm5DhLrERshyfvWLI1Z0Om/filter.json?per_page=25&page=1', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "domain_key": "{{ product.id }}",
+          sortings: [{
+            sort_by: 'image_count',
+            ascending: false
+          }]
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+           createNewReviewElements(data, false, true, true);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      } else if (selectedValue == "verified_buyers") {
+        fetch('https://api-cdn.yotpo.com/v1/reviews/FpAmvotWhpWC80ACl8Pm5DhLrERshyfvWLI1Z0Om/filter.json?per_page=25&page=1', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "domain_key": "{{ product.id }}",
+          verified_buyer: true
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+           createNewReviewElements(data, false, true, true);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+  });
+ });
+
+
+
+</script>
+<style>
+    #shopify-section-template--16742195233001__168032554961b22d0c, .yotpo-widget-instance {
+      display:none;
+    }
+    .reviews_header {
+      display: flex;
+      align-items: baseline;
+      grid-column-gap: 1.5rem;
+    }
+
+    .reviews_total-wrapper {
+      margin-right: auto;
+      display:flex;
+      gap:0.5rem;
+    }
+
+    .reviews_popup {
+      background-color:rgba(0,0,0,0.75);z-index:99999;position:fixed;top:0;width:0;height:100%;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:5%;
+    }
+
+    .reviews_popup * {
+      background-size:contain!important;
+      width:100%!important;
+      height:100%!important;
+      padding:0!important;
+      margin:0!important;
+    }
+
+    .reviews_read-more, .reviews_read-less {
+      display:none;
+    }
+
+    .star {
+      display: block;
+      width: 1.15rem;
+      height: 1.15rem;
+      justify-content: center;
+      align-items: center;
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+      -o-object-fit: contain;
+         object-fit: contain;
+      -o-object-position: 50% 50%;
+         object-position: 50% 50%;
+    }
+
+    .reviews_stars {
+      position: relative;
+      margin-bottom: 0.5rem;
+      width:6.12rem;
+    }
+
+    .reviews_stars-bg {
+      width: 6.12rem;
+      height: 0.9774999999999999rem;
+      background-image: url('https://cdn.shopify.com/s/files/1/0629/2855/2169/files/stars.svg?v=1680893295');
+      background-position: 0% 50%;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      opacity: 0.33;
+      -o-object-fit: cover;
+         object-fit: cover;
+      -o-object-position: 0% 0%;
+         object-position: 0% 0%;
+    }
+
+    .reviews_stars-fg {
+      position: absolute;
+      left: 0%;
+      top: 0%;
+      right: auto;
+      bottom: 0%;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://cdn.shopify.com/s/files/1/0629/2855/2169/files/stars.svg?v=1680893295');
+      background-position: 0% 50%;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      -o-object-fit: cover;
+         object-fit: cover;
+      -o-object-position: 0% 0%;
+         object-position: 0% 0%;
+    }
+
+    .reviews_filters {
+      margin-top:1rem;
+      margin-bottom: 2rem;
+    }
+
+    .reviews_search-input {
+      background-image: url('https://cdn.shopify.com/s/files/1/0629/2855/2169/files/search-icon.svg?v=1680893264');
+      background-position: 100% 50%;
+      background-size: 1.75rem 1.75rem;
+      background-repeat: no-repeat;
+      width:auto!important;
+      display:inline-block!important;
+    }
+
+    .reviews_list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .review_primary-item {
+      display: flex;
+      width: 100%;
+      padding-bottom: 1.5rem;
+      align-items: center;
+      grid-column-gap: 3rem;
+      border-bottom: 1px solid #fff;
+    }
+
+    .review_item {
+      display: block;
+      width: 33.33%;
+      padding-top: 1.5rem;
+      padding-right: 4%;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #fff;
+    }
+
+    .review_primary-content {
+      flex: 1;
+    }
+
+   .reviews_item-media-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin-right: -1rem;
+    flex: 1;
+
+    /* Hide scrollbar for Chrome, Safari, and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* Hide scrollbar for Firefox */
+  @-moz-document url-prefix() {
+    .reviews_item-media-wrapper {
+      scrollbar-width: none;
+    }
+  }
+
+    .reviews_item-media-wrapper {
+      margin-right: -1rem;
+    }
+    .reviews_media-item {
+      width: calc(50% - 2rem);
+      cursor:pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+      padding-bottom: calc(50% - 2rem);
+      margin-right: 1rem;
+      align-self: stretch;
+      background-size:cover;
+      flex: 0 0 auto;
+      -o-object-fit: contain;
+         object-fit: contain;
+      -o-object-position: 0% 0%;
+         object-position: 0% 0%;
+    }
+
+    .reviews_item-body {
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .reviews_item-stars {
+      position: relative;
+      margin-bottom: 0.5rem;
+      position: relative;
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      transform-origin: left bottom;
+      transform: scale(0.66);
+    }
+
+    .reviews_items-stars-fg {
+      position: absolute;
+      left: 0%;
+      top: 0%;
+      right: auto;
+      bottom: 0%;
+      display: block;
+      width: 4.303125rem;
+      height: 0.6873046875rem;
+      background-image: url('https://cdn.shopify.com/s/files/1/0629/2855/2169/files/stars.svg?v=1680893295');
+      background-position: 0% 50%;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      -o-object-fit: cover;
+         object-fit: cover;
+      -o-object-position: 0% 0%;
+         object-position: 0% 0%;
+    }
+
+    .reviews_item-stars-bg {
+      width: 4.303125rem;
+      height: 0.6873046875rem;
+      background-image: url('https://cdn.shopify.com/s/files/1/0629/2855/2169/files/stars.svg?v=1680893295');
+      background-position: 0% 50%;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      opacity: 0.33;
+      -o-object-fit: cover;
+         object-fit: cover;
+      -o-object-position: 0% 0%;
+         object-position: 0% 0%;
+    }
+
+    .reviews_item-bio {
+      margin-top: 1.5rem;
+    }
+
+    .reviews_item-media-wrapper {
+      display: flex;
+      overflow: scroll;
+    }
+
+    .reviews_item-review {
+      margin-bottom: 0px;
+    }
+
+    .review-primary_media {
+      flex: 1;
+    }
+
+    .reviews_item-media.is-primary {
+      display: none;
+    }
+
+    .reviews_read-all-wrapper {
+      display: flex;
+      width: 100%;
+      margin-top: -1px;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      justify-content: center;
+      align-items: center;
+      border-top: 1px solid #fff;
+      text-align: center;
+    }
+
+    .reviews_item-layout {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .reviews_header-left {
+      display: flex;
+      margin-right: auto;
+      align-items:baseline;
+    }
+
+    .reviews_filters-layout {
+      display: flex;
+      flex-wrap: wrap;
+      grid-column-gap: 1rem;
+      grid-row-gap: 0.5rem;
+    }
+
+    .reviews_item-review {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+  /*     -webkit-line-clamp: 8;
+      line-clamp: 8; */
+    }
+    .reviews_item-review.expanded {
+    	-webkit-line-clamp: unset!important;
+      line-clamp: unset!important;
+    }
+
+    @media (max-width:478px) {
+    	.review_item {
+        padding-right: unset;
+      }
+      .reviews_filters-layout input, .reviews_filters-layout select, .reviews_filters-layout {
+        	width:100%!important;
+        }
+    	}
+
+    @media screen and (max-width: 991px) {
+      .review_item {
+        width: 100%;
+      }
+
+      .reviews_header-left {
+        flex-direction: column;
+
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .review-primary_media {
+        display: none;
+      }
+
+      .reviews_item-media.is-primary {
+        display: block;
+      }
+      .reviews_total-wrapper {
+        flex-direction:column;
+        gap:0;
+      }
+    }
+
+    @media screen and (max-width: 479px) {
+      .reviews_header {
+      }
+
+      .reviews_filters {
+        margin-bottom: 1rem;
+      }
+
+      .review_item {
+        width: 100%;
+      }
+    }
+
+#yotpo-modal h1, #yotpo-modal h2, #yotpo-modal h3, #yotpo-modal h4, #yotpo-modal h5, .yotpo-headline-complete {    text-transform: uppercase;font-weight: 400;letter-spacing: 0.1em;}
+.yotpo-headline-complete {font-family:Saol Display,Times New Roman,serif!important;}
+#yotpo-modal .yotpo-form-label {font-size: calc(var(--fontsize) * (14/17)); line-height: calc(var(--fontsize) * (14/17)); letter-spacing: calc(var(--fontsize) * (.75/17));text-transform: uppercase;font-family:Neutraface, sans-serif!important;font-weight:500;margin-bottom:0.25rem;}
+yotpo-star-rating-icons-wrapper {padding:0;margin:0;margin-bottom:1rem;}
+.yotpo-new-review-star-rating {min-height:0!important;margin-bottom:1rem;}
+.yotpo-star-rating-icons {transform: scale(0.75);transform-origin: top left;}
+#yotpo-modal fieldset {padding:0!important;}
+.yotpo-input-wrapper {min-height:0!important;margin-bottom:1rem!important;}
+.yotpo-review-form {padding-bottom:2rem!important;}
+#yotpo-modal {background-color:var(--extralight)!important;}
+.yotpo-input-wrapper input::placeholder, .yotpo-input-wrapper textarea::placeholder {padding-left:0!important;padding-right:0!important;}
+#yotpo-modal input, #yotpo-modal textarea {background-color:transparent!important;border:none;border-bottom:1px solid black;padding-left:0!important;padding-right:0!important;}
+#yotpo-modal .form-footer {background-color:transparent!important;}
+#yotpo-modal .form-footer button, yotpo-shop-complete {padding: 12px 15px;
+    width:auto!important;;height:auto!important;;border-radius:0px!important;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--black)!important;;
+    background-color: transparent!important;;
+    -webkit-transition: all .2s ease!important;;
+    transition: all .2s ease!important;;
+    color: var(--black)!important;;
+    font-size: calc(var(--fontsize) * (14 / 17))!important;;
+    line-height: calc(var(--fontsize) * (14 / 17))!important;;
+    text-align: center!important;;
+    letter-spacing: calc(var(--fontsize) * (3.5 / 17))!important;;
+    text-transform: uppercase!important;;
+    cursor: pointer;}
+.yotpo-sr-bottom-line-text {font-weight:400!important;}
+</style>
+
+{% schema %}
+{
+  "name": "Yotpo PDP reviews",
+  "settings": [
+    {
+      "type": "select",
+      "id": "header-size",
+      "label": "Header Size",
+      "options": [
+          {
+              "value": "heading-s",
+              "label": "Small"
+          },
+          {
+              "value": "heading-m",
+              "label": "Medium"
+          },
+          {
+              "value": "heading-l",
+              "label": "Large"
+          },
+          {
+              "value": "heading-xl",
+              "label": "Xlarge"
+          },
+          {
+              "value": "heading-xxl",
+              "label": "Huge"
+          }
+      ],
+      "default": "heading-m"
+  },
+    {
+      "type": "color",
+      "id": "background-color",
+      "label": "Background color"
+    },
+    {
+        "type": "color",
+        "id": "text-color",
+        "label": "Text color"
+    },
+    {
+        "type": "radio",
+        "id": "text_align",
+        "options": [
+            {
+                "value": "left",
+                "label": "Text left"
+            },
+            {
+                "value": "center",
+                "label": "Text center"
+            },
+            {
+                "value": "right",
+                "label": "Text right"
+            }
+        ],
+        "label": "Text aligment",
+        "default": "left"
+    },
+    {
+        "type": "select",
+        "id": "container_size",
+        "label": "Container Size",
+        "options": [
+            {
+                "value": "none",
+                "label": "None"
+            },
+            {
+                "value": "small",
+                "label": "Small"
+            },
+            {
+                "value": "medium",
+                "label": "Medium"
+            },
+            {
+                "value": "large",
+                "label": "Large"
+            },
+            {
+                "value": "xlarge",
+                "label": "X-Large"
+            }
+        ],
+        "default": "medium"
+    },
+    {
+        "type": "checkbox",
+        "id": "page_padding",
+        "label": "Page Padding",
+        "default": true
+    },
+    {
+        "type": "range",
+        "id": "padding-top",
+        "label": "Padding Top",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "default": 4,
+        "unit": "vw",
+        "info": "Padding is responsive and will shrink on smaller screensizes"
+    },
+    {
+        "type": "range",
+        "id": "padding-bottom",
+        "label": "Padding Bottom",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "default": 4,
+        "unit": "vw",
+        "info": "Padding is responsive and will shrink on smaller screensizes"
+    },
+    {
+        "type": "range",
+        "id": "margin-top",
+        "label": "Margin Top",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "default": 4,
+        "unit": "rem",
+        "info": "Margin is unchanging on all screensizes."
+    },
+    {
+        "type": "range",
+        "id": "margin-bottom",
+        "label": "Margin Bottom",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "default": 4,
+        "unit": "rem",
+        "info":"Margin is unchanging on all screensizes."
+    }
+  ],
+  "presets": [
+    {
+      "category": "pdp",
+      "name":"Yotpo PDP reviews"
+    }
+  ]
+}
+{% endschema %}

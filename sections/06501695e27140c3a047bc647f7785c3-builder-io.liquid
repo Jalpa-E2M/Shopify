@@ -1,0 +1,87 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == 'd54fc87320574b0cb7cb5b7e19ca71b9' %}
+{% include 'content.d54fc87320574b0cb7cb5b7e19ca71b9.builder' %}
+{% elsif request.design_mode and section.settings.builder_content_entry_preview == '142a716e97894168a9e4feca52688cae' %}
+{% include 'content.142a716e97894168a9e4feca52688cae.builder' %}
+{% elsif request.design_mode and section.settings.builder_content_entry_preview == 'c059f6988130498fa8bfd9edccc0dcbf' %}
+{% include 'content.c059f6988130498fa8bfd9edccc0dcbf.builder' %}
+{% elsif request.design_mode and section.settings.builder_content_entry_preview == '941e3151b79a44d9b73dad99eb98b7c4' %}
+{% include 'content.941e3151b79a44d9b73dad99eb98b7c4.builder' %}
+{% elsif request.design_mode and section.settings.builder_content_entry_preview == '6292aed7972541a284c841cef59040c2' %}
+{% include 'content.6292aed7972541a284c841cef59040c2.builder' %}
+{% elsif request.design_mode and section.settings.builder_content_entry_preview == 'd2bdb1446e0445d19173b05d6cade470' %}
+{% include 'content.d2bdb1446e0445d19173b05d6cade470.builder' %}
+{% elsif request.design_mode and section.settings.builder_content_entry_preview == '61f4826f4fc44c8289c77fa10d2b1189' %}
+{% include 'content.61f4826f4fc44c8289c77fa10d2b1189.builder' %}
+{% elsif request.design_mode and section.settings.builder_content_entry_preview == '1bbfca9978c3498a84c7fb177431fcee' %}
+{% include 'content.1bbfca9978c3498a84c7fb177431fcee.builder' %}
+{% elsif request.design_mode and section.settings.builder_content_entry_preview == '43561216b5774e8b98886c582e4dc538' %}
+{% include 'content.43561216b5774e8b98886c582e4dc538.builder' %}
+{% elsif request.design_mode and section.settings.builder_content_entry_preview == '0e0802e3c718461fa22e1e6af43bbdd6' %}
+{% include 'content.0e0802e3c718461fa22e1e6af43bbdd6.builder' %}
+  {% else %}
+    {% include 'model.journal-page-content.builder' %}
+  {% endif %}
+  
+  {% schema %}
+   {
+  "name": "Journal page content",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=06501695e27140c3a047bc647f7785c3). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "d54fc87320574b0cb7cb5b7e19ca71b9", "label": "Drinks Journal Header"},{ "value": "142a716e97894168a9e4feca52688cae", "label": "Mains Journal Header "},{ "value": "c059f6988130498fa8bfd9edccc0dcbf", "label": "Small Plates Journal Header"},{ "value": "941e3151b79a44d9b73dad99eb98b7c4", "label": "Podcast Journal Header"},{ "value": "6292aed7972541a284c841cef59040c2", "label": "Desserts Journal Header"},{ "value": "d2bdb1446e0445d19173b05d6cade470", "label": "Eyeswoon Unplugged Journal Header"},{ "value": "61f4826f4fc44c8289c77fa10d2b1189", "label": "Recipe Journal Header"},{ "value": "1bbfca9978c3498a84c7fb177431fcee", "label": "Living Header"},{ "value": "43561216b5774e8b98886c582e4dc538", "label": "The Nines Journal Header"},{ "value": "0e0802e3c718461fa22e1e6af43bbdd6", "label": "Fallback Journal Heading (don't delete)"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+    "type": "paragraph",
+    "content": "Name: Drinks Journal Header. Targeting: url includes '/recipes/tagged/drinks'. Visit the [entry in Builder](https://builder.io/content/d54fc87320574b0cb7cb5b7e19ca71b9)"
+  },{
+    "type": "paragraph",
+    "content": "Name: Mains Journal Header . Targeting: url includes '/blogs/recipes/tagged/mains'. Visit the [entry in Builder](https://builder.io/content/142a716e97894168a9e4feca52688cae)"
+  },{
+    "type": "paragraph",
+    "content": "Name: Small Plates Journal Header. Targeting: url includes '/recipes/tagged/small-plates'. Visit the [entry in Builder](https://builder.io/content/c059f6988130498fa8bfd9edccc0dcbf)"
+  },{
+    "type": "paragraph",
+    "content": "Name: Podcast Journal Header. Targeting: url includes '/blogs/podcast'. Visit the [entry in Builder](https://builder.io/content/941e3151b79a44d9b73dad99eb98b7c4)"
+  },{
+    "type": "paragraph",
+    "content": "Name: Desserts Journal Header. Targeting: url includes '/recipes/tagged/desserts'. Visit the [entry in Builder](https://builder.io/content/6292aed7972541a284c841cef59040c2)"
+  },{
+    "type": "paragraph",
+    "content": "Name: Eyeswoon Unplugged Journal Header. Targeting: url includes 'blogs/eyeswoon-unplugged'. Visit the [entry in Builder](https://builder.io/content/d2bdb1446e0445d19173b05d6cade470)"
+  },{
+    "type": "paragraph",
+    "content": "Name: Recipe Journal Header. Targeting: url includes 'blogs/recipes'. Visit the [entry in Builder](https://builder.io/content/61f4826f4fc44c8289c77fa10d2b1189)"
+  },{
+    "type": "paragraph",
+    "content": "Name: Living Header. Targeting: url includes 'blogs/living'. Visit the [entry in Builder](https://builder.io/content/1bbfca9978c3498a84c7fb177431fcee)"
+  },{
+    "type": "paragraph",
+    "content": "Name: The Nines Journal Header. Targeting: url includes '/blogs/the-nines'. Visit the [entry in Builder](https://builder.io/content/43561216b5774e8b98886c582e4dc538)"
+  },{
+    "type": "paragraph",
+    "content": "Name: Fallback Journal Heading (don't delete). Targeting: no targeting. Visit the [entry in Builder](https://builder.io/content/0e0802e3c718461fa22e1e6af43bbdd6)"
+  }
+  ],
+  "presets":[{
+    "name": "Journal page content"
+  }]
+}
+  {% endschema %}

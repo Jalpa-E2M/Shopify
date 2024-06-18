@@ -1,0 +1,13 @@
+{% comment schema %}
+{
+    "name":"Journal Heading"
+}
+{% endcomment %}
+
+    <h1 class="heading-l">
+      {% if request.path contains blog.handle %}
+        {{ blog.title }}
+      {% else %}
+        Journal
+      {% endif %}
+    </h1>

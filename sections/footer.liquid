@@ -1,0 +1,240 @@
+<div id="{{ section.settings.anchor-id }}" class="footer wf-section bg-color-{{ section.settings.bg-color }} fade-in-{{ section.settings.fade }}">
+        <div class="padding-medium padding-vertical">
+          <div class="page-padding">
+            <div class="container-{{ section.settings.container-width }} w-container">
+              <div class="footer_layout">
+                  {% if section.settings.featured_img != blank %}
+                  <div class="footer_img">
+                    <div class="img-auto">
+                    <img src="{{ section.settings.featured_img | img_url: '1000x' }}" loading="lazy" class="img-base is-auto" alt="{{ section.settings.featured_img.alt | t }}">
+                    </div>
+                  </div>
+                  {% endif %}
+                  
+                <div class="footer_top-btm-wrapper">
+                  <div class="footer_top" style="width:100%;">
+                    <div class="footer_subscribe" style="width:100%;">
+                      {% if section.settings.top-text != blank %}
+                        <div class="body-medium">{{ section.settings.top-text }}</div>
+                      {% endif %}
+                      <div id="footer-form" class="footer_form-block w-form" style="width:100%;margin-top:0;"> 
+                       <!-- {% form 'customer', class: 'footer_form-wrapper' %}
+                          <input type="hidden" name="contact[tags]" value="newsletter">
+
+                          <input
+                            id="NewsletterForm--{{ section.id }}"
+                            type="email"
+                            name="contact[email]"
+                            class="form-input w-input"
+                            value="{{ form.email }}"
+                            aria-required="true"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            autocomplete="email"
+                            {% if form.errors %}
+                              autofocus
+                              aria-invalid="true"
+                              aria-describedby="Newsletter-error--{{ section.id }}"
+                            {% endif %}
+                            {% if form.posted_successfully? %}
+                              aria-describedby="Newsletter-success--{{ section.id }}"
+                            {% endif %}
+                            placeholder="Enter email"
+                            required 
+                          >
+                          <div class="footer_form-submit-wrapper">
+                          {% if form.posted_successfully? %}
+                            <div class="text-caption">
+                              <div>You're subscribed!</div>
+                            </div>
+                          {% else %}
+                             <div class="text-caption">{{ section.settings.form-caption }}</div>
+                          {% endif %}
+                          
+                            <input type="submit" name="commit" aria-label="Subscribe" value="Submit" class="button-text w-button">
+                          </div>
+                      {% endform %} -->
+                       <div class="klaviyo-form-VmCUDV"></div>
+                      </div>
+                    </div>
+
+
+                    {% if section.settings.logomark != blank %}
+                      <div class="footer_logomark hide-tablet">
+                      <img src="{{ section.settings.logomark | img_url: '400x' }}" loading="lazy" alt="{{ section.settings.logomark.alt | t }}">
+                      </div>
+                    {% endif %}
+
+                  </div>
+
+
+                  <div class="footer_btm">
+                    <div class="footer_links-wrapper">
+
+                    {% for link in linklists.footer.links %}
+                      {% if link.links.size > 0 %}
+                        <div class="footer_links-col">
+                          {% for child_link in link.links %}
+                            <a href="{{ child_link.url }}" class="footer_link">{{ child_link.title }}</a>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    {% endfor %} 
+
+
+                      <div id="w-node-_56f5f551-696c-c63f-5d70-990ba4871550-a4871516" class="footer_links-col is-copyright">
+                        {% if section.settings.logomark != blank %}
+                          <div class="footer_logomark show-tablet"><img src="{{ section.settings.logomark | image_url: width: 500 }}" loading="lazy" alt="{{ section.settings.logomark.alt | t }}"></div>
+                        {% endif %}
+                        <div class="footer_caption">{{ section.settings.copyright }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+{% schema %}
+    {
+        "name": "Footer",
+        "tag": "div",
+        "settings": [
+        {
+          "type": "richtext",
+          "id": "top-text",
+          "label": "Top Text",
+          "default": "<p>Sign up for exclusive product drops, restocks, interior design content, recipes, and much more before anyone else.</p>"
+        },
+        {
+          "type": "text",
+          "id": "form-caption",
+          "label": "Form Caption",
+          "default": "EMAIL US ANYTIME AT: INFO@EYE-SWOON.COM"
+        },
+        {
+          "type": "text",
+          "id": "copyright",
+          "label": "Copyright Text",
+          "default": "© 2022 EYESWOON"
+        },
+        {
+            "type": "select",
+            "id": "bg-color",
+            "options": [
+            {
+                "value": "white",
+                "label": "White"
+            },
+            {
+                "value": "extralight",
+                "label": "Extra Light"
+            },
+            {
+                "value": "light",
+                "label": "Light"
+            },
+            {
+                "value": "medium",
+                "label": "Medium"
+            },
+            {
+                "value": "dark",
+                "label": "Dark"
+            },
+            {
+                "value": "extradark",
+                "label": "Extra Dark"
+            }
+            ],
+            "default": "medium",
+            "label": "Bg Color"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_img",
+          "label": "Featured Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "logomark",
+          "label": "Logomark"
+        },
+        {
+  "type": "select",
+  "id": "container-width",
+  "options": [
+    {
+      "value": "small",
+      "label": "Small"
+    },
+    {
+      "value": "medium",
+      "label": "Medium"
+    },
+    {
+      "value": "large",
+      "label": "Large"
+    },
+    {
+      "value": "xlarge",
+      "label": "X Large"
+    },
+    {
+      "value": "none",
+      "label": "No container"
+    }
+  ],
+  "default": "large",
+  "label": "Container Width"
+},
+{
+  "type": "select",
+  "id": "fade",
+  "options": [
+    {
+      "value": "0",
+      "label": "None"
+    },
+    {
+      "value": "1",
+      "label": "First (Fast)"
+    },
+    {
+      "value": "2",
+      "label": "Second (Medium)"
+    },
+    {
+      "value": "3",
+      "label": "Third (Slow)"
+    }
+  ],
+  "default": "2",
+  "label": "Content Fade-in"
+},
+{
+  "type": "text",
+  "id": "anchor-id",
+  "label": "Anchor ID",
+  "info": "Useful for linking to this part of the page"
+}
+        ]
+    }
+{% endschema %}
+{% stylesheet %}
+
+  #shopify-section-footer .go4246467415 {width:2.5rem!important;}
+  #shopify-section-footer .klaviyo-form input {border:none!important;border-bottom:1px solid black!important;padding-left:6px!important;height:42px!important;outline:none!important;}
+  #shopify-section-footer .klaviyo-form button { border:none!important;border-bottom:1px solid black!important;padding:0px!important;height:auto!important;padding:4px 0px!important;font-size:14px!important;}
+  #shopify-section-footer .klaviyo-form [role="combobox"] {border:none!important;}
+  #shopify-section-footer .go2560581893 * {border:none!important;}
+  #shopify-section-footer .go2560581893 {border:none!important;}
+  @media (max-width: 479px) {
+    #shopify-section-footer .klaviyo-form [data-testid="form-row"] {flex-direction:column!important;}
+    #shopify-section-footer .klaviyo-form [data-testid="form-row"] div {flex:1!important;padding-left:0!important;}
+  }
+
+{% endstylesheet %}

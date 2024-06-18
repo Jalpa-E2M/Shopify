@@ -1,0 +1,169 @@
+{% form 'cart', cart %}
+  <div class="bag-preview_header">
+    <div>
+      <div class="heading-xs text-style-sans">
+        BAG (<span
+          style="display:inline"
+          id="cart-count-preview"
+          class="cart-count"
+        >
+          {{- cart.item_count -}}</span
+        >)
+      </div>
+    </div>
+    <div id="bag-preview-close" class="bag-preview_close" onclick="$('.bag-preview').fadeOut();">
+      <a data-w-id="93db90fe-32df-ed7f-66a1-0d2fc7931e3f" href="#" class="button-text">CLOSE</a>
+    </div>
+  </div>
+  <div id="bag-preview_list" class="bag-preview_list">
+    {% for item in cart.items %}
+      {% assign default_stock = item.product.selected_or_first_available_variant.inventory_quantity %}
+      {% if item.product.selected_or_first_available_variant.available
+        and default_stock < 1
+        or item.product.selected_or_first_available_variant.available
+        and default_stock == ''
+      %}
+        {% assign default_stock = 99999 %}
+      {% endif %}
+      {% assign custom_max = item.product.metafields.custom.max %}
+      {% if custom_max and default_stock > custom_max %}
+        {% assign product_stock = custom_max %}
+      {% else %}
+        {% assign product_stock = default_stock %}
+      {% endif %}
+      {% assign required_quantity_increment = 1 %}
+      {% if item.product.metafields.custom.required_quantity_increment > 1 %}
+        {% assign required_quantity_increment = item.product.metafields.custom.required_quantity_increment %}
+      {% endif %}
+      <div class="bag-preview_product">
+        <a href="#" class="bag-preview_product-img w-inline-block">
+          <div class="img-portrait-sm">
+            <img
+              src="{{ item.product.featured_image | image_url: width: 300 }}"
+              loading="lazy"
+              alt="{{ item.product.title }}"
+              class="img-base"
+            >
+          </div>
+        </a>
+        <div class="bag-preview_product-info">
+          <a href="#" class="w-inline-block">
+            <div class="text-item serif">{{ item.title }}</div>
+
+            {% comment %}
+              THIS IS BAD CODE, NEEDS TO PROPERLY SELECT CUSTOMIZATION
+              <div class="text-caption opacity50">{{ item.product.selected_variant.title }}</div>
+              {% unless item.properties == empty %}
+                      {% for property in item.properties %}
+                        {% unless property.last == null or property.last == '' %}
+                          <div class="body-small opacity50 margin-top margin-xxsmall">Customization: "{{ property.last }}"</div>
+                        {% endunless %}
+                      {% endfor %}
+                    {% endunless %}
+            {% endcomment %}
+            <div>{{ item.price | times: item.quantity | money_without_trailing_zeros }}</div>
+          </a>
+          <div class="add-to-cart_quantity is-bag-preview w-embed">
+            <label style="display:none">Quantity</label>
+            <button
+              data-step="{{ item.product.metafields.custom.required_quantity_increment }}"
+              style="font-size:24px;padding:10px;border:none;background-color:transparent;"
+              type="button"
+              class="quantity-button decrement-quantity"
+              aria-label="Subtract one"
+              data-direction="-1"
+              onclick="updateQuantityClick(this)"
+            >
+              <svg
+                width="15"
+                height="15"
+                viewbox="0 0 15 2"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M0 1H14.5" stroke="currentColor" stroke-width="0.75"></path>
+              </svg>
+            </button>
+            <input
+              {% if required_quantity_increment > 1 %}
+                readonly
+              {% endif %}
+              data-step="{{ item.product.metafields.custom.required_quantity_increment }}"
+              step="{{ item.product.metafields.custom.required_quantity_increment }}"
+              onchange="updateItem({{ forloop.index }}, this.value);"
+              style="{% if required_quantity_increment > 1 %}cursor:not-allowed;{% endif %}padding:0px;padding-bottom:3px;width:40px;text-align:center;border:none;background-color:transparent;"
+              data-min="1"
+              data-max="{{ product_stock }}"
+              type="text"
+              name="updates[]"
+              class="quantity-value"
+              value="{{ item.quantity }}"
+            >
+            <button
+              data-step="{{ item.product.metafields.custom.required_quantity_increment }}"
+              step="{{ item.product.metafields.custom.required_quantity_increment }}"
+              style="font-size:24px;padding:10px;border:none;background-color:transparent;"
+              type="button"
+              class="quantity-button increment-quantity"
+              aria-label="Add one"
+              data-direction="1"
+              onclick="updateQuantityClick(this)"
+            >
+              <svg
+                width="15"
+                height="15"
+                viewbox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M0 7.25H14.5" stroke="currentColor" stroke-width="0.75"></path>
+                <path d="M7.25 0L7.25 14.5" stroke="currentColor" stroke-width="0.75"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <a
+          style="cursor:pointer"
+          href=""
+          onclick="updateItem({{ forloop.index }}, 0);$(this).parent().parent().fadeOut();"
+          class="bag-delete-btn w-inline-block"
+        ></a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="bag-preview_checkout">
+    <!-- Route Code Edited 8/1/23 -->
+    <div class="route-div" watch-changes="#bag-preview_list" style="margin-top;-1pc; margin-bottom:-1pc;"></div>
+    <div style="font-size: 12px; margin-top:-1pc; margin-bottom: -1pc; text-align:center; line-height:11px;">
+      By purchasing Route protection, you ensure your EyeSwoon order is covered should the unpredictable occur.
+      Replacements or refunds are often processed within a matter of hours by the Route team.
+    </div>
+    <style>
+      .pw-route-protection{
+        padding:0px !important;
+      }
+      .pw-route-protection .pw-container:not(.legacy) .pw-row-3 .capsule{
+          display: none !important;
+       }
+    </style>
+    <!-- End Route Code -->
+
+    <a href="{{ routes.cart_url }}" class="button-text w-button">View My Bag</a>
+    <button type="submit" name="checkout" class="button w-button">Checkout</button>
+  </div>
+{% endform %}
+
+<style>
+  .bag-delete-btn {
+    background-image: url('{{ ' close.webp' | asset_url }}')
+  };
+</style>
+
+{% schema %}
+{
+"name": "Bag Preview",
+"tag": "div",
+"class": "bag-preview"
+}
+{% endschema %}

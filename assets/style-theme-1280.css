@@ -1,0 +1,33 @@
+@media screen and (min-width: 1280px) {
+	.of-5 {
+		width: calc(20% - 45px*4/5);
+	}
+
+	.of-4 {
+		width: calc(25% - 45px*3/4);
+	}
+
+	.of-3 {
+		width: calc(33.3333% - 45px*2/3);
+	}
+
+	.of-2 {
+		width: calc(50% - 45px/2);
+	}
+
+	.of-1 { width: 100%; }
+	
+	.collage_layout {
+		-webkit-column-gap: 100px;
+		column-gap: 100px;
+	}
+
+	.collage_layout._4-col {
+		-webkit-column-count: 4;
+		column-count: 4;
+	}
+
+	.product-header_layout {
+		grid-column-gap: 100px;
+	}
+}

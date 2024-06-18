@@ -1,0 +1,62 @@
+{% comment schema %}
+{
+"name":"Media Card",
+"inputs": [
+{
+"name": "title",
+"type": "string",
+"defaultValue": "Insert text here..."
+},
+{
+"name": "urlLink",
+"type": "string",
+"defaultValue": ""
+},
+{
+"name": "image",
+"type": "file",
+},
+{
+name: 'textFadeInOnHover',
+type: 'boolean',
+defaultValue: false
+},
+{
+name: 'imageRatio',
+type: 'string',
+defaultValue: 'square',
+enum: ['landscape', 'portrait','portrait-sm', 'square']
+},
+{
+name: 'textStyle',
+type: 'string',
+defaultValue: 'sans',
+enum: ['sans', 'serif']
+},
+{
+name: 'backgroundColor',
+type: 'string',
+defaultValue: 'none',
+enum: ['extralight', 'light', 'medium', 'dark', 'extradark', 'white', 'black', 'none']
+}
+]
+}
+{% endcomment %}
+
+
+
+<div class="list_item-layout">
+    <div class="list_item-visual-content bg-color-{{ backgroundColor }}">
+
+        <a href="{{ urlLink }}" class="img-{{ imageRatio }}">
+            <img style="object-fit:cover;" srcset="{{ image }}" width="auto" loading="lazy" alt="" class="img-base">
+        </a>
+
+    </div>
+
+    <div class="list_item-info" {% if textFadeInOnHover == true %}style="opacity:45%"{% endif %}>
+        <div class="list_item-header-wrapper is-price-btm">
+            <div class="text-item {% if textStyle == 'serif' %}serif {% endif %}text-style-1lines">{{title}}</div>
+        </div>
+    </div>
+</div>

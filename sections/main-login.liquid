@@ -1,0 +1,95 @@
+<div class="login bg-color-extralight">
+  <div id="recover">
+    <div class="padding-vertical padding-xxlarge">
+      <div class="page-padding">
+        <div class="container-xsmall w-container">
+          <div class="text-align-center margin-bottom margin-medium">
+            <div class="heading-layout">
+              <h2 class="heading-l">Change <em>your Password</em></h2>
+            </div>
+          </div>
+          <div class="login_form-wrapper w-form">
+            {%- form 'recover_customer_password' -%}
+            {% assign recover_success = form.posted_successfully? %}
+            <div class="form-input-wrapper">
+              <input class="form-input w-input" type="email" value="" name="email" id="RecoverEmail" autocorrect="off"
+                autocapitalize="off" autocomplete="email" {% if form.errors %} aria-invalid="true"
+                aria-describedby="RecoverEmail-email-error" autofocus {% endif %} placeholder="Email Address" />
+            </div>
+
+            <div class="login_submit-wrapper">
+              <button class="button is-fullwidth w-button">Submit</button>
+              {%- if form.errors -%}
+              <span class="error">{{ form.errors.messages["form"] }}</span>
+              {%- endif -%}
+              <a href="#login" onclick="$('#recover').css('display', 'none');$('#login').css('display', 'block');" class="button-text is-subtle w-button">Cancel</a>
+            </div>
+            {%- endform -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="login">
+    <div class="padding-vertical padding-xxlarge">
+      <div class="page-padding">
+        <div class="container-xsmall w-container">
+          <div class="text-align-center margin-bottom margin-medium">
+            <div class="heading-layout">
+              {%- if recover_success == true -%}
+              <span style="
+                  width: 100%;
+                  text-align: center;
+                  margin-bottom: 15px;
+                  opacity: 50%;
+                ">
+                <em>Check your email for instructions to reset your password.</em>
+              </span>
+              {%- endif -%}
+              <h2 class="heading-l">Log <em>in</em></h2>
+            </div>
+          </div>
+          <div class="login_form-wrapper w-form">
+            {%- form 'customer_login', return_to: routes.account, novalidate: 'novalidate' -%}
+
+            <div class="form-input-wrapper">
+              <input class=" form-input w-input" type="email" name="customer[email]" id="CustomerEmail"
+                autocomplete="email" autocorrect="off" autocapitalize="off" {% if form.errors contains 'form' %}
+                aria-invalid="true" {% endif %} placeholder="Email"> {%-
+              if form.password_needed -%} <input class=" form-input no-margin
+              w-input" type="password" value="" name="customer[password]" id="CustomerPassword"
+                autocomplete="current-password" {% if form.errors contains 'form' %} aria-invalid="true" {% endif %}
+                placeholder="Password">
+
+              <a href="#recover" onclick="$('#recover').css('display', 'block');$('#login').css('display', 'none');" class="button-text is-subtle is-lowercase">Forgot your password?</a>
+              {%- endif -%}
+            </div>
+
+            <div class="login_submit-wrapper">
+              <button class="button is-fullwidth w-button">Sign In</button>
+              {%- if form.errors -%}
+              <span class="error">{{ form.errors | default_errors }}</span>
+              {%- endif -%} {%- if shop.checkout.guest_login -%}
+              <div>
+                {%- form 'guest_login' -%}
+                <button class="is-fullwidth w-button opacity50">
+                  Continue as guest
+                </button>
+                {%- endform -%} {%- endif -%}
+                <a href="{{ routes.account_register_url }}" class="button-text is-subtle w-button">Create an Account</a>
+              </div>
+            </div>
+
+            {%- endform -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "main-login"
+}
+{% endschema %}

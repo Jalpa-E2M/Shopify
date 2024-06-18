@@ -1,0 +1,80 @@
+{% comment schema %}
+{
+    "name":"Article Card",
+    "inputs": [
+        {
+            "name": "articleHandle",
+            "type": "text",
+            "defaultValue": "the-nines/athenas-summer-essentials",
+            "helperText": "What's the URL of this blog post AFTER /blogs/?"
+        },
+        {
+            name: 'showTitle',
+            type: 'boolean',
+            defaultValue: true
+        },
+        {
+            name: 'horizontalLayout',
+            type: 'boolean',
+            defaultValue: false
+        },
+        {
+          name: 'imageRatio',
+          type: 'string',
+          defaultValue: 'square',
+          enum: ['landscape', 'portrait', 'square']
+        },
+        {
+          name: 'imageStyle',
+          type: 'string',
+          defaultValue: 'standard',
+          enum: ['standard', 'secondary image']
+        }
+    ]
+}
+{% endcomment %}
+
+{% assign article = articles[articleHandle] %}
+
+    <div class="list_item-layout{% if horizontalLayout == true %} is-horizontal{% endif %}">
+                      <div class="list_item-visual-content{% if horizontalLayout == true %} is-horizontal{% endif %}">
+
+                        <a href="{{ article.url }}" class="img-{{ imageRatio }}">
+                        
+                        {% if imageStyle == "standard" %}
+                        <img
+                            src="{{ article.image | image_url: width:800 }}" width="auto"
+                            loading="lazy" alt="{{ article.title }}" class="img-base">
+                        {% else %}
+                        {% if article.metafields.custom.hover_image %}
+                         <img
+                            src="{{ article.metafields.custom.hover_image | image_url: width:800 }}" width="auto"
+                            loading="lazy" alt="{{ article.title }}" class="img-base">
+                        {% endif %}
+                        {% endif %}
+
+
+                        </a>
+
+                        <a href="{{ article.url }}" name="{{ article.title }}" alt="{{ article.title }}" class="img-overlay">{% if imageStyle == "standard" %}
+                        {% if article.metafields.custom.hover_image %}
+                          <img src="{{ article.metafields.custom.hover_image | image_url: width:800 }}" width="auto"
+                            loading="lazy" alt="{{ article.title }}" class="list_item-image">{% endif %}{% endif %}
+                        </a>
+
+                      </div>
+                      <div class="list_item-info">
+                        <div class="list_item-header-wrapper">
+                        {% if showTitle == true %}
+                          <a class="list_item-title" href="{{ article.url }}">
+
+                            <div class="text-item serif text-style-3lines">{{ article.title }}
+
+                            </div>
+
+                          </a>
+                        {% endif %}
+                        </div>
+                        
+                      </div>
+                    </div>

@@ -1,0 +1,682 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "spacer": {
+      "type": "spacer",
+      "disabled": true,
+      "settings": {
+        "bg-color": "dark",
+        "height": 48
+      }
+    },
+    "d3539962-c876-4850-933c-527b335447f2": {
+      "type": "collection-list",
+      "settings": {
+        "product_list": "new-arrivals",
+        "tag": "",
+        "products_to_show": 16,
+        "columns": "5",
+        "img-ratio": "portrait-sm",
+        "main-img": "1",
+        "item-bg-color": "none",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": false,
+        "show-translucent-title": false,
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "",
+        "vertical-title": "",
+        "list-url": "",
+        "list-url-text": "View More",
+        "bg-color": "medium",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "home-shop-all",
+        "visibility": "show"
+      }
+    },
+    "9bad8aed-82e9-4137-842e-ca6babc189b0": {
+      "type": "product-list",
+      "settings": {
+        "product_list": [
+          "magari-wall-lamp-blueprint-lighting",
+          "810-tray-in-cherry-gold-anastasio-home",
+          "kaya-mohair-throw-natural-claude-home",
+          "antidris-cassis-candle-maison-louis-marie",
+          "petite-magari-wall-lamp-blueprint-lighting",
+          "volubilis-scented-candle-journey-by-oliver-gustav-2",
+          "neo-vessel-apparatus",
+          "cirrus-no-3-steamer-sand-steamery",
+          "pair-of-twisted-candleholders-signe-ceramics",
+          "almendres-candle-holder-henry-wilson",
+          "crescent-bookends",
+          "arq-004-vase-canoa-lab",
+          "willow-marble-bowl-claude-home",
+          "butler-spice-mill-oak-de-jong",
+          "columnar-side-table-ombia-studio",
+          "19-skeletal-bowl-evamarie-pappas",
+          "f-ace-wall-hook-brass-henry-wilson",
+          "farmhouse-pond-side-table-frama",
+          "custom-imprint-19-dhaene-studio",
+          "large-faceted-vase-signe-ceramics",
+          "xl-bowl-dhaene-studio",
+          "box-tray-in-emerald-anastasio-home",
+          "custom-terrain-12-dhaene-studio",
+          "travertine-catch-all-claude-home",
+          "athenas-tool-kit-material-kitchen",
+          "arq-005-canoa-lab",
+          "carbonator-3-kit-sand-aarke",
+          "large-double-handled-cutting-board-il-buco-vita",
+          "paper-towel-holder-flat-top-the-wooden-palate"
+        ],
+        "columns": "5",
+        "img-ratio": "portrait-sm",
+        "main-img": "1",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": true,
+        "show-translucent-title": false,
+        "item-bg-color": "none",
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "",
+        "vertical-title": "",
+        "list-url": "",
+        "list-url-text": "View More",
+        "bg-color": "medium",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "home-shop-manual",
+        "visibility": "show"
+      }
+    },
+    "bab9e5e7-f15f-4045-a3e3-89da87203468": {
+      "type": "links-list",
+      "blocks": {
+        "1ef5cef5-f34e-4c3b-af68-a2d27fd6985a": {
+          "type": "article",
+          "settings": {
+            "article": "recipes\/red-wine-poached-pear-crostata"
+          }
+        },
+        "e0184039-cb03-4a22-8482-7ffde16deef0": {
+          "type": "article",
+          "settings": {
+            "article": "living\/host-gifts-ideas"
+          }
+        },
+        "fb0756bd-33d6-4f8c-9e4f-8c485c324a54": {
+          "type": "article",
+          "settings": {
+            "article": "the-nines\/self-serve-station"
+          }
+        },
+        "5d0e15b7-dcba-4b4f-85e3-9b26cf04b82f": {
+          "type": "article",
+          "settings": {
+            "article": "living\/garden-design-athena-calderone"
+          }
+        },
+        "7735910a-01ff-4965-a3f7-534160f48045": {
+          "type": "article",
+          "settings": {
+            "article": "recipes\/green-beans-recipe-romilly-newman"
+          }
+        },
+        "c57365bb-26aa-46b9-922c-2c2555a92a09": {
+          "type": "article",
+          "settings": {
+            "article": "living\/self-care-gifts"
+          }
+        },
+        "86d32a19-d56f-4a9e-a298-d004c80132da": {
+          "type": "article",
+          "settings": {
+            "article": "living\/luxury-gift-ideas"
+          }
+        },
+        "96659ab2-618b-49b5-8dd0-1f941c7ee65c": {
+          "type": "article",
+          "settings": {
+            "article": "living\/gifts-under-200"
+          }
+        }
+      },
+      "block_order": [
+        "1ef5cef5-f34e-4c3b-af68-a2d27fd6985a",
+        "e0184039-cb03-4a22-8482-7ffde16deef0",
+        "fb0756bd-33d6-4f8c-9e4f-8c485c324a54",
+        "5d0e15b7-dcba-4b4f-85e3-9b26cf04b82f",
+        "7735910a-01ff-4965-a3f7-534160f48045",
+        "c57365bb-26aa-46b9-922c-2c2555a92a09",
+        "86d32a19-d56f-4a9e-a298-d004c80132da",
+        "96659ab2-618b-49b5-8dd0-1f941c7ee65c"
+      ],
+      "settings": {
+        "columns": "5",
+        "img-ratio": "square",
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "From the Journal",
+        "vertical-title": "",
+        "list-url": "shopify:\/\/blogs\/living",
+        "list-url-text": "View All",
+        "bg-color": "dark",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "home-journal-list",
+        "visibility": "show"
+      }
+    },
+    "f074419b-5da2-4d2b-9efa-12b10e7eeb22": {
+      "type": "blog-list",
+      "settings": {
+        "blog": "the-nines",
+        "tag": "",
+        "articles_to_show": 8,
+        "columns": "3",
+        "img-ratio": "square",
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "MORE NINES ARTICLES",
+        "vertical-title": "",
+        "list-url": "shopify:\/\/blogs\/the-nines",
+        "list-url-text": "View All",
+        "bg-color": "dark",
+        "padding-top": "small",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "nines-sample-2",
+        "visibility": "show"
+      }
+    },
+    "db2e3ba0-452c-44d6-9715-a66b088cd5c5": {
+      "type": "product-list",
+      "settings": {
+        "product_list": [
+          "19-skeletal-bowl-evamarie-pappas",
+          "bol-delicat-white-footed-centerpiece-bowl",
+          "brooklyn-cannelee-vase",
+          "chamfer-wood-sculpture",
+          "la-struttura-sculpture",
+          "la-struttura-white-sculpture",
+          "les-cretes-vase"
+        ],
+        "columns": "5",
+        "img-ratio": "portrait",
+        "main-img": "2",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": true,
+        "show-translucent-title": false,
+        "item-bg-color": "none",
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "You might also like",
+        "vertical-title": "",
+        "list-url": "shopify:\/\/collections\/all",
+        "list-url-text": "View All",
+        "bg-color": "dark",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "product-page-footer",
+        "visibility": "show"
+      }
+    },
+    "6247b419-f62f-42b7-aca8-313d18311986": {
+      "type": "product-list",
+      "settings": {
+        "product_list": [
+          "cedrat-tumbler-set-of-6",
+          "cook-beautiful",
+          "mito-20-piece-flatware-costa-nova",
+          "the-coated-pan-material-kitchen",
+          "the-knives-stand-material-kitchen",
+          "the-table-knives-material-kitchen"
+        ],
+        "columns": "5",
+        "img-ratio": "portrait",
+        "main-img": "1",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": true,
+        "show-translucent-title": false,
+        "item-bg-color": "none",
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "Tools you will need",
+        "vertical-title": "",
+        "list-url": "shopify:\/\/collections\/kitchen",
+        "list-url-text": "View All",
+        "bg-color": "dark",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "poached-pear-tools",
+        "visibility": "show"
+      }
+    },
+    "2dd4a1fa-58df-4006-a3f8-409dfd685603": {
+      "type": "blog-list",
+      "settings": {
+        "blog": "recipes",
+        "tag": "",
+        "articles_to_show": 8,
+        "columns": "3",
+        "img-ratio": "square",
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "",
+        "vertical-title": "<p><em>new<\/em> Recipes<\/p>",
+        "list-url": "",
+        "list-url-text": "View More",
+        "bg-color": "dark",
+        "padding-top": "xxlarge",
+        "padding-bottom": "xxlarge",
+        "container-width": "large",
+        "fade": "2",
+        "anchor-id": "new-recipes-general",
+        "visibility": "show"
+      }
+    },
+    "a85caf32-b222-48e8-8d88-72aca4ba3881": {
+      "type": "collection-list",
+      "settings": {
+        "product_list": "new-arrivals",
+        "tag": "",
+        "products_to_show": 10,
+        "columns": "5",
+        "img-ratio": "portrait-sm",
+        "main-img": "1",
+        "item-bg-color": "none",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": false,
+        "show-translucent-title": false,
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "You Might Like",
+        "vertical-title": "",
+        "list-url": "shopify:\/\/collections\/new-arrivals",
+        "list-url-text": "View All",
+        "bg-color": "dark",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "youmightlike-list",
+        "visibility": "show"
+      }
+    },
+    "4b46e93f-36c1-4d6e-98c1-50d171e03d84": {
+      "type": "collection-list",
+      "settings": {
+        "product_list": "decor",
+        "tag": "",
+        "products_to_show": 16,
+        "columns": "5",
+        "img-ratio": "portrait-sm",
+        "main-img": "1",
+        "item-bg-color": "none",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": false,
+        "show-translucent-title": false,
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "",
+        "vertical-title": "<p><em>Shop<\/em> Decor<\/p>",
+        "list-url": "",
+        "list-url-text": "View More",
+        "bg-color": "medium",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "journal-shop-decor",
+        "visibility": "show"
+      }
+    },
+    "dfa43131-2573-4297-8006-be89f6d693b5": {
+      "type": "product-list",
+      "settings": {
+        "product_list": [
+          "willow-marble-bowl-claude-home",
+          "512-tray-in-emerald-anastasio-home",
+          "810-tray-in-cherry-gold-anastasio-home",
+          "box-tray-in-emerald-anastasio-home",
+          "the-dot-box-medium-anastasio-home",
+          "median-3-surface-mount-apparatus",
+          "censer-incense-burner-apparatus",
+          "vecchio-vase-grande",
+          "vecchio-vase-small",
+          "rosa-wine-cooler",
+          "rosa-catch-all",
+          "travertine-catch-all-claude-home",
+          "rosa-platter",
+          "rosa-cheese-knives",
+          "canali-medium-planter",
+          "neo-vessel-apparatus",
+          "la-sienna-side-table",
+          "revival-petite-side-table",
+          "crescent-bookends",
+          "luna-marble-bowl-claude-home",
+          "the-810-tray-in-travertine-anastasio-home",
+          "10013-potpourri-journey-by-oliver-gustav",
+          "copy-of-rosa-platter",
+          "revival-coffee-table"
+        ],
+        "columns": "4",
+        "img-ratio": "portrait-sm",
+        "main-img": "1",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": false,
+        "show-translucent-title": false,
+        "item-bg-color": "none",
+        "is-swiper": false,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "Shop Stone Décor",
+        "vertical-title": "",
+        "list-url": "",
+        "list-url-text": "View All",
+        "bg-color": "dark",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "shop-stone-decor",
+        "visibility": "show"
+      }
+    },
+    "b8c225af-547e-4db5-a48b-02994399f9e0": {
+      "type": "product-list",
+      "settings": {
+        "product_list": [
+          "horsehair-sconce-apparatus",
+          "rivet-side-table-frama",
+          "the-ruins-cream-lamp",
+          "vintage-set-of-seven-serving-pieces-mepra",
+          "il-solido-lamp",
+          "aarke-water-purifier",
+          "rivet-box-frama",
+          "rosa-cheese-knives",
+          "copy-of-the-ruins-cream-lamp",
+          "vintage-20-pcs-place-setting-mepra",
+          "rivet-typecase-frama",
+          "tournage-lamp"
+        ],
+        "columns": "5",
+        "img-ratio": "portrait-sm",
+        "main-img": "1",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": false,
+        "show-translucent-title": false,
+        "item-bg-color": "none",
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "Shop the trend",
+        "vertical-title": "",
+        "list-url": "",
+        "list-url-text": "View More",
+        "bg-color": "medium",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "shop-silver-decor",
+        "visibility": "show"
+      }
+    },
+    "e4c27a97-e9ce-4dcb-b33b-85dd76774bdb": {
+      "type": "product-list",
+      "settings": {
+        "product_list": [
+          "10013-potpourri-journey-by-oliver-gustav",
+          "crescent-bookends",
+          "censer-incense-burner-apparatus",
+          "the-dot-box-medium-anastasio-home",
+          "luna-marble-bowl-claude-home",
+          "65-3-section-pod-evamarie-pappas",
+          "810-tray-in-cherry-gold-anastasio-home",
+          "la-struttura-sculpture",
+          "large-footed-bowl-beau-rush-terracotta",
+          "large-faceted-vase-signe-ceramics"
+        ],
+        "columns": "5",
+        "img-ratio": "portrait-sm",
+        "main-img": "1",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": false,
+        "show-translucent-title": false,
+        "item-bg-color": "none",
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "Shop artful objects",
+        "vertical-title": "",
+        "list-url": "",
+        "list-url-text": "View More",
+        "bg-color": "medium",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "shop-artful-objects",
+        "visibility": "show"
+      }
+    },
+    "82e3ea07-1dd8-4246-b865-623979bf2771": {
+      "type": "product-list",
+      "settings": {
+        "product_list": [
+          "petit-footed-bowl-black-clay-beau-rush",
+          "il-buco-vita-urbino-iron-candleholder",
+          "small-low-vase-signe-ceramics",
+          "iron-tapered-candleholders-il-buco-vita",
+          "stamnos-vase-canoa-lab"
+        ],
+        "columns": "5",
+        "img-ratio": "portrait-sm",
+        "main-img": "1",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": false,
+        "show-translucent-title": false,
+        "item-bg-color": "none",
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "shop the trend",
+        "vertical-title": "",
+        "list-url": "",
+        "list-url-text": "View More",
+        "bg-color": "medium",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "shop-decor-trend-2023",
+        "visibility": "show"
+      }
+    },
+    "55275816-a0d0-4643-b431-943ccf4b49fe": {
+      "type": "product-list",
+      "settings": {
+        "product_list": [
+
+        ],
+        "columns": "5",
+        "img-ratio": "portrait-sm",
+        "main-img": "1",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": false,
+        "show-translucent-title": false,
+        "item-bg-color": "none",
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "",
+        "vertical-title": "",
+        "list-url": "",
+        "list-url-text": "View More",
+        "bg-color": "medium",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "",
+        "visibility": "show"
+      }
+    },
+    "37a617ba-ee70-47bd-8224-b66dd6e38b68": {
+      "type": "product-list",
+      "settings": {
+        "product_list": [
+          "19-skeletal-bowl-evamarie-pappas",
+          "the-810-tray-in-travertine-anastasio-home",
+          "chamfer-wood-sculpture",
+          "luna-marble-bowl-claude-home",
+          "iunion-lamp",
+          "custom-big-moon-ii-07-es-exclusive-dhaene-studio",
+          "arq-001-vase-canoa-lab",
+          "mizutama-xl-dhaene-studio"
+        ],
+        "columns": "5",
+        "img-ratio": "portrait-sm",
+        "main-img": "1",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": false,
+        "show-translucent-title": false,
+        "item-bg-color": "none",
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "shop organic forms",
+        "vertical-title": "",
+        "list-url": "",
+        "list-url-text": "View More",
+        "bg-color": "medium",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "shop-organic-forms",
+        "visibility": "show"
+      }
+    },
+    "2dab2e87-0e72-4248-8c3e-5d9c453c8cef": {
+      "type": "blog-list",
+      "settings": {
+        "blog": "living",
+        "tag": "Design",
+        "articles_to_show": 8,
+        "columns": "5",
+        "img-ratio": "square",
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "",
+        "vertical-title": "<p><em>More<\/em> Design<\/p>",
+        "list-url": "",
+        "list-url-text": "",
+        "bg-color": "medium",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "more-design",
+        "visibility": "show"
+      }
+    }
+  },
+  "order": [
+    "spacer",
+    "d3539962-c876-4850-933c-527b335447f2",
+    "9bad8aed-82e9-4137-842e-ca6babc189b0",
+    "bab9e5e7-f15f-4045-a3e3-89da87203468",
+    "f074419b-5da2-4d2b-9efa-12b10e7eeb22",
+    "db2e3ba0-452c-44d6-9715-a66b088cd5c5",
+    "6247b419-f62f-42b7-aca8-313d18311986",
+    "2dd4a1fa-58df-4006-a3f8-409dfd685603",
+    "a85caf32-b222-48e8-8d88-72aca4ba3881",
+    "4b46e93f-36c1-4d6e-98c1-50d171e03d84",
+    "dfa43131-2573-4297-8006-be89f6d693b5",
+    "b8c225af-547e-4db5-a48b-02994399f9e0",
+    "e4c27a97-e9ce-4dcb-b33b-85dd76774bdb",
+    "82e3ea07-1dd8-4246-b865-623979bf2771",
+    "55275816-a0d0-4643-b431-943ccf4b49fe",
+    "37a617ba-ee70-47bd-8224-b66dd6e38b68",
+    "2dab2e87-0e72-4248-8c3e-5d9c453c8cef"
+  ]
+}

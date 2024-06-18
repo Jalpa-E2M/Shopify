@@ -1,0 +1,182 @@
+<script type="module" async>
+
+  import WishlistKing from "{{ 'app_wishlist-king_sdk.js' | asset_url }}";
+  import templates from "{{ 'app_wishlist-king_templates.js' | asset_url }}";
+  import settings from "{{ 'app_wishlist-king_settings.js' | asset_url }}";
+
+
+window.addEventListener('load', (event) => {
+  
+  WishlistKing.toolkit.init({
+    templates,
+    settings,
+    events: {
+      ready() {
+        // App is ready and WishlistKing.toolkit can be used
+      },
+      addedToCart(cart) {
+        // This is a good place to trigger AJAX cart update
+        window.scrollTo(0, 0);
+        location.reload();
+      },
+      loginRequired(intent) {
+        window.location = [
+          "/account/login?wk-redirect=",
+          encodeURIComponent(
+            JSON.stringify({
+              path: window.location.pathname,
+              intent: intent,
+            })
+          ),
+        ].join("");
+      },
+    },
+    shop: {
+      name: {{ shop.name | replace: "&amp;", "&" | json }},
+      domain: "{{ shop.domain }}",
+      permanent_domain: "{{ shop.permanent_domain }}",
+      currency: "{{ shop.currency }}",
+      money_format: {{ shop.money_format | json }},
+      root_url: "{% unless routes.root_url == '/'  %}{{ routes.root_url }}{% endunless %}",
+    },
+    session: {
+      customer: {{ customer.id | json }},
+      customer_email: {{ customer.email | json }},
+    },
+    wishlist: {
+      filter: function (product) {
+        return !product.hidden;
+      },
+      share: {
+        title: {{ "app_wishlist-king.general.share_list_title" | t | json }},
+        description: {{ "app_wishlist-king.general.share_list_description" | t: shopName: shop.name | json }},
+      },
+      fallbackImage: "https://cdn.shopify.com/s/images/themes/product-1.png",
+    },
+    theme: {
+      locale: {
+        wishlist: {{ "app_wishlist-king.general.wishlist" | t | json }},
+        wishlist_empty_note: {{ "app_wishlist-king.general.wishlist_empty_note" | t | json }},
+        add_to_wishlist: {{ "app_wishlist-king.general.add_to_wishlist" | t | json }},
+        remove_from_wishlist: {{ "app_wishlist-king.general.remove_from_wishlist" | t | json }},
+        clear_wishlist: {{ "app_wishlist-king.general.clear_wishlist" | t | json }},
+        in_wishlist: {{ "app_wishlist-king.general.in_wishlist" | t | json }},
+        share_wishlist: {{ "app_wishlist-king.general.share_wishlist" | t | json }},
+        copy_share_link: {{ "app_wishlist-king.general.copy_share_link" | t | json }},
+        share_link_copied: {{ "app_wishlist-king.general.share_link_copied" | t | json }},
+        share_by_email_body: {{ "app_wishlist-king.general.share_by_email_body" | t | json }},
+        login_or_signup_note: {{ "app_wishlist-king.general.login_or_signup_note_html" | t: login_url: routes.account_login_url, register_url: routes.account_register_url | json }},
+        add_to_cart: {{ "app_wishlist-king.general.add_to_cart" | t | json }},
+        sold_out: {{ "app_wishlist-king.general.sold_out" | t | json }},
+        quantity: {{ "app_wishlist-king.general.quantity" | t | json }},
+        view_product: {{ "app_wishlist-king.general.view_product" | t | json }},
+        view_wishlist: {{ "app_wishlist-king.general.view_wishlist" | t | json }},
+        share_on_facebook: {{ "app_wishlist-king.general.share_on_facebook" | t | json }},
+        share_on_twitter: {{ "app_wishlist-king.general.share_on_twitter" | t | json }},
+        share_on_pinterest: {{ "app_wishlist-king.general.share_on_pinterest" | t | json }},
+        share_with_whatsapp: {{ "app_wishlist-king.general.share_with_whatsapp" | t | json }},
+        share_by_email: {{ "app_wishlist-king.general.share_by_email" | t | json }},
+        get_link: {{ "app_wishlist-king.general.get_link" | t | json }},
+        send_to_customer_service: {{ "app_wishlist-king.general.send_to_customer_service" | t | json }},
+        add_all_to_cart: {{ "app_wishlist-king.general.add_all_to_cart" | t | json }},
+      },
+      customer: {{ customer.id | json }},
+      customer_accounts_enabled: {{ shop.customer_accounts_enabled | json }},
+    },
+  });
+
+  // Header link
+
+  WishlistKing.observe(
+    {
+      selector: "#menu-cart",
+    },
+    (target) => {
+      target.insertBefore(WishlistKing.createComponent("wishlist-link"));
+    }
+  );
+
+  WishlistKing.observe(
+    {
+      selector: "#cart-mobile",
+    },
+    (target) => {
+      target.insertBefore(WishlistKing.createComponent("wishlist-link-mobile"));
+    }
+  );
+
+  // Wishlist button on product page
+
+  WishlistKing.observe(
+    {
+      selector: ".product-header_images",
+      template: "product",
+    },
+    (target) => {
+      target.append(
+        WishlistKing.createComponent("wishlist-button", {
+          id: "{{ product.id }}",
+        })
+      );
+    }
+  );
+
+
+  // Wishlist button on collection page
+  
+  WishlistKing.observe(
+    {
+      selector: "[buttons-product-id]"
+    },
+    (target) => {
+      target.append(
+        WishlistKing.createComponent("wishlist-button-list", {
+          id: target.container.getAttribute("buttons-product-id"),
+        })
+      );
+    }
+  );
+  
+
+  // Wishlist page
+
+  WishlistKing.observe(
+    {
+      selector: ".favorites_layout",
+      template: "wishlist",
+    },
+    (target) => {
+      target.insertAfter(
+        WishlistKing.createComponent("wishlist-page")
+      
+        );
+    }
+  );
+
+  // Shared wishlist page
+  WishlistKing.observe(
+    {
+      selector: ".favorites_layout",
+      template: "shared-wishlist",
+    },
+    (target) => {
+      target.insertAfter(WishlistKing.createComponent("wishlist-page-shared"));
+    }
+  );
+
+setTimeout(() => {
+  $(".view-switcher_grid").on("click", function () {
+  $(".list_layout").removeClass("is-1-col");
+  $(".view-switcher_col").removeClass("is-active");
+  $(".view-switcher_grid").addClass("is-active");
+});
+$(".view-switcher_col").on("click", function () {
+  $(".list_layout").addClass("is-1-col");
+  $(".view-switcher_grid").removeClass("is-active");
+  $(".view-switcher_col").addClass("is-active");
+});
+
+}, "2000")
+
+});
+</script>

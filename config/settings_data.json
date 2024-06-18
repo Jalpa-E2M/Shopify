@@ -1,0 +1,149 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "current": {
+    "fontsize": 18,
+    "color_extradark": "#d6d0c8",
+    "color_dark": "#e2dfd8",
+    "checkout_logo_image": "shopify:\/\/shop_images\/eyeswoon_logomark.png",
+    "checkout_logo_size": "small",
+    "checkout_body_background_color": "#e2ded7",
+    "checkout_sidebar_background_color": "#f8f6f3",
+    "checkout_heading_font": "Source Sans Pro",
+    "checkout_accent_color": "#423b35",
+    "checkout_button_color": "#3e3731",
+    "checkout_error_color": "#711515",
+    "sections": {
+      "menu": {
+        "type": "menu",
+        "settings": {
+          "nav-bg": "medium",
+          "dropdown-bg": "extralight",
+          "show_banner": false,
+          "banner-text": "Subscribe to our newsletter to get the latest inspiration in your inbox.",
+          "popup-text": "<h2><em>Swoon <\/em>with us<\/h2><p>Subscribe to our newsletter for delicious recipes, design advice, and product news straight to your inbox. <\/p>",
+          "banner-link": "",
+          "banner-bg": "dark",
+          "show_popup": false,
+          "show_timed_popup": false,
+          "popup_delay": 2,
+          "popup-bg": "medium",
+          "subscribed-text": "<p>Welcome to Eyeswoon.<\/p>",
+          "cookie-visits": 3,
+          "cookie-days": 365
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "top-text": "",
+          "form-caption": "",
+          "copyright": "© 2024 EYESWOON",
+          "bg-color": "medium",
+          "featured_img": "shopify:\/\/shop_images\/EYESWOON_LIFESTYLE_ILBUCO_DECANTER_FOOTER_900x1050_0285248a-fea9-479e-8b29-9747d2bf5fe9.png",
+          "logomark": "shopify:\/\/shop_images\/631d25631ba21e1945088740_eyeswoon_logomark.webp",
+          "container-width": "xlarge",
+          "fade": "2",
+          "anchor-id": ""
+        }
+      },
+      "bag-preview": {
+        "type": "bag-preview",
+        "settings": {
+        }
+      },
+      "product-list": {
+        "type": "product-list",
+        "settings": {
+          "product_list": [
+            "eyeswoon-gift-card",
+            "19-skeletal-bowl-evamarie-pappas",
+            "large-faceted-edge-signe-ceramics",
+            "horsehair-sconce-apparatus",
+            "iremia-artwork-aliyah-sadaf",
+            "makun-pillow-dreadlocks-treko",
+            "mito-20-piece-flatware-costa-nova",
+            "perigord-water-glass-set-of-6-la-rochere",
+            "plat-delicat-pedestal"
+          ],
+          "columns": "5",
+          "img-ratio": "portrait-sm",
+          "main-img": "1",
+          "show-title": true,
+          "show-price": true,
+          "show-description": false,
+          "show-sale-tag": true,
+          "show-strikethrough": true,
+          "show-quick-add": true,
+          "show-translucent-title": false,
+          "item-bg-color": "none",
+          "is-swiper": true,
+          "layout-horizontal": false,
+          "view-switcher": false,
+          "title": "You might like",
+          "vertical-title": "",
+          "list-url": "",
+          "list-url-text": "View More",
+          "bg-color": "dark",
+          "padding-top": "xlarge",
+          "padding-bottom": "huge",
+          "container-width": "large",
+          "fade": "1",
+          "anchor-id": "",
+          "visibility": "show"
+        }
+      },
+      "divider-line": {
+        "type": "divider-line",
+        "settings": {
+          "bg-color": "dark",
+          "fade-in": "0",
+          "anchor-id": ""
+        }
+      },
+      "collection-list": {
+        "type": "collection-list",
+        "settings": {
+          "product_list": "bestsellers",
+          "tag": "",
+          "products_to_show": 12,
+          "columns": "5",
+          "img-ratio": "portrait-sm",
+          "main-img": "1",
+          "item-bg-color": "none",
+          "show-title": true,
+          "show-price": true,
+          "show-description": false,
+          "show-sale-tag": true,
+          "show-strikethrough": true,
+          "show-quick-add": false,
+          "show-translucent-title": false,
+          "is-swiper": true,
+          "layout-horizontal": false,
+          "view-switcher": false,
+          "title": "You might like",
+          "vertical-title": "",
+          "list-url": "",
+          "list-url-text": "View More",
+          "bg-color": "dark",
+          "padding-top": "medium",
+          "padding-bottom": "medium",
+          "container-width": "large",
+          "fade": "1",
+          "anchor-id": "",
+          "visibility": "show"
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  }
+}

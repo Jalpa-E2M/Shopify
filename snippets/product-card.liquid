@@ -1,0 +1,186 @@
+<div replaceId="{{ product.id }}" class="{% if section.settings.is-swiper %}swiper-slide list_item{% else %}list_item-wrapper{% endif %} of-{{ section.settings.columns }} w-inline-block">
+                            <div class="list_item-layout{% if section.settings.layout-horizontal == true %} is-horizontal{% endif %}">
+                              <div class="list_item-visual-content{% if section.settings.layout-horizontal == true %} is-horizontal{% endif %} bg-color-{{ section.settings.item-bg-color }}">
+  
+                                <a href="{% if product.metafields.custom.affiliate_link == nil %}{{ product.url }}{% else %}{{ product.metafields.custom.affiliate_link }}{% endif %}" class="img-{{ section.settings.img-ratio }}">
+                                  <img srcset="{% if section.settings.main-img == "1" or section.settings.main-img == "3" %}
+                                                                                                    {{ product.featured_image | image_url: width: 720 }} 720w{% else %}{{ product.images[1] |
+                                                                                                        image_url: width: 720 }} 720w{% endif %}" width="auto" loading="lazy" alt="{{ product.title }}" class="img-base">
+                                  {% if section.settings.show-sale-tag %}
+                                    {% if product.compare_at_price %}
+                                      <div class="list_item-tag">
+                                        <div>Sale</div>
+                                      </div>
+                                    {% endif %}
+                                  {% endif %}
+                                </a>
+  
+                                <a href="{% if product.metafields.custom.affiliate_link == nil %}{{ product.url }}{% else %}{{ product.metafields.custom.affiliate_link }}{% endif %}" class="img-overlay" name="{{ product.title }}" alt="{{ product.title }}" >
+                                  {% if section.settings.main-img == "1" and
+                                  product.images[1] != nil %}<img srcset="{{ product.images[1] | image_url: width: 720 }} 720w" width="auto" alt="{{ product.title }}" loading="lazy" class="list_item-image">{% endif %}
+                                  <div buttons-product-id="{{ product.id }}" class="list_item-overlay-button-wrapper">
+  
+                                    {%- form 'product', product, class:'flex-grow' -%}
+                                      <select name="id" style="display:none;">
+                                        {% for variant in product.variants %}
+                                          <option value="{{ variant.id }}" {% if variant==product.selected_or_first_available_variant %} selected="selected"{% endif %}>
+                                            {{ variant.title }}
+                                          </option>
+                                        {% endfor %}
+                                      </select>
+                                      {% if product.metafields.custom.affiliate_link == nil %}
+                                      <div class="product-form__buttons">
+                                      {% if section.settings.show-quick-add %}
+                                        <button style="width:100%" {%- if product.selected_or_first_available_variant.available -%} onclick="addToCart({{ product.selected_or_first_available_variant.id }}, this);return false;"
+                                          class="button button-slim is-filled cart-trigger"{%- else -%}
+                                          class="button button-slim is-filled disabled"disabled {%- endif -%}>
+                                          <span>
+                                            {%- if product.selected_or_first_available_variant.available -%}
+                                              Quick Add
+                                            {%- else -%}
+                                              Waitlist
+                                            {%- endif -%}
+                                          </span>
+                                        </button>
+                                        {% endif %}
+                                      </div>
+                                        {% endif %}
+                                    {%- endform -%}
+  
+                                  </div>
+                                </a>
+</div>
+                              <div class="list_item-info" {% if section.settings.show-translucent-title %}style="opacity:45%"{% endif %}>
+                                <div class="list_item-header-wrapper is-price-btm">
+  
+                                  <a class="list_item-title" href="{% if product.metafields.custom.affiliate_link == nil %}{{ product.url }}{% else %}{{ product.metafields.custom.affiliate_link }}{% endif %}">
+  
+                                    <div class="text-item text-style-1lines" {% if section.settings.layout-horizontal == true %} style="white-space: normal;"{% endif %}>
+                                      {% if section.settings.show-title
+                                      %}
+                                        {{product.title}}
+                                      {% endif %}
+  
+                                    </div>
+  
+                                  </a>
+                                  {% if section.settings.show-price %}
+                                    <div class="list_i<div replaceId="{{ product.id }}" class="{% if section.settings.is-swiper %}swiper-slide list_item{% else %}list_item-wrapper{% endif %} of-{{ section.settings.columns }} w-inline-block">
+                            <div class="list_item-layout{% if section.settings.layout-horizontal == true %} is-horizontal{% endif %}">
+                              <div class="list_item-visual-content{% if section.settings.layout-horizontal == true %} is-horizontal{% endif %} bg-color-{{ section.settings.item-bg-color }}">
+  
+                                <a href="{% if product.metafields.custom.affiliate_link == nil %}{{ product.url }}{% else %}{{ product.metafields.custom.affiliate_link }}{% endif %}" class="img-{{ section.settings.img-ratio }}">
+                                  <img srcset="{% if section.settings.main-img == "1" or section.settings.main-img == "3" %}
+                                                                                                    {{ product.featured_image | image_url: width: 720 }} 720w{% else %}{{ product.images[1] |
+                                                                                                        image_url: width: 720 }} 720w{% endif %}" width="auto" loading="lazy" alt="{{ product.title }}" class="img-base">
+                                  {% if section.settings.show-sale-tag %}
+                                    {% if product.compare_at_price %}
+                                      <div class="list_item-tag">
+                                        <div>Sale</div>
+                                      </div>
+                                    {% endif %}
+                                  {% endif %}
+                                </a>
+  
+                                <a href="{% if product.metafields.custom.affiliate_link == nil %}{{ product.url }}{% else %}{{ product.metafields.custom.affiliate_link }}{% endif %}" class="img-overlay" name="{{ product.title }}" alt="{{ product.title }}" >
+                                  {% if section.settings.main-img == "1" and
+                                  product.images[1] != nil %}<img srcset="{{ product.images[1] | image_url: width: 720 }} 720w" width="auto" alt="{{ product.title }}" loading="lazy" class="list_item-image">{% endif %}
+                                  <div buttons-product-id="{{ product.id }}" class="list_item-overlay-button-wrapper">
+  
+                                    {%- form 'product', product, class:'flex-grow' -%}
+                                      <select name="id" style="display:none;">
+                                        {% for variant in product.variants %}
+                                          <option value="{{ variant.id }}" {% if variant==product.selected_or_first_available_variant %} selected="selected"{% endif %}>
+                                            {{ variant.title }}
+                                          </option>
+                                        {% endfor %}
+                                      </select>
+                                      {% if product.metafields.custom.affiliate_link == nil %}
+                                      <div class="product-form__buttons">
+                                      {% if section.settings.show-quick-add %}
+                                        <button style="width:100%" {%- if product.selected_or_first_available_variant.available -%} onclick="addToCart({{ product.selected_or_first_available_variant.id }}, this);return false;"
+                                          class="button button-slim is-filled cart-trigger"{%- else -%}
+                                          class="button button-slim is-filled disabled"disabled {%- endif -%}>
+                                          <span>
+                                            {%- if product.selected_or_first_available_variant.available -%}
+                                              Quick Add
+                                            {%- else -%}
+                                              Waitlist
+                                            {%- endif -%}
+                                          </span>
+                                        </button>
+                                        {% endif %}
+                                      </div>
+                                        {% endif %}
+                                    {%- endform -%}
+  
+                                  </div>
+</a>
+</div>
+                              <div class="list_item-info" {% if section.settings.show-translucent-title %}style="opacity:45%"{% endif %}>
+                                <div class="list_item-header-wrapper is-price-btm">
+  
+                                  <a class="list_item-title" href="{% if product.metafields.custom.affiliate_link == nil %}{{ product.url }}{% else %}{{ product.metafields.custom.affiliate_link }}{% endif %}">
+  
+                                    <div class="text-item text-style-1lines" {% if section.settings.layout-horizontal == true %} style="white-space: normal;"{% endif %}>
+                                      {% if section.settings.show-title
+                                      %}
+                                        {{product.title}}
+                                      {% endif %}
+  
+                                    </div>
+  
+                                  </a>
+                                  {% if section.settings.show-price %}
+                                    <div class="list_item-price">
+                                      <div class="text-item opacity50 text-style-1lines margin-right margin-xxsmall">{{ product.vendor }}</div>
+                                            <div class="text-item opacity50">
+                                        {% if product.price > 0 %}
+                                          {{ product.price | money_without_trailing_zeros }}
+                                          {%
+                                      else %}FREE{% endif %}
+                                      </div>
+                                      {% if section.settings.show-strikethrough %}
+                                        {% if product.compare_at_price %}
+                                          <div class="text-item text-style-strikethrough text-color-black20">{{
+                                        product.compare_at_price
+                                        | money_without_trailing_zeros }}
+                                          </div>
+                                        {% endif %}
+                                      {% endif %}
+                                    </div>
+                                  {% endif %}
+                                </div>
+                                {% if section.settings.show-description %}
+                                  <div class="text-style-3lines body-small">{{
+                                    product.description }}
+                                  </div>
+                                {% endif %}
+                              </div>
+                            </div>
+                          </div>tem-price">
+                                      <div class="text-item">
+                                        {% if product.price > 0 %}
+                                          {{ product.price | money_without_trailing_zeros }}
+                                          {%
+                                      else %}FREE{% endif %}
+                                      </div>
+                                      {% if section.settings.show-strikethrough %}
+                                        {% if product.compare_at_price %}
+                                          <div class="text-item text-style-strikethrough text-color-black20">{{
+                                        product.compare_at_price
+                                        | money_without_trailing_zeros }}
+                                          </div>
+                                        {% endif %}
+                                      {% endif %}
+                                    </div>
+                                  {% endif %}
+                                </div>
+                                {% if section.settings.show-description %}
+                                  <div class="text-style-3lines body-small">{{
+                                    product.description }}
+                                  </div>
+                                {% endif %}
+                              </div>
+                            </div>
+                          </div>

@@ -1,0 +1,20 @@
+{% comment schema %}
+{
+    "name":"Simple Product Card",
+    "inputs": [
+        
+        {
+            "name": "productHandle",
+            "type": "string",
+            "defaultValue": "petit-footed-bowl-black-clay-beau-rush",
+            "helperText": "Add the URL slug for this particular product"
+        }
+    ]
+}
+{% endcomment %}
+
+<div id="product-card-{{ productHandle }}" width="100%">
+<script>
+$('#product-card-{{ productHandle }}').load('https://eye-swoon.com/products/{{ productHandle }}.html #ajax-product-card');
+</script>
+</div>

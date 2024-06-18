@@ -1,0 +1,150 @@
+<div class="bg-color-{{ section.settings.bg-color }} {{ section.settings.visibility }} fade-in-{{ section.settings.fade-content }}">
+<div>
+{% comment %} <div class="shop_title-wrapper ">
+  <div class="page-padding">"
+    <h1>
+      {% if blog.url == request.path %}
+        {{ blog.title }}
+      {% else %}
+        {% if blog.tags[0] %}
+          {{ blog.tags[0] }}
+          {% else %}Journal{% endif %}
+      {% endif %}
+    </h1>
+  </div>
+</div> {% endcomment %}
+
+<div class="shop_menu-wrapper fade-in-1">
+  {% if request.path contains "/pages/journal" %} 
+  <div class="shop_main-menu">
+    <div class="shop_nav-wrapper">
+      {% for link in linklists.journal-menu.links %}
+        <a href="{{ link.url }}" class="text-style-hover-link w-inline-block">
+          <div class="text-tag {% if request.path contains link.url %}text-underline{% endif %}">{{ link.title }}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  {% comment %}
+    {% if request.path contains linklists.shop-menu.links %} {% endif %}
+  {% endcomment %}
+  <div class="shop_main-menu shop_sub-menu">
+    <div class="shop_nav-wrapper">
+      <a href="{{ blog.url }}" class="text-style-hover-link w-inline-block">
+              <div class="text-tag">All
+              </div>
+            </a>
+      {% for link in linklists.journal-menu.links %}
+        {% if request.path contains link.url %}
+
+          {% for child_link in link.links %}
+            {% assign links_present = true %}
+            <a href="{{ child_link.url }}" class="text-style-hover-link w-inline-block">
+              <div class="text-tag">{{ child_link.title }}
+              </div>
+            </a>
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+      {% if links_present != true %}
+        <style>
+        
+          .shop_main-menu.shop_sub-menu {
+            display: none;
+          }
+        </style>
+      {% endif %}
+      {% if links_present != true and request.path contains "/blogs" %}
+      <style>
+       .journal-fallback { padding-bottom: 0px;}
+         #hideme-top { display:none;}
+          #hideme-btm { display:none;}
+      </style>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Journal Navigation",
+    "tag": "div",
+    "settings": [
+      {
+        "type": "select",
+        "id": "bg-color",
+        "options": [
+          {
+            "value": "white",
+            "label": "White"
+          },
+          {
+            "value": "extralight",
+            "label": "Extra Light"
+          },
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "dark",
+            "label": "Dark"
+          }, {
+            "value": "extradark",
+            "label": "Extra Dark"
+          }
+        ],
+        "default": "dark",
+        "label": "Background Color"
+      }, {
+        "type": "select",
+        "id": "fade",
+        "options": [
+          {
+            "value": "0",
+            "label": "None"
+          }, {
+            "value": "1",
+            "label": "First (Fast)"
+          }, {
+            "value": "2",
+            "label": "Second (Medium)"
+          }, {
+            "value": "3",
+            "label": "Third (Slow)"
+          }
+        ],
+        "default": "2",
+        "label": "Fade-in"
+      }, {
+        "type": "select",
+        "id": "visibility",
+        "options": [
+          {
+            "value": "show",
+            "label": "Desktop and Mobile"
+          }, {
+            "value": "hide-mobile-landscape",
+            "label": "Desktop Only"
+          }, {
+            "value": "show-mobile-landscape",
+            "label": "Mobile Only"
+          }, {
+            "value": "hidden",
+            "label": "Hidden"
+          }
+        ],
+        "default": "show",
+        "label": "Visibility"
+      }
+    ]
+  }
+{% endschema %}

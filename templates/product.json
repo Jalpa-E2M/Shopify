@@ -1,0 +1,76 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "product-header": {
+      "type": "product-header",
+      "settings": {
+      }
+    },
+    "5033fff7-7d5f-4a83-ad4b-87b3eba64faf": {
+      "type": "692c7093ee67439aa1cf6fc9947b7700-builder-io",
+      "settings": {
+        "builder_content_entry_preview": "b50d56f60fed4424a808da3e4110e49d"
+      }
+    },
+    "8c375431-abc0-4010-9145-6ca1d8e5fb67": {
+      "type": "divider-line",
+      "settings": {
+        "bg-color": "white",
+        "fade-in": "0",
+        "anchor-id": ""
+      }
+    },
+    "d04e3ca0-596c-4069-be9d-797693081579": {
+      "type": "yotpo_pdp_reviews",
+      "disabled": true,
+      "settings": {
+        "header-size": "heading-m",
+        "background-color": "rgba(0,0,0,0)",
+        "text-color": "#000000",
+        "text_align": "left",
+        "container_size": "large",
+        "page_padding": true,
+        "padding-top": 1,
+        "padding-bottom": 0,
+        "margin-top": 2,
+        "margin-bottom": 0
+      }
+    },
+    "1683300794ccc46d3b": {
+      "type": "apps",
+      "settings": {
+      }
+    },
+    "d6478a79-3581-4236-9bae-b70dc95581ac": {
+      "type": "divider-line",
+      "settings": {
+        "bg-color": "white",
+        "fade-in": "0",
+        "anchor-id": ""
+      }
+    },
+    "56568b5d-36b0-4f6f-b71d-04e2c7a342cf": {
+      "type": "7b393758255f48748ef9b5f511ada47e-builder-io",
+      "settings": {
+        "builder_content_entry_preview": "5e5a7c72a4d3423781b16a972dd8a4a1"
+      }
+    }
+  },
+  "order": [
+    "product-header",
+    "5033fff7-7d5f-4a83-ad4b-87b3eba64faf",
+    "8c375431-abc0-4010-9145-6ca1d8e5fb67",
+    "d04e3ca0-596c-4069-be9d-797693081579",
+    "1683300794ccc46d3b",
+    "d6478a79-3581-4236-9bae-b70dc95581ac",
+    "56568b5d-36b0-4f6f-b71d-04e2c7a342cf"
+  ]
+}

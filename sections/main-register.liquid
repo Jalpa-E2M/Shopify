@@ -1,0 +1,89 @@
+
+</script><div class="login bg-color-extralight wf-section">
+  <div class="padding-vertical padding-xxlarge">
+    <div class="page-padding">
+      <div class="container-xsmall w-container">
+        <div class="text-align-center margin-bottom margin-medium">
+          <div class="heading-layout">
+            <h1 class="heading-l">Create <em>your </em>account</h1>
+          </div>
+        </div>
+        <div class="login_form-wrapper w-form">
+          {%- form 'create_customer', novalidate: 'novalidate' -%}
+            <input type="text" name="customer[first_name]" id="RegisterForm-FirstName" {% if form.first_name
+              %}value="{{ form.first_name }}" {% endif %} autocomplete="given-name"
+              placeholder="First name" class="form-input w-input" required>
+          
+            <input type="text" name="customer[last_name]" id="RegisterForm-LastName" {% if form.last_name
+                %}value="{{ form.last_name }}" {% endif %} autocomplete="family-name"
+                placeholder="Last name" class="form-input w-input" required>
+
+            <input type="email" name="customer[email]" id="RegisterForm-email" {% if form.email %} value="{{ form.email }}" {%
+              endif %} spellcheck="false" autocapitalize="off" autocomplete="email" aria-required="true" {% if form.errors
+              contains 'email' %} aria-invalid="true" aria-describedby="RegisterForm-email-error" {% endif %}
+              placeholder="Email" class="form-input w-input" required>
+         
+            <input type="password" name="customer[password]" id="RegisterForm-password" aria-required="true" {% if form.errors
+              contains 'password' %} aria-invalid="true" aria-describedby="RegisterForm-password-error" {% endif %}
+              placeholder="Password" class="form-input w-input" required>
+
+            <label
+            class="w-checkbox form-checkbox">
+            <div class="w-checkbox-input w-checkbox-input--inputType-custom form-checkbox-icon w--redirected-checked"></div>
+            <input checked="checked" disabled
+              type="checkbox" id="terms" name="customer[note][Terms] data-name="terms" required
+              style="opacity:0;position:absolute;z-index:-1"><span for="terms"
+              class="form-checkbox-label w-form-label">I agree to the <a class="text-underline" href="/pages/terms">Terms and
+                Conditions</a></span>
+          </label>
+          
+          <label class="w-checkbox form-checkbox">
+            <div class="w-checkbox-input w-checkbox-input--inputType-custom form-checkbox-icon"></div>
+            <input
+              type="checkbox" id="Subscribe" name="customer[accepts_marketing]" onchange="if(this.checked == true){this.setAttribute('value','true');}else{this.setAttribute('value','false')};" value="false" data-name="Subscribe"
+              style="opacity:0;position:absolute;z-index:-1"><span for="Subscribe"
+              class="form-checkbox-label w-form-label">Sign up for updates on product drops, restocks, design advice,
+              recipes, and so much more before anyone else</span>
+          </label>
+
+
+          <div class="login_submit-wrapper">
+            <input value="Create" type="submit" class="button is-fullwidth w-button">
+            <div class="text-caption">Already have an account? <a href="{{ routes.account_login_url }}"
+                class="button-text text-underline">Login</a>
+            </div>
+          </div>
+          {%- if form.errors -%}
+          <span class="error">{{ form.errors | default_errors }}</span>
+          {%- endif -%}
+        {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  !function(o){
+    o.addEventListener("DOMContentLoaded", function(){
+        // Ensure the Shopify and recaptchaV3 objects exist on the window
+        window.Shopify = window.Shopify || {};
+        window.Shopify.recaptchaV3 = window.Shopify.recaptchaV3 || {
+            siteKey: "6LcCR2cUAAAAANS1Gpq_mDIJ2pQuJphsSQaUEuc9"
+        };
+
+        // Create a new script element
+        var recaptchaScript = o.createElement("script");
+
+        // Set the source of the script element to the reCAPTCHA script
+        recaptchaScript.setAttribute("src", "https://cdn.shopify.com/shopifycloud/storefront-recaptcha-v3/v0.6/index.js");
+
+        // Append the script element to the body of the document
+        o.body.appendChild(recaptchaScript);
+    });
+}(document);
+</script>
+{% schema %}
+{
+"name": "main-register"
+}
+{% endschema %}

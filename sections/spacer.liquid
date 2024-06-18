@@ -1,0 +1,62 @@
+<div style="display:block;width:100%;height:{{ section.settings.height }}px;" class="bg-color-{{ section.settings.bg-color }}"></div>
+
+{% schema %}
+{
+  "name": "Spacer",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "bg-color",
+      "options": [
+        {
+          "value": "black",
+          "label": "Black"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "extralight",
+          "label": "Extra Light"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "extradark",
+          "label": "Extra Dark"
+        }
+      ],
+      "default": "white",
+      "label": "Color"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 0,
+      "max": 192,
+      "step": 8,
+      "unit": "px",
+      "label": "Spacer Height",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spacer",
+      "category": "Utilities"
+    }
+  ]
+}
+{% endschema %}

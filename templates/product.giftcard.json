@@ -1,0 +1,35 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "giftcard-header": {
+      "type": "giftcard-header",
+      "settings": {
+      }
+    },
+    "5033fff7-7d5f-4a83-ad4b-87b3eba64faf": {
+      "type": "692c7093ee67439aa1cf6fc9947b7700-builder-io",
+      "settings": {
+        "builder_content_entry_preview": "b50d56f60fed4424a808da3e4110e49d"
+      }
+    },
+    "56568b5d-36b0-4f6f-b71d-04e2c7a342cf": {
+      "type": "7b393758255f48748ef9b5f511ada47e-builder-io",
+      "settings": {
+        "builder_content_entry_preview": "5e5a7c72a4d3423781b16a972dd8a4a1"
+      }
+    }
+  },
+  "order": [
+    "giftcard-header",
+    "5033fff7-7d5f-4a83-ad4b-87b3eba64faf",
+    "56568b5d-36b0-4f6f-b71d-04e2c7a342cf"
+  ]
+}

@@ -1,0 +1,42 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == '5e5a7c72a4d3423781b16a972dd8a4a1' %}
+{% include 'content.5e5a7c72a4d3423781b16a972dd8a4a1.builder' %}
+{% else %}
+  {% include 'model.product-page-footer.builder' %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product page footer",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=7b393758255f48748ef9b5f511ada47e). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "5e5a7c72a4d3423781b16a972dd8a4a1", "label": "Default Footer - All Products"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+  "type": "paragraph",
+  "content": "Name: Default Footer - All Products. Targeting: no targeting. Visit the [entry in Builder](https://builder.io/content/5e5a7c72a4d3423781b16a972dd8a4a1)"
+}
+  ],
+  "presets":[{
+    "name": "Product page footer"
+  }]
+}
+{% endschema %}

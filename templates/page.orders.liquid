@@ -1,0 +1,123 @@
+<script src="{{ 'customer.js' | asset_url }}" defer></script>
+
+{% if customer %}
+{% else %}
+  <script>
+    window.location.replace("/account/login?return_url=%2Fpages%2Forders");
+  </script>
+{% endif %}
+
+<div class="account wf-section">
+  <div class="page-padding">
+    <div class="container-large w-container">
+      <h1 class="heading-l"><em>My</em> Orders</h1>
+      <div class="account_layout">
+        <div class="account_menu">
+          <a href="{{ routes.account_url }}" class="text-link is-tab favorites w-inline-block">
+            <div>My Info</div>
+          </a>
+          <a href="/pages/orders" class="text-link is-tab favorites w-inline-block">
+            <div>Orders</div>
+          </a>
+          <a href="{{ routes.account_addresses_url }}" class="text-link is-tab favorites w-inline-block">
+            <div>Addresses</div>
+          </a>
+          <a href="/pages/favorites" class="text-link is-tab favorites w-inline-block">
+            <div>My Favorites</div>
+          </a>
+          <a href="{{ routes.account_logout_url }}" class="text-link is-tab favorites w-inline-blockk">
+            <div>Log Out</div>
+          </a>
+        </div>
+        <div class="tabs-content">
+          <div class="account_myorders">
+            {% if customer.orders.size < 1 %}
+              <p class="opacity50">You have no order history</p>
+            {% else %}
+              {% for order in customer.orders -%}
+                <div class="account_box-wrapper">
+                  <div class="account_order-header">
+                    <div class="account_order-data">
+                      <div class="account_order-status">
+                        <h2 class="heading-m">
+                          {%- if order.cancelled -%}
+                            Cancelled
+                          {% else %}
+                            {% if order.fulfillment_status_label == 'Unfulfilled' %}Pending{% endif %}
+                            {% if order.fulfillment_status_label == 'Fulfilled' %}Shipped{% endif %}
+                            {% if order.fulfillment_status_label == 'Complete' %}Delivered{% endif %}
+                            {% if order.fulfillment_status_label == 'Partial' %}In Progress{% endif %}
+                            {% if order.fulfillment_status_label == 'Restocked' %}Pending{% endif %}
+                          {%- endif -%}
+                        </h2>
+                      </div>
+                      <div>Order Number: {{ order.name }}</div>
+                      <div>Order Placed: {{ order.created_at | date: '%m/%d/%y' }}</div>
+                      <div>Grand Total: {{ order.total_price | money_without_trailing_zeros }}</div>
+                      <div>
+                        Status: {{ order.financial_status_label }}
+                        {% if order.total_refunded_amount > 0 -%}
+                          ({{ order.total_refunded_amount | money_without_trailing_zeros }})
+                        {%- endif %}
+                      </div>
+                    </div>
+                    <div class="account_order-data">
+                      <a class="button-text" href="{{ order.order_status_url }}">View details</a>
+                    </div>
+                  </div>
+
+                  <div class="account_order-info">
+                    {% for item in order.line_items %}
+                      <div class="account_order-product">
+                        <a href="{{ item.product.url }}" class="account_order-product-title-wrapper w-inline-block">
+                          <div class="account_order-product-img">
+                            <div class="img-portrait-sm">
+                              {{ item | image_url: width: 200 | img_tag: '', 'img-base', '' }}
+                            </div>
+                          </div>
+                          <div class="account_order-product-title">
+                            <div>
+                              <div class="text-item serif">{{ item.product.title }}</div>
+                              {% unless item.product.has_only_default_variant -%}
+                                <div class="text-caption opacity50">{{ item.variant.title }}</div>
+                              {%- endunless %}
+                            </div>
+                            <div>
+                              <div class="text-color-black50">
+                                {{ item.variant.price | money_without_trailing_zeros }} (x{{ item.quantity }})
+                              </div>
+                              {% if item.product.metafields.custom.lead_time_short.value != null
+                                and item.product.metafields.custom.lead_time_short.value != ''
+                              -%}
+                                <div style="font-size:0.75rem;text-transform:uppercase" class="text-color-black50">
+                                  Lead time: {{ item.product.metafields.custom.lead_time_short.value }}
+                                </div>
+                              {%- endif %}
+                            </div>
+                          </div>
+                        </a>
+                        <div class="account_order-product-links">
+                          {%- if item.fulfillment.tracking_url -%}
+                            <a class="button-text" href="{{ item.fulfillment.tracking_url }}"> Track </a>
+                          {%- endif -%}
+                          <a href="{{ item.product.url }}" target="_blank" class="button-text">Order Again</a>
+                          <a href="/pages/contact" class="button-text">Request Return</a>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.onload = () => {
+    typeof CustomerAddresses !== 'undefined' && new CustomerAddresses();
+  }
+</script>

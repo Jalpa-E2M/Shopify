@@ -1,0 +1,534 @@
+<div id="{{ section.settings.anchor-id }}" class="list bg-color-{{ section.settings.bg-color }} wf-section {{ section.settings.visibility }}">
+  <div class="fade-in-{{ section.settings.fade }}">
+    <div class="padding-top padding-{{ section.settings.padding-top }}">
+    <div class="padding-bottom padding-{{ section.settings.padding-bottom }}">
+      <div class="list_component">
+        <div class="page-padding">
+          <div class="container-{{ section.settings.container-width }} w-container">
+            <div class="list_wrapper {% if section.settings.is-swiper %}is-swiper {% endif %}{% if section.settings.vertical-title != blank %}has-vertical-title{% endif %}">
+              <div class="{% if section.settings.is-swiper %}swiper is-list {% endif %}{% if section.settings.vertical-title != blank %}has-vertical-title{% endif %}">
+                {% if section.settings.title != "" or section.settings.list-url != blank %}
+                <div class="list-header-wrapper {% if section.settings.is-swiper %}is-swiper{% endif %}">
+                    {% if section.settings.title != "" %}
+                    <div class="text-align-center hide-mobile-landscape">
+                      <div class="heading-m">{{ section.settings.title }}</div>
+                    </div>
+                    <div class="text-align-left show-mobile-landscape">
+                      <div class="heading-m">{{ section.settings.title }}</div>
+                    </div>
+                    {% endif %}
+                    {% if section.settings.list-url != blank %}
+                    <div class="flex-grow text-align-right">
+                      <a href="{{ section.settings.list-url }}" class="button-text w-button">{{ section.settings.list-url-text }}</a>
+                    </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                {% if section.settings.view-switcher %}
+                <div class="list-header-wrapper {% if section.settings.is-swiper %}is-swiper{% endif %} show-mobile-landscape">
+                    <div class="view-switcher-layout" style="margin-top:20px;">
+                    <div class="text-tag">View:</div>
+                    <a href="#" class="view-switcher_grid w-inline-block"></a>
+                    <a href="#" class="view-switcher_col w-inline-block"></a>
+                    </div>
+                  </div>
+                {% endif %}
+                <div class="list_layout is-{{ section.settings.columns }}-col{% if section.settings.is-swiper %} swiper-wrapper{% endif %}"> 
+                  
+                 {% for article in section.settings.blog.articles limit: section.settings.articles_to_show %}
+                 {% if section.settings.tag != "" %}
+                 {% if article.tags contains section.settings.tag %}
+
+                  <div loading="lazy"
+                    class="{% if section.settings.is-swiper %}swiper-slide list_item{% else %}list_item-wrapper{% endif %} of-{{ section.settings.columns }} w-inline-block">
+                    <div class="list_item-layout{% if section.settings.layout-horizontal == true %} is-horizontal{% endif %}">
+                      <div class="list_item-visual-content{% if section.settings.layout-horizontal == true %} is-horizontal{% endif %}">
+
+                        <a href="{{ article.url }}" class="img-{{ section.settings.img-ratio }}" loading="lazy"><img
+                            loading="lazy" src="{{ article.image | image_url: width:600 }}" width="auto"
+                            loading="lazy" alt="{{ article.title }}" class="img-base">
+                        </a>
+
+                        <a href="{{ article.url }}" class="img-overlay" name="{{ article.title }}" alt="{{ product.title }}" >{% if article.metafields.custom.hover_image %}
+                          <img alt="{{ article.title }}" src="{{ article.metafields.custom.hover_image | image_url: width:600 }}"
+                            loading="lazy" class="list_item-image">{% endif %}
+                        </a>
+
+                      </div>
+                      <div class="list_item-info">
+                        <div class="list_item-header-wrapper">
+
+                          <a class="list_item-title" href="{{ article.url }}">
+
+                            <div class="text-item serif text-style-3lines">{{ article.title }}
+
+                            </div>
+
+                          </a>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {% endif %}
+                  {% else %}
+
+                   <div
+                    class="{% if section.settings.is-swiper %}swiper-slide list_item{% else %}list_item-wrapper{% endif %} of-{{ section.settings.columns }} w-inline-block">
+                    <div class="list_item-layout{% if section.settings.layout-horizontal == true %} is-horizontal{% endif %}">
+                      <div class="list_item-visual-content{% if section.settings.layout-horizontal == true %} is-horizontal{% endif %}">
+
+                        <a href="{{ article.url }}" class="img-{{ section.settings.img-ratio }}"><img
+                            src="{{ article.image | image_url: width:600 }}" width="auto"
+                            loading="lazy" alt="{{ article.title }}" class="img-base">
+                        </a>
+
+                        <a href="{{ article.url }}" class="img-overlay" name="{{ article.title }}" alt="{{ article.title }}" >{% if article.metafields.custom.hover_image %}
+                          <img src="{{ article.metafields.custom.hover_image | image_url: width:600 }}"
+                            loading="lazy" class="list_item-image" alt="{{ article.title }}">{% endif %}
+                        </a>
+
+                      </div>
+                      <div class="list_item-info">
+                        <div class="list_item-header-wrapper">
+
+                          <a class="list_item-title" href="{{article.url }}">
+
+                            <div class="text-item serif text-style-3lines">{{ article.title }}
+
+                            </div>
+
+                          </a>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {% endif %}
+                  {% endfor %}
+
+
+                </div>
+              </div>
+              {% if section.settings.is-swiper %}
+              <div class="swiper-button-left is-shop-list {% if section.settings.vertical-title != blank %}hidden{% endif %}"></div>
+              <div class="swiper-button-next is-shop-list"></div>
+              <div class="swiper-pagination"></div>
+              {% comment %} <div class="hidden w-embed w-script">
+
+                <script>
+                  currentSwiper = document.currentScript.parentNode.parentNode.firstChild.nextElementSibling;
+                  navNext = currentSwiper.nextElementSibling.nextElementSibling;
+                  navPrev = currentSwiper.nextElementSibling;
+                  pagination = currentSwiper.nextElementSibling.nextElementSibling.nextElementSibling;
+                  var swipername = new Swiper(currentSwiper, {
+                    slidesPerView: "auto",
+                    slidesPerGroupAuto: false,
+                    speed: 250,
+                    //spaceBetween: 45,
+                    loop: true,
+                    initialSlide: 0,
+                    centeredSlides: false,
+                    shortSwipes: true,
+                    threshold: 20,
+                    passiveListeners: true,
+                    mousewheel: {
+                      releaseOnEdges: false,
+                      forceToAxis: true,
+                      sensitivity: 0.5,
+                    },
+                    navigation: {
+                      nextEl: navNext,
+                      prevEl: navPrev,
+                    },
+                    pagination: {
+                      el: pagination,
+                      type: 'bullets',
+                      clickable: 'false'
+                    },
+                  });
+                </script>
+
+
+
+
+              </div> {% endcomment %}
+              {% endif %}
+              {% if section.settings.vertical-title != blank %}
+              <div class="list_vertical-title">
+                <div class="heading-l">{{ section.settings.vertical-title }}</div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog List",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    },
+    
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Filter by blog tag",
+      "info": "\"small plates,\" for example. Make sure the case of your tag matches the tag case in the blog."
+    },
+    {
+      "type": "range",
+      "id": "articles_to_show",
+      "min": 1,
+      "max": 25,
+      "step": 1,
+      "default": 8,
+      "label": "Number of articles to show"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Maximum Columns",
+      "info": "Note: Number of columns will shrink on smaller screen sizes",
+      "options": [
+        {
+          "value": "2",
+          "label": "Two"
+        },
+        {
+          "value": "3",
+          "label": "Three"
+        },
+        {
+          "value": "4",
+          "label": "Four"
+        },
+        {
+          "value": "5",
+          "label": "Five"
+        }
+      ],
+      "default": "5"
+    },
+    {
+      "type": "select",
+      "id": "img-ratio",
+      "label": "Image Ratio",
+      "default": "square",
+      "info": "If the images do not fit the chosen ratio, they will be cropped to center",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "portrait-sm",
+          "label": "Portrait Small"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape"
+        },
+        {
+          "value": "landscape-wide",
+          "label": "Landscape Wide"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "is-swiper",
+      "label": "Show as carousel?",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "layout-horizontal",
+      "label": "Horizontal link layout on desktop?",
+      "default": false,
+      "info": "If set to on, only a maximum of 2 columns is recommended."
+    },
+    {
+      "type": "checkbox",
+      "id": "view-switcher",
+      "label": "Show view switcher on mobile?",
+      "info": "If carousel is on, this should be off",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "vertical-title",
+      "label": "Decorative Vertical Title",
+      "info": "optional - Do not use if you added a standard title"
+    },
+    {
+      "type": "url",
+      "id": "list-url",
+      "label": "List Link",
+      "info": "Useful to link to collections or related landing pages"
+    },
+    {
+      "type": "text",
+      "id": "list-url-text",
+      "label": "List Link Text",
+      "default": "View More"
+    },
+    {
+      "type": "select",
+      "id": "bg-color",
+      "options": [
+        {
+          "value": "black",
+          "label": "Black"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "extralight",
+          "label": "Extra Light"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "extradark",
+          "label": "Extra Dark"
+        }
+      ],
+      "default": "medium",
+      "label": "Background Color"
+    },
+    {
+      "type": "select",
+      "id": "padding-top",
+      "options": [
+        {
+          "value": "0",
+          "label": "None"
+        },
+        {
+          "value": "tiny",
+          "label": "Tiny"
+        },
+        {
+          "value": "xxsmall",
+          "label": "XX Small"
+        },
+        {
+          "value": "xsmall",
+          "label": "X Small"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "xlarge",
+          "label": "X Large"
+        },
+        {
+          "value": "xxlarge",
+          "label": "XX Large"
+        },
+        {
+          "value": "huge",
+          "label": "Huge"
+        },
+        {
+          "value": "xhuge",
+          "label": "X Huge"
+        },
+        {
+          "value": "xxhuge",
+          "label": "XX Huge"
+        }
+      ],
+      "default": "medium",
+      "label": "Top Padding"
+    },
+    {
+      "type": "select",
+      "id": "padding-bottom",
+      "options": [
+        {
+          "value": "0",
+          "label": "None"
+        },
+        {
+          "value": "tiny",
+          "label": "Tiny"
+        },
+        {
+          "value": "xxsmall",
+          "label": "XX Small"
+        },
+        {
+          "value": "xsmall",
+          "label": "X Small"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "xlarge",
+          "label": "X Large"
+        },
+        {
+          "value": "xxlarge",
+          "label": "XX Large"
+        },
+        {
+          "value": "huge",
+          "label": "Huge"
+        },
+        {
+          "value": "xhuge",
+          "label": "X Huge"
+        },
+        {
+          "value": "xxhuge",
+          "label": "XX Huge"
+        }
+      ],
+      "default": "medium",
+      "label": "Bottom Padding"
+    },
+    {
+      "type": "select",
+      "id": "container-width",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "xlarge",
+          "label": "X Large"
+        },
+        {
+          "value": "none",
+          "label": "No container"
+        }
+      ],
+      "default": "large",
+      "label": "Container Width"
+    },
+    {
+      "type": "select",
+      "id": "fade",
+      "options": [
+        {
+          "value": "0",
+          "label": "None"
+        },
+        {
+          "value": "1",
+          "label": "First (Fast)"
+        },
+        {
+          "value": "2",
+          "label": "Second (Medium)"
+        },
+        {
+          "value": "3",
+          "label": "Third (Slow)"
+        }
+      ],
+      "default": "1",
+      "label": "Content Fade-in"
+    },
+    {
+      "type": "text",
+      "id": "anchor-id",
+      "label": "Anchor ID",
+      "info": "Useful for linking to this part of the page"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "show",
+          "label": "Desktop and Mobile"
+        },
+        {
+          "value": "hide-mobile-landscape",
+          "label": "Desktop Only"
+        },
+        {
+          "value": "show-mobile-landscape",
+          "label": "Mobile Only"
+        },
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        }
+      ],
+      "default": "show",
+      "label": "Visibility"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog List",
+      "category": "Lists"
+    }
+  ]
+}
+{% endschema %}

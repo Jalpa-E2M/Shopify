@@ -1,0 +1,99 @@
+@media print {
+	@page {
+		margin: 5mm;
+		/* this affects the margin in the printer settings */
+	}
+
+
+	html {
+		background-color: var(--white);
+		margin: 0px;
+		/* this affects the margin on the html before sending to printer */
+	}
+
+	.nav-menu-layout { height: 64px; margin-bottom: 32px; }
+
+	.nav-link-wrapper { display:none!important; }
+
+	.uai {display:none!important;}
+
+	.nav-component {
+		position: static!important;
+	}
+
+	li {
+		display: list-item;
+		list-style-position: inside;
+		font-family: initial;
+    	color: #000000;
+	  }
+
+	  ol li {
+		display:block;
+		font-family: initial;
+    	color: #000000;
+	  }
+
+	  ol li {
+		list-style: decimal;
+		list-style-position: inside;
+		font-family: initial;
+    	color: #000000;
+		margin-bottom:2px;
+		padding-bottom:8px;
+		border-bottom: 1px solid rgb(0,0,0,0.25);
+	}
+
+	ol {
+		list-style-type: decimal;
+		list-style-position: inside;
+		-webkit-margin-before: 1em;
+		-webkit-margin-after: 1em;
+		-webkit-margin-start: 0px;
+		-webkit-margin-end: 0px;
+		-webkit-padding-start: 0px;
+		font-family: initial;
+    	color: #000000;
+	}
+
+	body {
+		background: var(--white);
+		margin: 5mm 5mm 5mm 5mm;
+		padding: 0px!important;
+	}
+
+	.padding-vertical {
+		padding: 0px 0px 0px 0px !important;
+		margin-bottom: 48px!important;
+	}
+
+	#banner { display:none!important; }
+
+	.nav-logo {
+		display: block;
+	}
+
+	.nav-mobile-bar-layout {display:none;}
+	.nav-link-wrapper {display:none;}
+
+	.print {
+		display: block !important;
+	}
+
+	#shopify-section-footer {
+		display:none!important;
+	}
+
+	.print {
+		display: block !important;
+	}
+
+	.button {
+		display: none!important;
+
+	}
+
+	.hideprint {
+		display: none !important;
+	}
+}

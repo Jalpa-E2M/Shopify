@@ -1,0 +1,61 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "main-404": {
+      "type": "main-404",
+      "settings": {
+        "button-text": "Take me home",
+        "heading-text": "<p>Page <em>Not<\/em> Found<\/p>",
+        "heading-size": "l",
+        "body-text": "<p>Sorry, that page never returned from Athena's kitchen.<br\/><strong>Her last recipe was just too delicious.<\/strong><\/p>",
+        "body-size": "medium",
+        "bg-color": "extralight"
+      }
+    },
+    "796a674d-20e9-41d3-bb12-25295e1d93c9": {
+      "type": "collection-list",
+      "settings": {
+        "product_list": "all",
+        "tag": "",
+        "products_to_show": 4,
+        "columns": "5",
+        "img-ratio": "portrait-sm",
+        "main-img": "1",
+        "item-bg-color": "none",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": false,
+        "show-translucent-title": false,
+        "is-swiper": true,
+        "layout-horizontal": false,
+        "view-switcher": false,
+        "title": "",
+        "vertical-title": "",
+        "list-url": "",
+        "list-url-text": "View More",
+        "bg-color": "medium",
+        "padding-top": "medium",
+        "padding-bottom": "medium",
+        "container-width": "large",
+        "fade": "1",
+        "anchor-id": "",
+        "visibility": "show"
+      }
+    }
+  },
+  "order": [
+    "main-404",
+    "796a674d-20e9-41d3-bb12-25295e1d93c9"
+  ]
+}

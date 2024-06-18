@@ -1,0 +1,132 @@
+
+<div class="_404 bg-color-{{ section.settings.bg-color }} wf-section">
+    <div class="padding-vertical padding-xxlarge">
+        <div class="page-padding">
+            <div class="container-xsmall w-container">
+                <div>
+                    <div class="max-width-huge text-align-center halign-center">
+                        <div class="heading-layout">
+                            <h1 class="heading-{{section.settings.heading-size }}">{{ section.settings.heading-text }}</h1>
+                            <div class="body-{{section.settings.body-size }}">{{ section.settings.body-text }}</div>
+                            <div>
+                                <a href="/" class="button w-button">{{ section.settings.button-text }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+"name": "404",
+"tag": "div",
+"settings": [
+{
+"type": "text",
+"id": "button-text",
+"default": "Take me home",
+"label": "Button Text"
+},
+{
+"type": "richtext",
+"id": "heading-text",
+"default": "<p>Page <em>not</em> found</p>",
+"label": "Heading"
+},
+{
+"type": "select",
+"id": "heading-size",
+"options": [
+{
+"value": "xs",
+"label": "Extra Small"
+},
+{
+"value": "s",
+"label": "Small"
+},
+{
+"value": "m",
+"label": "Medium"
+},
+{
+"value": "l",
+"label": "Large"
+},
+{
+"value": "xl",
+"label": "Extra Large"
+}
+],
+"default": "l",
+"label": "Heading Size"
+},
+{
+"type": "richtext",
+"id": "body-text",
+"default": "<p>Sorry, that page never returned from Athena's kitchen.<br><strong>Her last recipe was just too delicious.</strong></p>",
+"label": "Body Text"
+},
+{
+"type": "select",
+"id": "body-size",
+"options": [
+{
+"value": "small",
+"label": "Small"
+},
+{
+"value": "medium",
+"label": "Medium"
+},
+{
+"value": "large",
+"label": "Large"
+}
+],
+"default": "medium",
+"label": "Body Size"
+},
+
+{
+"type": "select",
+"id": "bg-color",
+"options": [
+{
+"value": "black",
+"label": "Black"
+},
+{
+"value": "white",
+"label": "White"
+},
+{
+"value": "extralight",
+"label": "Extra Light"
+},
+{
+"value": "light",
+"label": "Light"
+},
+{
+"value": "medium",
+"label": "Medium"
+},
+{
+"value": "dark",
+"label": "Dark"
+},
+{
+"value": "extradark",
+"label": "Extra Dark"
+}
+],
+"default": "extralight",
+"label": "Color"
+}
+]
+}
+{% endschema %}

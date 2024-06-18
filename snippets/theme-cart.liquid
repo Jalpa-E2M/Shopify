@@ -1,0 +1,261 @@
+function whenCartJSExists(callback) {
+  if (window.CartJS) {
+    callback();
+  } else {
+    setTimeout(function() {
+      whenCartJSExists(callback);
+    }, 100); // Check every 100ms
+  }
+}
+
+whenCartJSExists(function() {
+
+var addToCartFormSelector = 'form[action="/cart/add"]';
+
+$(addToCartFormSelector).submit(function (e) {
+    e.preventDefault();
+});
+
+window.addToCart = function(id, el) {
+  CartJS.removeItemById(id);
+  const customPropertyField = document.getElementById('custom-properties');
+  const customPropertyVal = $('#custom-properties').val();
+  const stockElement = document.getElementById('product-stock');
+  const availableStock = stockElement ? parseInt(stockElement.getAttribute('data-stock')) : Infinity;
+ 
+  // check if the #custom-properties element exists
+  if (customPropertyField) {
+    // check if #custom-properties has a value
+    if (!customPropertyVal) {
+      customPropertyField.required = true;
+      customPropertyField.reportValidity();
+      return; // do not execute the function
+    }
+  }
+  
+  // execute the function if #custom-properties has a value or if it doesn't exist
+  const originalBtnText = $(el).text();
+  $(el).text("Adding");
+  const quantityBefore = CartJS.cart.item_count;
+  const quantityField = document.getElementById('main-product-quantity');
+  const quantityNum = $(quantityField).attr("value");
+  let num = 1;
+  if (quantityNum > 0) {
+    num = quantityNum;
+  };
+   if (num > availableStock) {
+    $(el).text(`Only ${availableStock} in stock`);
+    return; // Stop execution
+  }
+  const incrementElement = document.getElementById('product-increment');
+  let incrementValue = 1; // Default value
+  if (incrementElement) {
+    incrementValue = parseInt(incrementElement.getAttribute('data-step')) || 1;
+  }
+
+  const preorderElement = document.getElementById('product-preorder');
+  let preorderText = ""; // Default value
+  if (preorderElement) {
+    preorderText = preorderElement.getAttribute('data-preorder') || "";
+  };
+
+  const availElement = document.getElementById('product-availability');
+  let availText = ""; // Default value
+  if (availElement) {
+    availText = ": " + availElement.getAttribute('data-availability') || "";
+  };
+  
+  const maxcountElement = document.getElementById('main-product-quantity');
+  let maxCountValue = 1; // Default value
+  if (maxcountElement) {
+    maxCountValue = parseInt(maxcountElement.getAttribute('data-max')) || 1;
+  }
+ CartJS.addItem(id,
+  num,
+  customPropertyVal != "" ? 
+    {'Customization': customPropertyVal, 'increment': incrementValue, 'maxcount': maxCountValue, 'availText': availText, 'preorderText': preorderText} : 
+    {'increment': incrementValue, 'maxcount': maxCountValue, 'availText': availText, 'preorderText': preorderText}, {
+    "success": function (data, textStatus, jqXHR) {
+      $(el).text("Added");
+      let timesRun = 0;
+      const intervalId = setInterval(() => {
+        timesRun += 1;
+        if (timesRun === 500) {
+          clearInterval(intervalId);
+          $(el).text(originalBtnText);
+        }
+        if (quantityBefore != CartJS.cart.item_count) {
+          clearInterval(intervalId);
+          replaceCart();
+          $(el).text(originalBtnText);
+          $(".bag-preview").fadeIn();
+
+        }
+      }, 200);
+    },
+    "error": function (jqXHR, textStatus, errorThrown) {
+      $(el).text("Quantity Unavailable");
+    },
+  });
+};
+
+
+
+
+
+const saveInput = (id, num) => {
+  const quantityBefore = CartJS.cart.item_count;
+  let maxCountValue = Infinity;
+  let index = parseInt(id) - 1;
+  if (CartJS.cart && CartJS.cart.items) {
+    const lineItem = CartJS.cart.items[index];
+    if (lineItem && lineItem.properties) {
+      maxCountValue = lineItem.properties.maxcount || Infinity;
+    }
+  }
+  if (parseInt(num) > parseInt(maxCountValue)) {
+    alert('Sorry, this quantity is not available.');
+    replaceCart();
+    return;
+  }
+  
+  CartJS.updateItem(id, num, {}, {
+    "success": function (data, textStatus, jqXHR) {
+      const intervalId = setInterval(() => {
+        if (quantityBefore != CartJS.cart.item_count) {
+          clearInterval(intervalId);
+          replaceCart();
+        }
+      }, 200);
+    },
+    "error": function (jqXHR, textStatus, errorThrown) {
+      alert('Sorry, this quantity is not available.');
+      replaceCart();
+    }
+  });
+}
+
+window.updateItem = debounce(saveInput, 500);
+
+window.replaceCart = function() {
+    $('#bag-preview_list').html("");
+    $('#bag-items').html("");
+    $('#cart-count-preview').html(CartJS.cart.item_count);
+    $('#menu-cart-count').html(CartJS.cart.item_count);
+    let cartTotal = CartJS.cart.total_price/100;
+    if (Number.isInteger(cartTotal)) {
+      $('#cart-total').html('$'+cartTotal);
+    } else { 
+      $('#cart-total').html('$'+(cartTotal.toFixed(2)));
+    }
+    CartJS.cart.items.forEach(function (element) {
+      let increment = 1;
+      let maxcount = 999;
+      if (element.variant_title !== null) {
+          variantTitle = element.variant_title;
+      } else {
+          variantTitle = "";
+      };
+      if (element.properties !== null) {
+        if (element.properties.Customization !== null && element.properties.Customization !== "" && element.properties.Customization !== undefined) {
+          var lineItemPropertyValue = "&quot;" + element.properties.Customization + "&quot;";
+        }
+        if (element.properties.increment !== null && element.properties.increment !== undefined) {
+          increment = element.properties.increment;
+        }
+        if (element.properties.maxcount !== null && element.properties.maxcount !== undefined) {
+          maxcount = element.properties.maxcount;
+        }
+        if (element.properties.preorderText !== null && element.properties.preorderText !== undefined) {
+          preorderText = element.properties.preorderText;
+          if (element.properties.availText !== null && element.properties.availText !== undefined) {
+            availText = element.properties.availText;
+          }
+        }
+      };
+      let readonlyAttr = "";
+      let cursorStyle = "";
+      if (increment > 1) {
+          readonlyAttr = "readonly";
+          cursorStyle = "cursor: not-allowed;";
+      }
+      let itemPrice = element.final_price/100;
+      if (Number.isInteger(itemPrice)) {
+        itemPrice = itemPrice;
+      } else {
+        itemPrice = itemPrice.toFixed(2);
+      };
+      let itemTotalPrice = element.final_line_price/100;
+      if (Number.isInteger(itemTotalPrice)) {
+        itemTotalPrice = itemTotalPrice;
+      } else {
+        itemTotalPrice = itemTotalPrice.toFixed(2);
+      };
+      let line_number = CartJS.cart.items.indexOf(element) + 1;
+      $('#bag-preview_list').append("<div class='bag-preview_product'><a href='" + element.url + "' class='bag-preview_product-img w-inline-block'><div class='img-portrait-sm'><img src='" + element.image + "' loading='lazy' alt='' class='img-base'></div></a><div class='bag-preview_product-info'><a href='" + element.url + "' class='w-inline-block'><div class='text-item serif'>" + element.product_title + "</div><div class='text-caption opacity50'>" + variantTitle + "</div>" + ((lineItemPropertyValue && lineItemPropertyValue.trim() !== "") ? "<div class='body-small opacity50'>" + lineItemPropertyValue + "</div>" : "") + ((element.properties.preorderText && element.properties.preorderText.trim() !== "") ? "<div class='body-small opacity50' style='line-height:1.1;'>" + element.properties.preorderText + element.properties.availText + "</div>" : "") + "<div>$" + itemTotalPrice + "</div></a><div class='add-to-cart_quantity is-bag-preview w-embed'> <label style='display: none'>Quantity</label> <button data-step='" + increment + "' style=' font-size: 24px; padding: 10px; border: none; background-color: transparent; ' type='button' class='quantity-button decrement-quantity' onclick='updateQuantityClick(this)' aria-label='Subtract one' data-direction='-1' > <svg width='15' height='15' viewbox='0 0 15 2' fill='none' xmlns='http://www.w3.org/2000/svg' > <path d='M0 1H14.5' stroke='currentColor' stroke-width='0.75'></path> </svg> </button> <input " + readonlyAttr + " data-max='" + maxcount + "' data-step='" + increment + "' step='" + increment + "' onchange='updateItem(" + line_number + ", this.value);' style='" + cursorStyle + " padding: 0px; padding-bottom: 3px; width: 40px; text-align: center; border: none; background-color: transparent; ' data-min='1' data-max='0' type='text' name='updates[]' class='quantity-value' value='" + element.quantity + "' /> <button data-step='" + increment + "' style=' font-size: 24px; padding: 10px; border: none; background-color: transparent; ' type='button' class='quantity-button increment-quantity' onclick='updateQuantityClick(this)' aria-label='Add one' data-direction='1' > <svg width='15' height='15' viewbox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg' > <path d='M0 7.25H14.5' stroke='currentColor' stroke-width='0.75'></path> <path d='M7.25 0L7.25 14.5' stroke='currentColor' stroke-width='0.75' ></path> </svg> </button> </div></div><a style='cursor:pointer' onclick='updateItem(" + line_number + ", 0);$(this).parent().fadeOut();' class='bag-delete-btn w-inline-block'></a></div> ");
+
+      $('#bag-items').append("<div class='bag_product'> <div class='bag_product-header-wrapper'> <a href='" + element.url + "' class='bag_product-title-wrapper w-inline-block'> <div class='bag_product-img'> <div class='img-portrait-sm'><img src='" + element.image + "' alt='' class='img-base'></div> </div> <div class='bag_product-title'> <div class='text-item serif'>" + element.product_title + "</div><div class='text-caption opacity50'>" + variantTitle + "</div> " + ((lineItemPropertyValue && lineItemPropertyValue.trim() !== "") ? "<div class='body-small opacity50 margin-top margin-tiny'>Customization: " + lineItemPropertyValue + "</div>" : "") + ((element.properties.preorderText && element.properties.preorderText.trim() !== "") ? "<div class='body-small opacity50 margin-top margin-tiny' style='line-height:1.1;'>" + element.properties.preorderText + element.properties.availText + "</div>" : "") + "</div> </a> <div class='bag_delete show-tablet'> <a style='cursor:pointer' onclick='updateItem(" + line_number + ", 0);$(this).parent().parent().parent().fadeOut();' class='bag-delete-btn w-inline-block'></a> </div> </div> <div class='bag_mobile-titles'> <div>PRICE</div> <div>QUANTITY</div> <div>TOTAL</div> </div> <div class='bag_price'> <div>$" + itemPrice + "</div> </div> <div class='bag_quantity'> <div class='add-to-cart_quantity is-bag w-embed'><label style='display:none'>Quantity</label> <button data-step='" + increment + "' style=' font-size: 24px; padding: 10px; border: none; background-color: transparent; ' type='button' class='quantity-button decrement-quantity' onclick='updateQuantityClick(this)' aria-label='Subtract one' data-direction='-1' > <svg width='15' height='15' viewbox='0 0 15 2' fill='none' xmlns='http://www.w3.org/2000/svg' > <path d='M0 1H14.5' stroke='currentColor' stroke-width='0.75'></path> </svg> </button> <input " + readonlyAttr + " data-max='" + maxcount + "' data-step='" + increment + "' step='" + increment + "' onchange='updateItem(" + line_number + ", this.value);' style='" + cursorStyle + " padding: 0px; padding-bottom: 3px; width: 40px; text-align: center; border: none; background-color: transparent; ' data-min='1' data-max='0' type='text' name='updates[]' class='quantity-value' value='" + element.quantity + "' /> <button data-step='" + increment + "' style=' font-size: 24px; padding: 10px; border: none; background-color: transparent; ' type='button' class='quantity-button increment-quantity' onclick='updateQuantityClick(this)' aria-label='Add one' data-direction='1' > <svg width='15' height='15' viewbox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg' > <path d='M0 7.25H14.5' stroke='currentColor' stroke-width='0.75'></path> <path d='M7.25 0L7.25 14.5' stroke='currentColor' stroke-width='0.75' ></path> </svg> </button> </div> </div> <div class='bag_total'> <div>$" + itemTotalPrice + "</div> </div> <div class='bag_delete hide-tablet'> <a style='cursor:pointer' onclick='updateItem(" + line_number + ", 0);$(this).parent().parent().fadeOut();' class='bag-delete-btn w-inline-block'></a> </div> </div>");
+
+    });
+};
+
+
+window.updateSetQuantity = function(event) {
+ console.log('updating');
+  const parent = $(event.target).parent().parent();
+  var currentQtyItem = parent.find('.quantity-value');
+  var newQty = event.target.value;
+  if (currentQtyItem.length) {
+    newQty = newQty.toString();
+    currentQtyItem.val(newQty);
+    currentQtyItem.attr('value', newQty);
+    currentQtyItem.trigger('change');
+  }
+}
+
+var selectElements = document.querySelectorAll(".product-form__select-quantity");
+selectElements.forEach((selectElement) => {
+  const el = { target: selectElement };
+  updateSetQuantity(el);
+});
+
+
+
+//quantity updates
+window.updateQuantityClick = function(trigger) {
+    var currentQtyItem = $(trigger).siblings('.quantity-value');
+    var currentQty = currentQtyItem.val();
+    var qtyDirection = $(trigger).data("direction");
+    var step = $(trigger).data("step") || 1;
+    var maxQty = parseInt(currentQtyItem.data("max")) || Infinity;
+    var newQty = 0;
+
+    if (qtyDirection == "1") {
+        newQty = parseInt(currentQty) + step;
+    } else if (qtyDirection == "-1") {
+        newQty = parseInt(currentQty) - step;
+    }
+
+    if (newQty > step) {
+        $(".decrement-quantity").removeAttr("disabled");
+    }
+
+    if (newQty >= step && newQty <= maxQty) {
+        currentQtyItem.val(newQty);
+        currentQtyItem.attr('value', newQty);
+        currentQtyItem.trigger('change');
+    } else if (newQty > maxQty) {
+      return;
+    } else {
+      currentQtyItem.val(step);
+      currentQtyItem.attr('value', step);
+      currentQtyItem.trigger('change');
+    }
+};
+
+
+$('#main-product-quantity').on('input', function() {
+  $(this).attr('value', $(this).val());
+});
+
+});

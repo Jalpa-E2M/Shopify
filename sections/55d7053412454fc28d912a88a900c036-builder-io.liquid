@@ -1,0 +1,57 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == '337535dc82cb494598326903192414e6' %}
+{% include 'content.337535dc82cb494598326903192414e6.builder' %}
+{% elsif request.design_mode and section.settings.builder_content_entry_preview == '861eb246120c434e8992a5e5cd06d2cb' %}
+{% include 'content.861eb246120c434e8992a5e5cd06d2cb.builder' %}
+{% elsif request.design_mode and section.settings.builder_content_entry_preview == '177f1d8416594ba5a20f5ef15600854b' %}
+{% include 'content.177f1d8416594ba5a20f5ef15600854b.builder' %}
+{% elsif request.design_mode and section.settings.builder_content_entry_preview == '42cc074f6d1347b89df12449207cd358' %}
+{% include 'content.42cc074f6d1347b89df12449207cd358.builder' %}
+{% else %}
+  {% include 'model.journal-featured-article-section.builder' %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Journal featured article ",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=55d7053412454fc28d912a88a900c036). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "337535dc82cb494598326903192414e6", "label": "Living Featured Articles"},{ "value": "861eb246120c434e8992a5e5cd06d2cb", "label": "Eyeswoon Unplugged featured article sect"},{ "value": "177f1d8416594ba5a20f5ef15600854b", "label": "Recipes featured articles"},{ "value": "42cc074f6d1347b89df12449207cd358", "label": "The Nines featured articles"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+  "type": "paragraph",
+  "content": "Name: Living Featured Articles. Targeting: url includes '/blogs/living'. Visit the [entry in Builder](https://builder.io/content/337535dc82cb494598326903192414e6)"
+},{
+  "type": "paragraph",
+  "content": "Name: Eyeswoon Unplugged featured article sections. Targeting: url includes '/blogs/eyeswoon-unplugged'. Visit the [entry in Builder](https://builder.io/content/861eb246120c434e8992a5e5cd06d2cb)"
+},{
+  "type": "paragraph",
+  "content": "Name: Recipes featured articles. Targeting: url includes '/blogs/recipes'. Visit the [entry in Builder](https://builder.io/content/177f1d8416594ba5a20f5ef15600854b)"
+},{
+  "type": "paragraph",
+  "content": "Name: The Nines featured articles. Targeting: url includes '/blogs/the-nines'. Visit the [entry in Builder](https://builder.io/content/42cc074f6d1347b89df12449207cd358)"
+}
+  ],
+  "presets":[{
+    "name": "Journal featured article "
+  }]
+}
+{% endschema %}

@@ -1,0 +1,167 @@
+{% comment schema %}
+{
+    "name":"Product Card",
+    "inputs": [
+        
+        {
+            "name": "productHandle",
+            "type": "string",
+            "defaultValue": "petit-footed-bowl-black-clay-beau-rush",
+            "helperText": "Add the URL slug for this particular product"
+        },
+        {
+            name: 'showTitle',
+            type: 'boolean',
+            defaultValue: true
+        },
+        {
+            name: 'showDescription',
+            type: 'boolean',
+            defaultValue: false
+        },
+        {
+            name: 'showSaleTag',
+            type: 'boolean',
+            defaultValue: true
+        },
+        {
+            name: 'showPrice',
+            type: 'boolean',
+            defaultValue: true
+        },
+        {
+            name: 'showCrossoutPrice',
+            type: 'boolean',
+            defaultValue: true
+        },
+        {
+            name: 'textFadeInOnHover',
+            type: 'boolean',
+            defaultValue: false
+        },
+        {
+            name: 'showQuickAdd',
+            type: 'boolean',
+            defaultValue: false
+        },
+        {
+            name: 'horizontalLayout',
+            type: 'boolean',
+            defaultValue: false
+        },
+        {
+          name: 'fontStyle',
+          type: 'string',
+          defaultValue: 'sans',
+          enum: ['sans', 'serif']
+        },
+        {
+          name: 'imageRatio',
+          type: 'string',
+          defaultValue: 'portrait-sm',
+          enum: ['landscape', 'portrait','portrait-sm', 'square']
+        },
+        {
+          name: 'imageStyle',
+          type: 'string',
+          defaultValue: 'standard',
+          enum: ['standard', 'secondary image']
+        },
+        {
+          name: 'backgroundColor',
+          type: 'string',
+          defaultValue: 'none',
+          enum: ['extralight', 'light', 'medium', 'dark', 'extradark', 'white', 'black', 'none']
+        }
+    ]
+}
+{% endcomment %}
+
+<div class="list_item-layout{% if horizontalLayout == true %} is-horizontal{% endif %}">
+        <div class="list_item-visual-content{% if horizontalLayout == true %} is-horizontal{% endif %} bg-color-{{ backgroundColor }}">
+
+        <a href="{% if all_products[productHandle].metafields.custom.affiliate_link == nil %}{{ all_products[productHandle].url }}{% else %}{{ all_products[productHandle].metafields.custom.affiliate_link }}{% endif %}" class="img-{{ imageRatio }}">
+        {% if imageStyle == "standard" %}
+        <img srcset="{{ all_products[productHandle].featured_image | image_url: width: 800 }} 800w" width="auto"
+            loading="lazy" alt="" class="img-base">
+        {% else %}
+        <img srcset="{{ all_products[productHandle].images[1] | image_url: width: 800 }} 800w" width="auto"
+            loading="lazy" alt="" class="img-base">
+        {% endif %}
+
+            {% if showSaleTag == true %}
+            {% if all_products[productHandle].compare_at_price %}
+            <div class="list_item-tag">
+            <div>Sale</div>
+            </div>
+            {% endif %}
+            {% endif %}
+            
+        </a>
+
+        <a href="{% if all_products[productHandle].metafields.custom.affiliate_link == nil %}{{ all_products[productHandle].url }}{% else %}{{ all_products[productHandle].metafields.custom.affiliate_link }}{% endif %}" name="{{ all_products[productHandle].title }}" alt="{{ all_products[productHandle].title }}" class="img-overlay">
+            {% if imageStyle == "standard" %}
+            {% if all_products[productHandle].images[1] != nil %}
+            <img
+            srcset="{{ all_products[productHandle].images[1] | image_url: width: 800 }} 800w" width="auto"
+            loading="lazy" class="list_item-image" alt="{{ all_products[productHandle].title }}">
+            {% endif %}
+            {% endif %}
+            <div buttons-product-id="{{ all_products[productHandle].id }}" class="list_item-overlay-button-wrapper">
+
+            {%- form 'product', all_products[productHandle], class:'flex-grow' -%}
+            <select name="id" style="display:none;">
+                {% for variant in all_products[productHandle].variants %} <option value="{{ variant.id }}" {% if
+                variant==all_products[productHandle].selected_or_first_available_variant %} selected="selected" {% endif %}>
+                {{ variant.title }} </option>{% endfor %}
+            </select>
+            {% if all_products[productHandle].metafields.custom.affiliate_link == nil %}
+                    <div class="product-form__buttons">
+                    {% if showQuickAdd == true %}
+                        <button style="width:100%" {%- if all_products[productHandle].selected_or_first_available_variant.available -%} onclick="addToCart({{ all_products[productHandle].selected_or_first_available_variant.id }}, this);return false;"
+                        class="button button-slim is-filled cart-trigger"{%- else -%}
+                        class="button button-slim is-filled disabled" disabled {%- endif -%}>
+                        <span>
+                            {%- if all_products[productHandle].selected_or_first_available_variant.available -%}
+                            Quick Add
+                            {%- else -%}
+                            Waitlist
+                            {%- endif -%}
+                        </span>
+                        </button>
+                        {% endif %}
+                    </div>
+                        {% endif %}
+            {%- endform -%}
+
+            </div>
+        </a>
+
+        </div>
+        <div class="list_item-info" {% if textFadeInOnHover == true %}style="opacity:45%"{% endif %}>
+        <div class="list_item-header-wrapper is-price-btm">
+
+            {% if showTitle == true %}<a class="list_item-title" href="{% if all_products[productHandle].metafields.custom.affiliate_link == nil %}{{ all_products[productHandle].url }}{% else %}{{ all_products[productHandle].metafields.custom.affiliate_link }}{% endif %}">
+
+            <div class="text-item {% if fontStyle == 'serif' %}serif {% endif %}text-style-1lines" {% if horizontalLayout == true %} style="white-space: normal;"{% endif %}>{{all_products[productHandle].title}}
+
+            </div>
+
+            </a>
+            {% endif %}
+            {% if showPrice == true %}
+            <div class="list_item-price">
+              <div class="text-item {% if fontStyle == 'serif' %}serif {% endif %} opacity50 text-style-1lines margin-right margin-xxsmall">{{ all_products[productHandle].vendor }}</div>
+            <div class="text-item opacity50 {% if fontStyle == 'serif' %}serif {% endif %}">{% if all_products[productHandle].price > 0 %}{{ all_products[productHandle].price | money_without_trailing_zeros }}{%
+                else %}FREE{% endif %}</div>
+            {% if showCrossoutPrice == true %}{% if all_products[productHandle].compare_at_price %}<div
+                class="text-item {% if fontStyle == 'serif' %}serif {% endif %}text-style-strikethrough text-color-black20">{{ all_products[productHandle].compare_at_price
+                | money_without_trailing_zeros }}</div>{% endif %}{% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% if showDescription == true %}<div class="text-style-3lines body-small">{{ all_products[productHandle].description }}
+                        </div>{% endif %}
+        </div>
+    </div>
+

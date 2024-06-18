@@ -1,0 +1,77 @@
+{{ 'vendor/qrcode.js' | shopify_asset_url | script_tag }}
+
+
+
+<div class="padding-xlarge padding-vertical">
+<div class="page-padding">
+    <div class="container-large w-container">
+        <div class="gift-card_wrapper">
+            <div>
+            <h1 class="heading-l margin-bottom margin-small">Your <em>gift card</em></h1>
+            <div class="heading-s gift-card__price">
+                <p>
+                    {{ gift_card.initial_value | money_without_trailing_zeros }}
+                </p>
+                {%- if gift_card.enabled == false or gift_card.expired -%}
+                <p class="text-size-large">Your gift card is no longer valid.</p>
+                {%- endif -%}
+
+            </div>
+
+            {%- assign gift_card_balance = gift_card.balance | money_without_trailing_zeros -%}
+            {%- if gift_card.balance != gift_card.initial_value -%}
+            <p class="text-size-large">Remaining balance: {{ gift_card_balance }}</p>
+            {%- endif -%}
+            </div>
+            <div class="gift-card__image-wrapper">
+                <img style="max-width:400px;" src="{{ 'giftcard.png' | asset_url }}" alt="" class="gift-card__image"
+                    loading="lazy">
+            </div>
+            <div class="gift-card__information">
+                <div class="gift-card__number">{{ gift_card.code | format_code }}</div>
+                <div class="margin-vertical margin-xsmall gift-card__copy-code">
+                    <button class="button gift-card__copy-link">Copy code</button>
+                    <span class="gift-card__copy-success form__message" role="status"></span>
+                    <template>
+                        Copied!
+                    </template>
+                </div>
+                {%- if gift_card.pass_url -%}
+                <a href="{{ gift_card.pass_url }}" class="gift_card__apple-wallet">
+                    <img src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="120" height="40"
+                        alt="Add to Apple Wallet" loading="lazy">
+                </a>
+                {%- endif -%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    var string = { qrImageAlt: {{ 'gift_cards.issued.qr_image_alt' | t | json }} };
+    document.addEventListener('DOMContentLoaded', function () {
+        new QRCode(document.querySelector('.gift-card__qr-code'), {
+            text: document.querySelector('.gift-card__qr-code').dataset.identifier,
+            width: 120,
+            height: 120,
+            imageAltText: string.qrImageAlt
+        });
+    });
+
+    var template = document.getElementsByTagName("template")[0];
+    var clonedTemplate = template.content.cloneNode(true);
+
+    var isMessageDisplayed = false
+    document
+        .querySelector('.gift-card__copy-link')
+        .addEventListener('click', () => {
+            navigator.clipboard.writeText(document.querySelector('.gift-card__number').value).then(function () {
+                if (!isMessageDisplayed) {
+                    document.querySelector('.gift-card__copy-success').appendChild(clonedTemplate);
+                    isMessageDisplayed = true
+                }
+            });
+        });
+</script>

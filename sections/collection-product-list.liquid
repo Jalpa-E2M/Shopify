@@ -1,0 +1,636 @@
+<div id="collection-list" class="bg-color-{{ section.settings.bg-color }} {{ section.settings.visibility }}">
+  <div>
+    <div class="page-padding">
+      <div class="container-{{ section.settings.container-width }} w-container">
+        {% if collection.products_count > 0 %}
+        {% unless request.path contains "vendors" %}
+        <div class="shop_filter-menu">
+          <div data-hover="false" data-delay="0" class="shop_nav-dropdown w-dropdown">
+            <div class="shop_nav-dropdown-toggle w-dropdown-toggle">
+              <div class="text-tag">SORT BY
+                <span id="sortby" class="shop_nav-dropdown-sort-text hide-mobile-landscape">
+                  {% if collection.sort_by == "manual" %}Featured{% endif %}
+                  {% if collection.sort_by == "best-selling" %}Bestsellers{% endif %}
+                  {% if collection.sort_by == "created-descending" %}What's New{% endif %}
+                  {% if collection.sort_by == "price-ascending" %}Low Price{% endif %}
+                  {% if collection.sort_by == "price-descending" %}High Price{% endif %}
+                  {% if collection.sort_by == "title-ascending" %}A to Z{% endif %}
+                  {% if collection.sort_by == nil or collection.sort_by == "" %}Featured{% endif %}
+                </span>
+              </div>
+            </div>
+            <nav class="shop_nav-dropdown-list w-dropdown-list">
+              <a href="{{ request.path | sort_by: 'manual' }}" class="shop_nav-dropdown-link w-dropdown-link">Featured</a>
+              <a href="{{ request.path | sort_by: 'best-selling' }}" class="shop_nav-dropdown-link w-dropdown-link">Best
+                                                Sellers</a>
+              <a href="{{ request.path | sort_by: 'created-descending' }}" class="shop_nav-dropdown-link w-dropdown-link">What&#x27;s New</a>
+              <a href="{{ request.path | sort_by: 'price-ascending' }}" class="shop_nav-dropdown-link w-dropdown-link">Low Price</a>
+              <a href="{{ request.path | sort_by: 'price-descending' }}" class="shop_nav-dropdown-link w-dropdown-link">High Price</a>
+              <a href="{{ request.path | sort_by: 'title-ascending' }}" class="shop_nav-dropdown-link w-dropdown-link">A
+                                                to Z</a>
+            </nav>
+          </div>
+          {%  endunless %}
+          <div class="show-mobile-landscape">
+            <div class="view-switcher-layout">
+              <div class="text-tag">View:</div>
+              <a href="#" class="view-switcher_grid w-inline-block"></a>
+              <a href="#" class="view-switcher_col w-inline-block"></a>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="{{ section.settings.anchor-id }}" class="list bg-color-{{ section.settings.bg-color }} wf-section {{ section.settings.visibility }}">
+  <div class="fade-in-{{ section.settings.fade }}">
+    <div class="padding-top padding-{{ section.settings.padding-top }}">
+      <div class="padding-bottom padding-{{ section.settings.padding-bottom }}">
+        <div class="list_component">
+          <div class="page-padding">
+            <div class="container-{{ section.settings.container-width }} w-container">
+              <div class="list_wrapper {% if section.settings.is-swiper %}is-swiper {% endif %}{% if section.settings.vertical-title != blank %}has-vertical-title{% endif %}">
+
+
+                <div class="{% if section.settings.is-swiper %}swiper is-list {% endif %}{% if section.settings.vertical-title != blank %}has-vertical-title{% endif %}">
+
+
+
+                  {% if section.settings.title != "" or section.settings.list-url != blank  %}
+                    <div class="list-header-wrapper {% if section.settings.is-swiper %}is-swiper{% endif %}">
+                      {% if section.settings.title != "" %}
+                        <div class="text-align-center hide-mobile-landscape">
+                          <div class="heading-m">{{ section.settings.title }}
+                          </div>
+                        </div>
+                        <div class="text-align-left show-mobile-landscape">
+                          <div class="heading-m">{{ section.settings.title }}
+                          </div>
+                        </div>
+                      {% endif %}
+                      {% if section.settings.list-url != blank %}
+                        <div class="flex-grow text-align-right">
+                          <a href="{{ section.settings.list-url }}" class="button-text w-button">{{
+                              section.settings.list-url-text }}
+                          </a>
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                  {% assign product_count = 0 %}
+             
+                  {% paginate collection.products by section.settings.products_to_show %}
+                    <div class="list_layout is-{{ section.settings.columns }}-col{% if section.settings.is-swiper %} swiper-wrapper{% endif %}">
+
+                      {% for product in collection.products %}
+                            <div replaceId="{{ product.id }}" class="{% if section.settings.is-swiper %}swiper-slide list_item{% else %}list_item-wrapper{% endif %} of-{{ section.settings.columns }} w-inline-block">
+                            <div class="list_item-layout{% if section.settings.layout-horizontal == true %} is-horizontal{% endif %}">
+                              <div class="list_item-visual-content{% if section.settings.layout-horizontal == true %} is-horizontal{% endif %} bg-color-{{ section.settings.item-bg-color }}">
+  
+                                <a href="{% if product.metafields.custom.affiliate_link == nil %}{{ product.url }}{% else %}{{ product.metafields.custom.affiliate_link }}{% endif %}" class="img-{{ section.settings.img-ratio }}">
+                                  <img srcset="{% if section.settings.main-img == "1" or section.settings.main-img == "3" %}
+                                                                                                    {{ product.featured_image | image_url: width: 720 }} 720w{% else %}{{ product.images[1] |
+                                                                                                        image_url: width: 720 }} 720w{% endif %}" width="auto" loading="lazy" alt="{{ product.title }}" class="img-base">
+                                  {% if section.settings.show-sale-tag %}
+                                    {% if product.compare_at_price %}
+                                      <div class="list_item-tag">
+                                        <div>Sale</div>
+                                      </div>
+                                    {% endif %}
+                                  {% endif %}
+                                </a>
+  
+                                <a href="{% if product.metafields.custom.affiliate_link == nil %}{{ product.url }}{% else %}{{ product.metafields.custom.affiliate_link }}{% endif %}" class="img-overlay" name="{{ product.title }}" alt="{{ product.title }}" >
+                                  {% if section.settings.main-img == "1" and
+                                  product.images[1] != nil %}<img srcset="{{ product.images[1] | image_url: width: 720 }} 720w" width="auto" alt="{{ product.title }}" loading="lazy" class="list_item-image">{% endif %}
+                                  <div buttons-product-id="{{ product.id }}" class="list_item-overlay-button-wrapper">
+  
+                                    {%- form 'product', product, class:'flex-grow' -%}
+                                      <select name="id" style="display:none;">
+                                        {% for variant in product.variants %}
+                                          <option value="{{ variant.id }}" {% if variant==product.selected_or_first_available_variant %} selected="selected"{% endif %}>
+                                            {{ variant.title }}
+                                          </option>
+                                        {% endfor %}
+                                      </select>
+                                      {% if product.metafields.custom.affiliate_link == nil %}
+                                      <div class="product-form__buttons">
+                                      {% comment %}
+                                      {% if section.settings.show-quick-add %}
+                                        <button style="width:100%" {%- if product.selected_or_first_available_variant.available -%} onclick="addToCart({{ product.selected_or_first_available_variant.id }}, this);return false;"
+                                          class="button button-slim is-filled cart-trigger"{%- else -%}
+                                          class="button button-slim is-filled disabled"disabled {%- endif -%}>
+                                          <span>
+                                            {%- if product.selected_or_first_available_variant.available -%}
+                                              Quick Add
+                                            {%- else -%}
+                                              Waitlist
+                                            {%- endif -%}
+                                          </span>
+                                        </button>
+                                        {% endif %}
+                                        {% endcomment %}
+                                      </div>
+                                        {% endif %}
+                                    {%- endform -%}
+  
+                                  </div>
+                                </a>
+  
+                              </div>
+                              <div class="list_item-info" {% if section.settings.show-translucent-title %}style="opacity:45%"{% endif %}>
+                                <div class="list_item-header-wrapper is-price-btm">
+  
+                                  <a class="list_item-title" href="{% if product.metafields.custom.affiliate_link == nil %}{{ product.url }}{% else %}{{ product.metafields.custom.affiliate_link }}{% endif %}">
+  
+                                    <div class="text-item text-style-1lines" {% if section.settings.layout-horizontal == true %} style="white-space: normal;"{% endif %}>
+                                      {% if section.settings.show-title
+                                      %}
+                                        {{product.title}}
+                                      {% endif %}
+  
+                                    </div>
+  
+                                  </a>
+                                  {% if section.settings.show-price %}
+                                    <div class="list_item-price">
+                                    
+                                     <div class="text-item opacity50 text-style-1lines margin-right margin-xxsmall">{{ product.vendor }}</div>
+                                            <div class="text-item opacity50">
+                                        {% if product.price > 0 %}
+                                          {{ product.price | money_without_trailing_zeros }}
+                                          {%
+                                      else %}FREE{% endif %}
+                                      </div>
+                                      {% if section.settings.show-strikethrough %}
+                                        {% if product.compare_at_price %}
+                                          <div class="text-item text-style-strikethrough text-color-black20">{{
+                                        product.compare_at_price
+                                        | money_without_trailing_zeros }}
+                                          </div>
+                                        {% endif %}
+                                      {% endif %}
+                                    </div>
+                                  {% endif %}
+                                </div>
+                                {% if section.settings.show-description %}
+                                  <div class="text-style-3lines body-small">{{
+                                    product.description }}
+                                  </div>
+                                {% endif %}
+                              </div>
+                            </div>
+                          </div>
+                          
+                      {% endfor %}
+                    </div>
+                  </div>
+                  {% if section.settings.is-swiper %}
+                    <div class="swiper-button-left is-shop-list {% if section.settings.vertical-title != blank %}hidden{% endif %}"></div>
+                    <div class="swiper-button-next is-shop-list"></div>
+                    <div class="swiper-pagination"></div>
+                  {% endif %}
+                  {% if section.settings.vertical-title != blank %}
+                    <div class="list_vertical-title">
+                      <div class="heading-l">{{ section.settings.vertical-title }}
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% render 'pagination', paginate: paginate, anchor: '#collection-list' %}
+{% endpaginate %}
+{% else %}
+          {% if section.settings.empty_text %}
+            <div class="padding-top padding-xxlarge">
+              <div class="padding-bottom padding-xxhuge">
+                <p class="text-tag opacity50" style="text-align:center;">{{ section.settings.empty_text }}</p>
+              </div>
+            </div>
+          {% else %}
+            <div class="padding-top padding-xxlarge">
+              <div class="padding-bottom padding-xxhuge">
+                <p class="text-tag opacity50" style="text-align:center;">Something beautiful is coming soon!</p>
+              </div>
+            </div>
+          {% endif %}
+{% endif %}                   
+
+<script>
+
+if (window.location.href.includes("?page=") || window.location.href.includes("?sort_by=")) {
+  location.hash = "#collection-list";
+};
+
+</script>
+
+
+{% schema %}
+  {
+    "name": "Collection List",
+    "tag": "div",
+    "settings": [
+       {
+        "type": "text",
+        "id": "empty_text",
+        "label": "Empty Text",
+        "info": "If there are no products to show, this text will appear on the page",
+        "default": "Something beautiful is coming soon!"
+      }, {
+        "type": "range",
+        "id": "products_to_show",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "default": 16,
+        "label": "Number of products to show per page"
+      },
+      {
+        "type": "select",
+        "id": "columns",
+        "label": "Maximum Columns",
+        "info": "Note: Number of columns will shrink on smaller screen sizes",
+        "options": [
+          {
+            "value": "2",
+            "label": "Two"
+          }, {
+            "value": "3",
+            "label": "Three"
+          }, {
+            "value": "4",
+            "label": "Four"
+          }, {
+            "value": "5",
+            "label": "Five"
+          }
+        ],
+        "default": "5"
+      },
+      {
+        "type": "select",
+        "id": "img-ratio",
+        "label": "Image Ratio",
+        "default": "portrait-sm",
+        "info": "If the product image does not fit the chosen ratio, it will be cropped to center",
+        "options": [
+          {
+            "value": "square",
+            "label": "Square"
+          },
+          {
+            "value": "portrait",
+            "label": "Portrait"
+          },
+          {
+            "value": "portrait-sm",
+            "label": "Portrait Small"
+          },
+          {
+            "value": "landscape",
+            "label": "Landscape"
+          }, {
+            "value": "landscape-wide",
+            "label": "Landscape Wide"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "main-img",
+        "label": "Image Style",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "Image 1, Hover Image 2"
+          }, {
+            "value": "2",
+            "label": "Image 2 only"
+          }, {
+            "value": "3",
+            "label": "Image 1 only"
+          }
+        ]
+      }, 
+    {
+      "type": "select",
+      "id": "item-bg-color",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "black",
+          "label": "Black"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "extralight",
+          "label": "Extra Light"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "extradark",
+          "label": "Extra Dark"
+        }
+      ],
+      "default": "none",
+      "label": "Product Background Color"
+    },
+    {
+        "type": "checkbox",
+        "id": "show-title",
+        "label": "Show product title?",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show-price",
+        "label": "Show product price?",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show-description",
+        "label": "Show product description?",
+        "default": false
+      }, {
+        "type": "checkbox",
+        "id": "show-sale-tag",
+        "label": "Show sale tag?",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show-strikethrough",
+        "label": "Show strikethrough sale price?",
+        "default": true
+      }, 
+      {
+      "type": "checkbox",
+      "id": "show-quick-add",
+      "label": "Show quick add button?",
+      "default": false
+    },
+     {
+      "type": "checkbox",
+      "id": "show-translucent-title",
+      "label": "Show text as translucent?",
+      "info": "If on, text will change to opaque on hover",
+      "default": false
+    },
+    {
+        "type": "checkbox",
+        "id": "is-swiper",
+        "label": "Show as carousel?",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "layout-horizontal",
+        "label": "Horizontal product layout on desktop?",
+        "default": false,
+        "info": "If set to on, only a maximum of 2 columns is recommended."
+      }, {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }, {
+        "type": "richtext",
+        "id": "vertical-title",
+        "label": "Decorative Vertical Title",
+        "info": "optional - Do not use if you added a standard title"
+      }, {
+        "type": "url",
+        "id": "list-url",
+        "label": "List Link",
+        "info": "Useful to link to collections or related landing pages"
+      }, {
+        "type": "text",
+        "id": "list-url-text",
+        "label": "List Link Text",
+        "default": "View More"
+      }, {
+        "type": "select",
+        "id": "bg-color",
+        "options": [
+          {
+            "value": "black",
+            "label": "Black"
+          },
+          {
+            "value": "white",
+            "label": "White"
+          },
+          {
+            "value": "extralight",
+            "label": "Extra Light"
+          },
+          {
+            "value": "light",
+            "label": "Light"
+          }, {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "dark",
+            "label": "Dark"
+          }, {
+            "value": "extradark",
+            "label": "Extra Dark"
+          }
+        ],
+        "default": "medium",
+        "label": "Background Color"
+      }, {
+        "type": "select",
+        "id": "padding-top",
+        "options": [
+          {
+            "value": "0",
+            "label": "None"
+          },
+          {
+            "value": "tiny",
+            "label": "Tiny"
+          },
+          {
+            "value": "xxsmall",
+            "label": "XX Small"
+          },
+          {
+            "value": "xsmall",
+            "label": "X Small"
+          }, {
+            "value": "small",
+            "label": "Small"
+          }, {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "large",
+            "label": "Large"
+          }, {
+            "value": "xlarge",
+            "label": "X Large"
+          }, {
+            "value": "xxlarge",
+            "label": "XX Large"
+          }, {
+            "value": "huge",
+            "label": "Huge"
+          }, {
+            "value": "xhuge",
+            "label": "X Huge"
+          }, {
+            "value": "xxhuge",
+            "label": "XX Huge"
+          }
+        ],
+        "default": "medium",
+        "label": "Top Padding"
+      }, {
+        "type": "select",
+        "id": "padding-bottom",
+        "options": [
+          {
+            "value": "0",
+            "label": "None"
+          },
+          {
+            "value": "tiny",
+            "label": "Tiny"
+          },
+          {
+            "value": "xxsmall",
+            "label": "XX Small"
+          },
+          {
+            "value": "xsmall",
+            "label": "X Small"
+          }, {
+            "value": "small",
+            "label": "Small"
+          }, {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "large",
+            "label": "Large"
+          }, {
+            "value": "xlarge",
+            "label": "X Large"
+          }, {
+            "value": "xxlarge",
+            "label": "XX Large"
+          }, {
+            "value": "huge",
+            "label": "Huge"
+          }, {
+            "value": "xhuge",
+            "label": "X Huge"
+          }, {
+            "value": "xxhuge",
+            "label": "XX Huge"
+          }
+        ],
+        "default": "medium",
+        "label": "Bottom Padding"
+      }, {
+        "type": "select",
+        "id": "container-width",
+        "options": [
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "medium",
+            "label": "Medium"
+          },
+          {
+            "value": "large",
+            "label": "Large"
+          },
+          {
+            "value": "xlarge",
+            "label": "X Large"
+          }, {
+            "value": "none",
+            "label": "No container"
+          }
+        ],
+        "default": "large",
+        "label": "Container Width"
+      }, {
+        "type": "select",
+        "id": "fade",
+        "options": [
+          {
+            "value": "0",
+            "label": "None"
+          }, {
+            "value": "1",
+            "label": "First (Fast)"
+          }, {
+            "value": "2",
+            "label": "Second (Medium)"
+          }, {
+            "value": "3",
+            "label": "Third (Slow)"
+          }
+        ],
+        "default": "1",
+        "label": "Content Fade-in"
+      }, {
+        "type": "text",
+        "id": "anchor-id",
+        "label": "Anchor ID",
+        "info": "Useful for linking to this part of the page"
+      }, {
+        "type": "select",
+        "id": "visibility",
+        "options": [
+          {
+            "value": "show",
+            "label": "Desktop and Mobile"
+          }, {
+            "value": "hide-mobile-landscape",
+            "label": "Desktop Only"
+          }, {
+            "value": "show-mobile-landscape",
+            "label": "Mobile Only"
+          }, {
+            "value": "hidden",
+            "label": "Hidden"
+          }
+        ],
+        "default": "show",
+        "label": "Visibility"
+      }
+    ]
+  }
+{% endschema %}

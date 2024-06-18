@@ -1,0 +1,42 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == 'b44f0b0a9e1542c3869207f69e4b7b0c' %}
+{% include 'content.b44f0b0a9e1542c3869207f69e4b7b0c.builder' %}
+{% else %}
+  {% include 'model.journal-page-footer.builder' %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Journal page footer",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=49e209a6ef724ed5ae36573b1c1f2336). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "b44f0b0a9e1542c3869207f69e4b7b0c", "label": "The Nines Footer"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+  "type": "paragraph",
+  "content": "Name: The Nines Footer. Targeting: url includes '/blogs/the-nines'. Visit the [entry in Builder](https://builder.io/content/b44f0b0a9e1542c3869207f69e4b7b0c)"
+}
+  ],
+  "presets":[{
+    "name": "Journal page footer"
+  }]
+}
+{% endschema %}

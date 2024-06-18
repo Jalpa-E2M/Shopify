@@ -1,0 +1,433 @@
+<!doctype html>
+<html
+  data-wf-page="63203c5916db8aa3af565aef"
+  data-wf-site="63168fe192d60d18b1cf6a46"
+  lang="{{ request.locale.iso_code }}"
+>
+  <meta name="viewport" width="device-width" initial-scale="1" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <head>
+<link rel='preconnect dns-prefetch' href='https://api.config-security.com/' crossorigin />
+<link rel='preconnect dns-prefetch' href='https://conf.config-security.com/' crossorigin />
+<link rel='preconnect dns-prefetch' href='https://whale.camera/' crossorigin />
+<script>
+/* >> TriplePixel :: start*/
+window.TriplePixelData={TripleName:"eyeswoon-dev.myshopify.com",ver:"2.11",plat:"SHOPIFY",isHeadless:false},function(W,H,A,L,E,_,B,N){function O(U,T,P,H,R){void 0===R&&(R=!1),H=new XMLHttpRequest,P?(H.open("POST",U,!0),H.setRequestHeader("Content-Type","application/json")):H.open("GET",U,!0),H.send(JSON.stringify(P||{})),H.onreadystatechange=function(){4===H.readyState&&200===H.status?(R=H.responseText,U.includes(".txt")?eval(R):P||(N[B]=R)):(299<H.status||H.status<200)&&T&&!R&&(R=!0,O(U,T-1,P))}}if(N=window,!N[H+"sn"]){N[H+"sn"]=1,L=function(){return Date.now().toString(36)+"_"+Math.random().toString(36)};try{A.setItem(H,1+(0|A.getItem(H)||0)),(E=JSON.parse(A.getItem(H+"U")||"[]")).push({u:location.href,r:document.referrer,t:Date.now(),id:L()}),A.setItem(H+"U",JSON.stringify(E))}catch(e){}var i,m,p;A.getItem('"!nC`')||(_=A,A=N,A[H]||(E=A[H]=function(t,e,a){return void 0===a&&(a=[]),"State"==t?E.s:(W=L(),(E._q=E._q||[]).push([W,t,e].concat(a)),W)},E.s="Installed",E._q=[],E.ch=W,B="configSecurityConfModel",N[B]=1,O("https://conf.config-security.com/model",5),i=L(),m=A[atob("c2NyZWVu")],_.setItem("di_pmt_wt",i),p={id:i,action:"profile",avatar:_.getItem("auth-security_rand_salt_"),time:m[atob("d2lkdGg=")]+":"+m[atob("aGVpZ2h0")],host:A.TriplePixelData.TripleName,plat:A.TriplePixelData.plat,url:window.location.href,ref:document.referrer,ver:A.TriplePixelData.ver},O("https://api.config-security.com/event",5,p),O("https://whale.camera/live/dot.txt",5)))}}("","TriplePixel",localStorage);
+/* << TriplePixel :: end*/
+</script>
+    
+    
+    
+    
+    {% comment %}START Partytown by Builder{% endcomment %}
+    <script>
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (var registration of registrations) {
+            if (registration && registration.scope && registration.scope.includes('apps/builder/partytown')) {
+              registration.unregister();
+            }
+          }
+        })
+      }
+    </script>
+    {% comment %}END Partytown by Builder{% endcomment %}
+    <title>
+      {{ page_title }}
+      {%- unless page_title contains shop.name %} | {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% render 'meta-tags' %}
+
+    {% style %}
+      :root {
+      --white: {{ settings.color_white }};
+      --black: {{ settings.color_black }};
+      --extradark: {{ settings.color_extradark }};
+      --dark: {{ settings.color_dark }};
+      --medium: {{ settings.color_medium }};
+      --light: {{ settings.color_light }};
+      --extralight: {{ settings.color_extralight }};
+      --fontsize: {{ settings.fontsize }}px;
+      };
+    {% endstyle %}
+
+   <link rel="preload" href="{{ 'style-theme.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>{{ 'style-theme.css' | asset_url | stylesheet_tag }}</noscript>
+    {% if template contains 'article' and article.published_at < '2023-01-01T00:00:00Z' %}
+      <link rel="preload" href="{{ 'style-old.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>{{ 'style-old.css' | asset_url | stylesheet_tag }}</noscript>
+    {% endif %}
+    {% comment %}
+      FILES REMOVED FOR SPEED OPTIMIZATION, SAVED FOR BACKUP
+      {{ 'style-normalize.css' | asset_url | stylesheet_tag }}
+      {{ 'style-theme.css' | asset_url | stylesheet_tag }}
+      {{ 'style-fonts.css' | asset_url | stylesheet_tag }}
+      {{ 'style-theme-991.css' | asset_url | stylesheet_tag }}
+      {{ 'style-theme-767.css' | asset_url | stylesheet_tag }}
+      {{ 'style-theme-479.css' | asset_url | stylesheet_tag }}
+      {{ 'style-theme-1280.css' | asset_url | stylesheet_tag }}
+      {{ 'style-theme-1440.css' | asset_url | stylesheet_tag }}
+      {{ 'style-colors.css' | asset_url | stylesheet_tag }}
+      {{ 'style-nav.css' | asset_url | stylesheet_tag }}
+      {{ 'style-hero.css' | asset_url | stylesheet_tag }}
+      {{ 'style-list.css' | asset_url | stylesheet_tag }}
+      {{ 'style-swiper.css' | asset_url | stylesheet_tag }}
+      {{ 'style-print.css' | asset_url | stylesheet_tag }}
+      {{ 'style-bag.css' | asset_url | stylesheet_tag }}
+      {{ 'style-account.css' | asset_url | stylesheet_tag }}
+      {{ 'style-old.css' | asset_url | stylesheet_tag }}
+    {% endcomment %}
+
+    <script
+      type="text/javascript"
+    >
+      !function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);
+    </script>
+    {% render 'jquery' %}
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {% else %}
+      <link rel="icon" type="image/png" href="{{ 'favicon.png' | asset_img_url: width: 32, height: 32}}">
+    {%- endif -%}
+
+    {{ content_for_header }}
+
+    {% render 'builder-head' %}
+
+    <style>
+       .builder-component, .main-wrapper {
+      opacity: 0%;
+      visibility: hidden;
+      transition: opacity 0.25s linear;
+      will-change: opacity, visibility;
+      -webkit-animation-fill-mode: initial;
+      animation-fill-mode: initial;
+       }
+
+      .main-wrapper.is-visible, .builder-component.is-visible {
+      opacity: 100%;
+      transform: none;
+      visibility: visible;
+      transition-delay: 0ms;
+       }
+    </style>
+    {% if request.design_mode %}
+      <script async src="https://cdn.builder.io/js/webcomponents"></script>
+    {% endif %}
+  </head>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WK5Z3TP');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <script>
+    const debounce = (func, timeout) => {
+        let timeoutId;
+        return (...args) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func(...args);
+        }, timeout);
+        };
+    };
+
+    var debounceImmediateExecAllowed = true;
+    const debounceNow = (func, timeout) => {
+        let timeoutId;
+        return (...args) => {
+        clearTimeout(timeoutId);
+        if (debounceImmediateExecAllowed == true) {
+          func(...args);
+          debounceImmediateExecAllowed = false;
+        }
+        timeoutId = setTimeout(() => {
+            debounceImmediateExecAllowed = true;
+            func(...args);
+        }, timeout);
+        };
+    };
+
+
+    //NAV STICKY AND OVERLAY
+
+    var navTransparent;
+    var isNavHovering = false;
+
+
+      var setTopPadding = function () {
+            let nav = document.querySelector('.nav-component');
+            let height = nav.offsetHeight+"px";
+            $('body').css("padding-top", height);
+            let negHeight = "-"+height;
+            $('.nav-overlay-black').css("margin-top", negHeight);
+            $('.nav-overlay-white').css("margin-top", negHeight);
+        };
+
+      var nav = function () {
+
+        setTopPadding();
+
+      $(".nav-menu-component").hover(
+        function () {
+        },
+        function () {
+          isNavHovering = false;
+        }
+      );
+
+      if ($('.nav-menu-component:hover').length != 0) {
+          isNavHovering = true;
+      }
+
+      if ($('.nav-overlay-black')[0] || $('.nav-overlay-white')[0]) {
+
+        const scrollNav = function (e) {
+
+           if ($('.nav-menu-component:hover').length != 0) {
+            isNavHovering = true;
+            }
+
+          if (window.scrollY == 0) {
+            if ($('.nav-overlay-black')[0] && isNavHovering == false) {
+                if ($('.nav-menu-layout').attr('data-nav-menu-open') != "") {
+                  $('.nav-component')[0].classList.add("is-black");
+                  $('.nav-menu-layout')[0].classList.add("is-black");
+                  $('.nav-mobile-bar-layout')[0].classList.add("is-black");
+                  $('.nav-menu-button').find('path').attr('stroke', 'rgb(0,0,0)');
+                  navTransparent = true;
+                }
+            } else {
+              if ($('.nav-overlay-white')[0] && isNavHovering == false) {
+                  if ($('.nav-menu-layout').attr('data-nav-menu-open') != "") {
+                    $('.nav-component')[0].classList.add("is-white");
+                    $('.nav-menu-layout')[0].classList.add("is-white");
+                    $('.nav-mobile-bar-layout')[0].classList.add("is-white");
+                    $('.nav-menu-button').find('path').attr('stroke', 'rgb(255,255,255)');
+                    navTransparent = true;
+                  }
+              }
+            }
+          }
+          else {
+            if (navTransparent == true || navTransparent == null) {
+              $('.nav-component')[0].classList.remove("is-black");
+              $('.nav-menu-layout')[0].classList.remove("is-black");
+              $('.nav-component')[0].classList.remove("is-white");
+              $('.nav-menu-layout')[0].classList.remove("is-white");
+              $('.nav-mobile-bar-layout')[0].classList.remove("is-black");
+              $('.nav-mobile-bar-layout')[0].classList.remove("is-white");
+              $('.nav-menu-button').find('path').attr('stroke', 'rgb(0,0,0)');
+              navTransparent = false;
+            }
+          }
+        };
+        const debouncedScrollNav = debounceNow(scrollNav, 100);
+        window.addEventListener('scroll', debouncedScrollNav);
+        scrollNav();
+
+
+
+        $(".nav-link").hover(
+          function () {
+            $('.nav-component')[0].classList.remove("is-black");
+            $('.nav-menu-layout')[0].classList.remove("is-black");
+            $('.nav-component')[0].classList.remove("is-white");
+            $('.nav-menu-layout')[0].classList.remove("is-white");
+            $('.nav-mobile-bar-layout')[0].classList.remove("is-black");
+            $('.nav-mobile-bar-layout')[0].classList.remove("is-white");
+            $('.nav-menu-button').find('path').attr('stroke', 'rgb(0,0,0)');
+            navTransparent = false;
+          },
+        );
+        $(".nav-menu-component").hover(
+          function () {
+          },
+          function () {
+            scrollNav();
+          }
+        );
+      };
+    };
+
+    // for removing banner and triggering reset
+      function remove(el) {
+        var element = el;
+        element.remove();
+        setTopPadding();
+      };
+  </script>
+
+  <script>
+    var getProductCard = function(slug){
+      console.log(slug);
+      let productUrl = 'https://eye-swoon.com/products/'+slug+'.html #ajax-product-card';
+      $('.product-card-'+slug).load(productUrl);
+    }
+  </script>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-WK5Z3TP"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="page-wrapper">
+      {% section 'menu' %}
+      {% section 'bag-preview' %}
+
+      <main class="main-wrapper">
+        {{ content_for_layout }}
+      </main>
+      {% section 'footer' %}
+    </div>
+
+    <script async src="{{ 'script-eyeswoon.js' | asset_url }}"></script>
+
+    {% comment %}ADDED TO MAIN SCRIPT <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>{% endcomment %}
+    {% comment %}re-add if issues with adding and selecting product variants <script async src="{{ 'option_selection.js' | shopify_asset_url }}"></script>{% endcomment %}
+    
+    <script>
+        var builderTimeout = null;
+        var builderHydrated = false;
+        var ajaxLoaded = false;
+        var builderAndAjaxLoaded = false;
+        var loadComplete = false;
+
+        const builderVisible = () => {
+          $(".builder-component").addClass("is-visible");
+          var builderComponentStyle = document.createElement("div");
+          builderComponentStyle.innerHTML = "<style>.builder-component{opacity:100%;transform:none;visibility:visible;transition-delay:0ms;}</style>";
+          document.body.appendChild(builderComponentStyle);
+        }
+
+        const renderLoad = () => {
+          $(".main-wrapper").addClass("is-visible");
+          builderVisible();
+          {% render 'loadliquidscript' %}
+          var script = document.createElement('script');
+          script.src = "{{ 'loadscript.js' | asset_url }}";
+          document.body.appendChild(script);
+          
+        }
+
+        window.addEventListener("DOMContentLoaded", e => {
+          $.ajax({
+            complete: function () {
+              let stateCheck = setInterval(() => {
+                if (document.readyState === 'complete') {
+                  ajaxLoaded = true;
+                  console.log('ajax loaded');
+                  if (typeof BuilderWC !== 'undefined') {
+                    if (BuilderWC.builder.editingMode$.value == true) {
+                      console.log('in editing mode: skipping builder checks');
+                      $( ".popup" ).remove();
+                      $( ".banner" ).remove();
+                      builderHydrated = true;
+                      builderVisible();
+                    }
+                  }
+                  if (builderHydrated == true) {
+                    builderAndAjaxLoaded = true;
+                    console.log('both loaded, load complete: '+loadComplete);
+                  }
+                  clearInterval(stateCheck);
+                  if(window.location.hash) {
+                      elmnt = document.getElementById(window.location.hash.substring(1));
+                      elmnt.scrollIntoView(true);
+                  }
+                  if ($(".builder-component")[0]) {
+                    if (builderAndAjaxLoaded == true && loadComplete == false) {
+                      console.log('triggering final load scripts');
+                      loadComplete = true;
+                      renderLoad();
+                      console.log('load complete: '+loadComplete);
+                    }
+                  } else {
+                    renderLoad();
+                    loadComplete = true;
+                    console.log('load complete: '+loadComplete);
+                  }
+
+                }
+              }, 200)
+            }
+          })
+        });
+
+
+        const elementToObserve = document.querySelector(".main-wrapper");
+        let observer;
+        let mutationTimer;
+       const startObserving = () => {
+         const observer = new MutationObserver(() => {
+          if ($(".builder-component")[0] && $(".builder-styles")[0] && $(".builder-hydrated")[0] && builderHydrated == false) {
+              builderHydrated = true;
+              console.log('builder hydrated');
+              builderVisible();
+              if (ajaxLoaded == true) {
+                builderAndAjaxLoaded = true;
+                console.log('both loaded, load complete: '+loadComplete);
+              };
+              if (builderAndAjaxLoaded == true && loadComplete == false) {
+                console.log('triggering final load scripts');
+                loadComplete = true;
+                renderLoad();
+                console.log('load complete: '+loadComplete);
+                observer.disconnect();
+              }
+          }
+        });
+
+        observer.observe(elementToObserve, {subtree: true, childList: true});
+       };
+      if (!loadComplete) {
+          startObserving();
+        }
+
+        setTimeout(() => {
+          if (loadComplete == false) {
+            loadComplete = true;
+            console.log('load timed out, showing page')
+            renderLoad();
+          }
+        }, 1000);
+    </script>
+    <script
+      async
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/shopify-cartjs/1.1.0/cart.min.js"
+    ></script>
+    <script>
+      setTimeout(function() {
+        (function(d) {
+          var s = d.createElement("script");
+          s.setAttribute("data-account", "na3Eno8QNW");
+          s.setAttribute("src", "https://accessibilityserver.org/widget.js");
+          (d.body || d.head).appendChild(s);
+        })(document);
+      }, 2000);
+    </script>
+
+    {% render 'app_wishlist-king' %}
+  </body>
+</html>

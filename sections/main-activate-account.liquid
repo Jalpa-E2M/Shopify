@@ -1,0 +1,45 @@
+<div class="login bg-color-extralight">
+   <div id="login">
+    <div class="padding-vertical padding-xxlarge">
+      <div class="page-padding">
+        <div class="container-xsmall w-container">
+          <div class="text-align-center margin-bottom margin-medium">
+            <div class="heading-layout">
+              <h2 class="heading-l"><em>Activate</em>your Account</h2>
+            </div>
+          </div>
+          <div class="login_form-wrapper w-form">
+            {% form 'activate_customer_password' %}
+
+            <div class="form-input-wrapper">
+
+              <input class=" form-input w-input" type="password" value="" name="customer[password]" id="password"
+                autocomplete="new-password" {% if form.errors contains 'form' %} aria-invalid="true"
+                aria-describedby="password-error" {% endif %} placeholder="Password">
+
+              <input class=" form-input w-input" type="password" value="" name="customer[password_confirmation]"
+                id="password_confirmation" autocomplete="new-password" {% if form.errors contains 'form' %}
+                aria-invalid="true" aria-describedby="password-confirmation-error" {% endif %} placeholder="Confirm password">
+            </div>
+
+            <div class="submit login_submit-wrapper">
+              <button type="submit" class="button is-fullwidth w-button" value="Activate Account">Activate Account</button>
+              <button type="submit" name="decline" value="Decline invitation" class="button-text is-subtle w-button">Decline</button>
+              {%- if form.errors -%}
+              <span class="error">{{ form.errors | default_errors }}</span>
+              {%- endif -%}
+            </div>
+
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% schema %}
+{
+  "name": "main-activate-account"
+}
+{% endschema %}

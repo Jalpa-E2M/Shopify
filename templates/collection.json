@@ -1,0 +1,94 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "e8b34be6-856c-4e39-be21-55fec48d965d": {
+      "type": "95e262cef7604b7dbc371779649d3cec-builder-io",
+      "settings": {
+        "builder_content_entry_preview": "69b2778b13d94d1aa98f80f235472c48"
+      }
+    },
+    "a4c82e65-e935-49da-a8fc-a72b11c8ed22": {
+      "type": "divider-line",
+      "settings": {
+        "bg-color": "light",
+        "fade-in": "0",
+        "anchor-id": "hideme-top"
+      }
+    },
+    "collection-nav": {
+      "type": "collection-nav",
+      "settings": {
+        "bg-color": "dark",
+        "fade": "1",
+        "visibility": "show"
+      }
+    },
+    "2066cd1a-da23-43f4-88f7-2b0f5880b3c5": {
+      "type": "divider-line",
+      "settings": {
+        "bg-color": "light",
+        "fade-in": "0",
+        "anchor-id": "hideme-btm"
+      }
+    },
+    "collection-product-list": {
+      "type": "collection-product-list",
+      "settings": {
+        "products_to_show": 40,
+        "columns": "5",
+        "img-ratio": "portrait-sm",
+        "main-img": "1",
+        "item-bg-color": "medium",
+        "show-title": true,
+        "show-price": true,
+        "show-description": false,
+        "show-sale-tag": true,
+        "show-strikethrough": true,
+        "show-quick-add": true,
+        "show-translucent-title": false,
+        "is-swiper": false,
+        "layout-horizontal": false,
+        "title": "",
+        "vertical-title": "",
+        "list-url": "",
+        "list-url-text": "",
+        "bg-color": "dark",
+        "padding-top": "0",
+        "padding-bottom": "huge",
+        "container-width": "none",
+        "fade": "2",
+        "anchor-id": "",
+        "visibility": "show"
+      }
+    },
+    "12316a73-ea50-4b20-babe-d8e81b9812cb": {
+      "type": "535e96846a67458fb80b78b5e297a055-builder-io",
+      "settings": {
+        "builder_content_entry_preview": "9457951c77c7451192d59d452e001f00"
+      }
+    },
+    "ff58ed1c-3f89-40d6-a50d-927a6b8147c0": {
+      "type": "fbc4e81f7efc4e91b51d9518543447cc-builder-io",
+      "settings": {
+        "builder_content_entry_preview": "df164c17c4764df98d5c4a866f25fd20"
+      }
+    }
+  },
+  "order": [
+    "e8b34be6-856c-4e39-be21-55fec48d965d",
+    "a4c82e65-e935-49da-a8fc-a72b11c8ed22",
+    "collection-nav",
+    "2066cd1a-da23-43f4-88f7-2b0f5880b3c5",
+    "collection-product-list",
+    "12316a73-ea50-4b20-babe-d8e81b9812cb",
+    "ff58ed1c-3f89-40d6-a50d-927a6b8147c0"
+  ]
+}

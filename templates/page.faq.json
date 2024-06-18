@@ -1,0 +1,221 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "a289d4e2-aea5-4741-bda2-f53f1dc111cc": {
+          "type": "q-a",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>We accept returns on select items within 14 days of receipt. Items must be postmarked by the 15th day to be eligible for a refund. All items must be in their original packaging and condition. <\/p><p>Please note that all made-to-order pieces are final sale and non-refundable. When a product is non-refundable, it is stated on the product listing page.<\/p><p>To return merchandise, please email orders@eye-swoon.com.<\/p><p>Once EyeSwoon receives items, refunds are credited to the original form of payment.<\/p><p>Customers are responsible for any shipping costs for returns and exchanges. EyeSwoon does not assume responsibility for reimbursement or compensation of returned packages lost in transit without proof of delivery to EyeSwoon.<\/p>",
+            "group": "group-2"
+          }
+        },
+        "1b2bd71a-9f6b-4416-ba1e-8b2c05c91b97": {
+          "type": "q-a",
+          "settings": {
+            "question": "Can I exchange my order?",
+            "answer": "<p>If you receive an item that's defective, damaged, or incorrect, we'd be happy to send you a replacement—but we're otherwise unable to offer an exchange. Instead, we'd be happy to process a return for you. You'll then be able to place a new order for the product you'd prefer.<\/p>",
+            "group": "group-1"
+          }
+        },
+        "4fa70b80-0203-4ba4-b533-2f62748606a7": {
+          "type": "q-a",
+          "settings": {
+            "question": "How do I cancel my order?",
+            "answer": "<p>We cannot cancel orders. If you have any concerns, please contact us via email: orders@eye-swoon.com.<\/p>",
+            "group": "group-1"
+          }
+        },
+        "6228c195-1e58-4d0d-9697-5506198ca968": {
+          "type": "q-a",
+          "settings": {
+            "question": "How to I check the status of my order?",
+            "answer": "<p>You can check the status of your order, estimated shipping date, and complete order history via your Customer Account. By setting up a Customer Account with EyeSwoon you will experience a faster checkout experience, easy access to your order status and history, and be the first to receive news on promotions, collection launches, and more.<\/p>",
+            "group": "group-1"
+          }
+        },
+        "322d428b-c89c-4c43-b9a5-730f71d701a1": {
+          "type": "q-a",
+          "settings": {
+            "question": "Can I change my order?",
+            "answer": "<p>Once your order has been placed, we cannot modify your order. If you wish to add items, please place an additional order. <\/p>",
+            "group": "group-1"
+          }
+        },
+        "38f709ca-6541-411c-b603-91b585402a3c": {
+          "type": "q-a",
+          "settings": {
+            "question": "Can I change the address on my order?",
+            "answer": "<p>If you notice that you've listed the incorrect address, and ordered while signed in to your EyeSwoon account,  please contact us via email: orders@eye-swoon.com as soon as possible in order to increase the chances that we're able to change the address for you, though we can't guarantee it.<\/p><p>Unfortunately, once an order has been processed (meaning it's with the warehouse and\/or a shipping label has been created), we are no longer able to change the address for you. We're so sorry in advance for the inconvenience.<\/p>",
+            "group": "group-1"
+          }
+        },
+        "02eabc5c-0cdd-48c3-b867-edd7c66a2c16": {
+          "type": "q-a",
+          "settings": {
+            "question": "What if I receive the wrong item or something is missing in my order?",
+            "answer": "<p>If your order is incorrect in any way, please contact us within 7 days at orders@eye-swoon.com for assistance.<\/p>",
+            "group": "group-1"
+          }
+        },
+        "b40a6f3d-8d0f-4d04-9e8c-5f20aaee87c9": {
+          "type": "q-a",
+          "settings": {
+            "question": "When will my order ship?",
+            "answer": "<p>Orders are typically fulfilled within 3-5 business days. Made to order and handmade designs often have longer lead times, please reference the product description page for more details. <\/p><p>All orders are shipped out Monday to Friday. You will receive updated tracking information as soon as your order is shipped to the email address provided at checkout.<\/p>",
+            "group": "group-3"
+          }
+        },
+        "bbea6221-3205-4eed-b227-924ab39d33a9": {
+          "type": "q-a",
+          "settings": {
+            "question": "How will I receive my items?",
+            "answer": "<p>Each brand will prepare and ship your items to you directly, therefore, if purchasing from multiple partners in a single order, it is likely that you will receive your order in several deliveries.<\/p>",
+            "group": "group-3"
+          }
+        },
+        "5dfb896e-232d-4184-99da-df2166b132bb": {
+          "type": "q-a",
+          "settings": {
+            "question": "What countries do you ship to?",
+            "answer": "<p>EyeSwoon currently only ships within the United States, international shipping is not offered at this time.<\/p>",
+            "group": "group-3"
+          }
+        },
+        "142589cb-cdaa-43c2-b5f7-cd6cf16435a5": {
+          "type": "q-a",
+          "settings": {
+            "question": "Does EyeSwoon sell gift cards?",
+            "answer": "<p>Yes. Please visit our gift card page to purchase.<\/p>",
+            "group": "group-4"
+          }
+        },
+        "2001e21e-2aea-4256-a6d8-5bde5ddcb58f": {
+          "type": "q-a",
+          "settings": {
+            "question": "Can I include a note with my gift?",
+            "answer": "<p>Unforunately, not at this time. <\/p>",
+            "group": "group-4"
+          }
+        },
+        "73b22741-976f-494c-a968-ef69fd3187b8": {
+          "type": "q-a",
+          "settings": {
+            "question": "Do you offer trade discounts?",
+            "answer": "<p>We do not offer trade discounts at this time.<\/p>",
+            "group": "group-5"
+          }
+        },
+        "f28b25af-df5e-40f3-933f-dfe9e37fd079": {
+          "type": "q-a",
+          "settings": {
+            "question": "Lorem ipsum dolor sit amet?",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>",
+            "group": "group-6"
+          }
+        },
+        "da51d9df-8d6c-4df4-aad0-b2c2d6f0f1c8": {
+          "type": "q-a",
+          "settings": {
+            "question": "Lorem ipsum dolor sit amet?",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>",
+            "group": "group-6"
+          }
+        },
+        "52123893-7879-4f4a-878c-8456791bd42a": {
+          "type": "q-a",
+          "settings": {
+            "question": "Lorem ipsum dolor sit amet?",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>",
+            "group": "group-6"
+          }
+        },
+        "8c804310-e7a3-4fdb-90e4-c508fa02c75a": {
+          "type": "q-a",
+          "settings": {
+            "question": "Lorem ipsum dolor sit amet?",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>",
+            "group": "group-6"
+          }
+        },
+        "70894a87-bdce-4376-9d95-ee6990ab2e75": {
+          "type": "q-a",
+          "settings": {
+            "question": "Lorem ipsum dolor sit amet?",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>",
+            "group": "group-6"
+          }
+        },
+        "ef17e93b-cd73-4e39-8022-9b15a557cc83": {
+          "type": "q-a",
+          "settings": {
+            "question": "Lorem ipsum dolor sit amet?",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>",
+            "group": "group-6"
+          }
+        },
+        "ed75d698-f222-4a14-b1da-eb4bae7abc6c": {
+          "type": "q-a",
+          "settings": {
+            "question": "Lorem ipsum dolor sit amet?",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>",
+            "group": "group-6"
+          }
+        }
+      },
+      "block_order": [
+        "a289d4e2-aea5-4741-bda2-f53f1dc111cc",
+        "1b2bd71a-9f6b-4416-ba1e-8b2c05c91b97",
+        "4fa70b80-0203-4ba4-b533-2f62748606a7",
+        "6228c195-1e58-4d0d-9697-5506198ca968",
+        "322d428b-c89c-4c43-b9a5-730f71d701a1",
+        "38f709ca-6541-411c-b603-91b585402a3c",
+        "02eabc5c-0cdd-48c3-b867-edd7c66a2c16",
+        "b40a6f3d-8d0f-4d04-9e8c-5f20aaee87c9",
+        "bbea6221-3205-4eed-b227-924ab39d33a9",
+        "5dfb896e-232d-4184-99da-df2166b132bb",
+        "142589cb-cdaa-43c2-b5f7-cd6cf16435a5",
+        "2001e21e-2aea-4256-a6d8-5bde5ddcb58f",
+        "73b22741-976f-494c-a968-ef69fd3187b8",
+        "f28b25af-df5e-40f3-933f-dfe9e37fd079",
+        "da51d9df-8d6c-4df4-aad0-b2c2d6f0f1c8",
+        "52123893-7879-4f4a-878c-8456791bd42a",
+        "8c804310-e7a3-4fdb-90e4-c508fa02c75a",
+        "70894a87-bdce-4376-9d95-ee6990ab2e75",
+        "ef17e93b-cd73-4e39-8022-9b15a557cc83",
+        "ed75d698-f222-4a14-b1da-eb4bae7abc6c"
+      ],
+      "settings": {
+        "page-title": "<p>FAQ<\/p>",
+        "menu": true,
+        "group-1": "Orders",
+        "group-2": "Returns",
+        "group-3": "Shipping",
+        "group-4": "Gift Cards",
+        "group-5": "General",
+        "group-6": "",
+        "text-alignment": "left",
+        "bg-color": "extralight",
+        "container-width": "large",
+        "padding-top": "xxlarge",
+        "padding-bottom": "huge",
+        "fade": "1",
+        "anchor-id": "",
+        "visibility": "show"
+      }
+    }
+  },
+  "order": [
+    "faq"
+  ]
+}

@@ -1,0 +1,541 @@
+<div id="{{ section.settings.anchor-id }}" class="faq wf-section bg-color-{{ section.settings.bg-color }} {{ section.settings.visibility }}">
+       <div class="padding-top padding-{{ section.settings.padding-top }}">
+    <div class="padding-bottom padding-{{ section.settings.padding-bottom }}">
+    <div class="fade-in-{{ section.settings.fade }}">
+          <div class="page-padding">
+            <div class="container-{{ section.settings.container-width }} w-container">
+              {% if section.settings.menu == true %}
+                <div class="faq_layout">
+                <div class="faq_menu">
+                  <div class="faq_title">
+                    <h1 class="heading-l">{{ section.settings.page-title }}</h1>
+                  </div>
+                  <div class="faq_menu-layout">
+                    {% if section.settings.group-1 != nil and section.settings.group-1 != "" %}<a href="#group-1" class="text-link">{{ section.settings.group-1 }}</a>{% endif %}
+                    {% if section.settings.group-2 != nil and section.settings.group-2 != "" %}<a href="#group-2" class="text-link">{{ section.settings.group-2 }}</a>{% endif %}
+                    {% if section.settings.group-3 != nil and section.settings.group-3 != "" %}<a href="#group-3" class="text-link">{{ section.settings.group-3 }}</a>{% endif %}
+                    {% if section.settings.group-4 != nil and section.settings.group-4 != "" %}<a href="#group-4" class="text-link">{{ section.settings.group-4 }}</a>{% endif %}
+                    {% if section.settings.group-5 != nil and section.settings.group-5 != "" %}<a href="#group-5" class="text-link">{{ section.settings.group-5 }}</a>{% endif %}
+                    {% if section.settings.group-6 != nil and section.settings.group-6 != "" %}<a href="#group-6" class="text-link">{{ section.settings.group-6 }}</a>{% endif %}
+                  </div>
+                </div>
+                {% endif %}
+                <div class="faq_list-wrapper text-align-{{ section.settings.text-alignment }}">
+                  {% if section.settings.group-1 != nil and section.settings.group-1 != "" %}
+                  <div>
+                    <div class="faq_section-header">
+                      <div class="faq_title">
+                        <h2>{{ section.settings.group-1 }}</h2>
+                        <div class="faq_section-title-expand"></div>
+                        <div class="faq_section-title-contract"></div>
+                      </div>
+                    </div>
+                    <div id="group-1" class="faq_section">
+                    {%- for block in section.blocks -%}
+                      {%- if block.settings.group == "group-1" -%}
+                      <div class="faq_item">
+                        <div class="faq_question">
+                          <div class="text-weight-semibold">{{ block.settings.question }}</div>
+                          <div class="faq_question-arrow"></div>
+                        </div>
+                        <div class="faq_answer hidden">
+                          <div class="faq_answer-text">{{ block.settings.answer }}</div>
+                        </div>
+                      </div>
+                     {% endif %}
+                  {% endfor %}
+                    </div>
+                  </div>
+                 {% endif %}
+                 {% if section.settings.group-2 != nil and section.settings.group-2 != "" %}
+                  <div>
+                    <div class="faq_section-header">
+                      <div class="faq_title">
+                        <h2>{{ section.settings.group-2 }}</h2>
+                        <div class="faq_section-title-expand"></div>
+                        <div class="faq_section-title-contract"></div>
+                      </div>
+                    </div>
+                    <div id="group-2" class="faq_section">
+                    {%- for block in section.blocks -%}
+                      {%- if block.settings.group == "group-2" -%}
+                      <div class="faq_item">
+                        <div class="faq_question">
+                          <div class="text-weight-semibold">{{ block.settings.question }}</div>
+                          <div class="faq_question-arrow"></div>
+                        </div>
+                        <div class="faq_answer hidden">
+                          <div class="faq_answer-text">{{ block.settings.answer }}</div>
+                        </div>
+                      </div>
+                     {% endif %}
+                  {% endfor %}
+                    </div>
+                  </div>
+                 {% endif %}
+                 {% if section.settings.group-3 != nil and section.settings.group-3 != "" %}
+                  <div>
+                    <div class="faq_section-header">
+                      <div class="faq_title">
+                        <h2>{{ section.settings.group-3 }}</h2>
+                        <div class="faq_section-title-expand"></div>
+                        <div class="faq_section-title-contract"></div>
+                      </div>
+                    </div>
+                    <div id="group-3" class="faq_section">
+                    {%- for block in section.blocks -%}
+                      {%- if block.settings.group == "group-3" -%}
+                      <div class="faq_item">
+                        <div class="faq_question">
+                          <div class="text-weight-semibold">{{ block.settings.question }}</div>
+                          <div class="faq_question-arrow"></div>
+                        </div>
+                        <div class="faq_answer hidden">
+                          <div class="faq_answer-text">{{ block.settings.answer }}</div>
+                        </div>
+                      </div>
+                     {% endif %}
+                  {% endfor %}
+                    </div>
+                  </div>
+                 {% endif %}
+                 {% if section.settings.group-4 != nil and section.settings.group-4 != "" %}
+                  <div>
+                    <div class="faq_section-header">
+                      <div class="faq_title">
+                        <h2>{{ section.settings.group-4 }}</h2>
+                        <div class="faq_section-title-expand"></div>
+                        <div class="faq_section-title-contract"></div>
+                      </div>
+                    </div>
+                    <div id="group-4" class="faq_section">
+                    {%- for block in section.blocks -%}
+                      {%- if block.settings.group == "group-4" -%}
+                      <div class="faq_item">
+                        <div class="faq_question">
+                          <div class="text-weight-semibold">{{ block.settings.question }}</div>
+                          <div class="faq_question-arrow"></div>
+                        </div>
+                        <div class="faq_answer hidden">
+                          <div class="faq_answer-text">{{ block.settings.answer }}</div>
+                        </div>
+                      </div>
+                     {% endif %}
+                  {% endfor %}
+                    </div>
+                  </div>
+                 {% endif %}
+                 {% if section.settings.group-5 != nil and section.settings.group-5 != "" %}
+                  <div>
+                    <div class="faq_section-header">
+                      <div class="faq_title">
+                        <h2>{{ section.settings.group-5 }}</h2>
+                        <div class="faq_section-title-expand"></div>
+                        <div class="faq_section-title-contract"></div>
+                      </div>
+                    </div>
+                    <div id="group-5" class="faq_section">
+                    {%- for block in section.blocks -%}
+                      {%- if block.settings.group == "group-5" -%}
+                      <div class="faq_item">
+                        <div class="faq_question">
+                          <div class="text-weight-semibold">{{ block.settings.question }}</div>
+                          <div class="faq_question-arrow"></div>
+                        </div>
+                        <div class="faq_answer hidden">
+                          <div class="faq_answer-text">{{ block.settings.answer }}</div>
+                        </div>
+                      </div>
+                     {% endif %}
+                  {% endfor %}
+                    </div>
+                  </div>
+                 {% endif %}
+                 {% if section.settings.group-6 != nil and section.settings.group-6 != "" %}
+                  <div>
+                    <div class="faq_section-header">
+                      <div class="faq_title">
+                        <h2>{{ section.settings.group-6 }}</h2>
+                        <div class="faq_section-title-expand"></div>
+                        <div class="faq_section-title-contract"></div>
+                      </div>
+                    </div>
+                    <div id="group-6" class="faq_section">
+                    {%- for block in section.blocks -%}
+                      {%- if block.settings.group == "group-6" -%}
+                      <div class="faq_item">
+                        <div class="faq_question">
+                          <div class="text-weight-semibold">{{ block.settings.question }}</div>
+                          <div class="faq_question-arrow"></div>
+                        </div>
+                        <div class="faq_answer hidden">
+                          <div class="faq_answer-text">{{ block.settings.answer }}</div>
+                        </div>
+                      </div>
+                     {% endif %}
+                  {% endfor %}
+                    </div>
+                    <div class="faq_section">
+                    {%- for block in section.blocks -%}
+                      {%- if block.settings.group == "" or block.settings.group == nil -%}
+                      <div class="faq_item">
+                        <div class="faq_question">
+                          <div class="text-weight-semibold">{{ block.settings.question }}</div>
+                          <div class="faq_question-arrow"></div>
+                        </div>
+                        <div class="faq_answer hidden">
+                          <div class="faq_answer-text">{{ block.settings.answer }}</div>
+                        </div>
+                      </div>
+                     {% endif %}
+                  {% endfor %}
+                    </div>
+                  </div>
+                 {% endif %}
+                </div>
+              {% if section.settings.menu == true %}</div>{% endif %}
+            </div>
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <script>
+      $('.faq_question').on('click', function() {
+  $(this).find('.faq_question-arrow').toggleClass('flip'); $(this).siblings('.faq_answer').toggleClass('hidden');
+});
+</script>
+
+
+      {% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "presets": [
+      {
+        "name": "FAQ"
+      }
+    ],
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "page-title",
+      "default": "<p>FAQ</p>",
+      "label": "Page Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "menu",
+      "default": true,
+      "label" : "Show menu?"
+    },
+    {
+      "type": "text",
+      "id": "group-1",
+      "label": "Group 1",
+      "default": "Orders & Returns"
+    },
+    {
+      "type": "text",
+      "id": "group-2",
+      "label": "Group 2",
+      "default": "Shipping"
+    },
+    {
+      "type": "text",
+      "id": "group-3",
+      "label": "Group 3",
+      "default": "Gift Cards"
+    },
+    {
+      "type": "text",
+      "id": "group-4",
+      "label": "Group 4",
+      "default": "General"
+    },
+    {
+      "type": "text",
+      "id": "group-5",
+      "label": "Group 5",
+      "default": "Products"
+    },
+    {
+      "type": "text",
+      "id": "group-6",
+      "label": "Group 6",
+      "default": "Other"
+    },
+    {
+        "type": "select",
+        "id": "text-alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }, {
+            "value": "justify",
+            "label": "Justify"
+          }
+        ],
+        "default": "left",
+        "label": "Text Alignment"
+      },
+      {
+        "type": "select",
+        "id": "bg-color",
+        "options": [
+          {
+            "value": "white",
+            "label": "White"
+          },
+           {
+            "value": "black",
+            "label": "Black"
+          },
+          {
+            "value": "extralight",
+            "label": "Extra Light"
+          },
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "dark",
+            "label": "Dark"
+          }, {
+            "value": "extradark",
+            "label": "Extra Dark"
+          }
+        ],
+        "default": "light",
+        "label": "Bg Color"
+      },
+      {
+        "type": "select",
+        "id": "container-width",
+        "options": [
+          {
+            "value": "small",
+            "label": "Small"
+          }, {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "large",
+            "label": "Large"
+          }, {
+            "value": "xlarge",
+            "label": "X Large"
+          }, {
+            "value": "none",
+            "label": "No container"
+          }
+        ],
+        "default": "large",
+        "label": "Container Width"
+      },
+      {
+        "type": "select",
+        "id": "padding-top",
+        "options": [
+          {
+            "value": "0",
+            "label": "None"
+          },
+          {
+            "value": "tiny",
+            "label": "Tiny"
+          },
+          {
+            "value": "xxsmall",
+            "label": "XX Small"
+          },
+          {
+            "value": "xsmall",
+            "label": "X Small"
+          }, {
+            "value": "small",
+            "label": "Small"
+          }, {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "large",
+            "label": "Large"
+          }, {
+            "value": "xlarge",
+            "label": "X Large"
+          }, {
+            "value": "xxlarge",
+            "label": "XX Large"
+          }, {
+            "value": "huge",
+            "label": "Huge"
+          }, {
+            "value": "xhuge",
+            "label": "X Huge"
+          }, {
+            "value": "xxhuge",
+            "label": "XX Huge"
+          }
+        ],
+        "default": "xxlarge",
+        "label": "Top Padding"
+      }, {
+        "type": "select",
+        "id": "padding-bottom",
+        "options": [
+          {
+            "value": "0",
+            "label": "None"
+          },
+          {
+            "value": "tiny",
+            "label": "Tiny"
+          },
+          {
+            "value": "xxsmall",
+            "label": "XX Small"
+          },
+          {
+            "value": "xsmall",
+            "label": "X Small"
+          }, {
+            "value": "small",
+            "label": "Small"
+          }, {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "large",
+            "label": "Large"
+          }, {
+            "value": "xlarge",
+            "label": "X Large"
+          }, {
+            "value": "xxlarge",
+            "label": "XX Large"
+          }, {
+            "value": "huge",
+            "label": "Huge"
+          }, {
+            "value": "xhuge",
+            "label": "X Huge"
+          }, {
+            "value": "xxhuge",
+            "label": "XX Huge"
+          }
+        ],
+        "default": "huge",
+        "label": "Bottom Padding"
+      }, {
+        "type": "select",
+        "id": "fade",
+        "options": [
+          {
+            "value": "0",
+            "label": "None"
+          }, {
+            "value": "1",
+            "label": "First (Fast)"
+          }, {
+            "value": "2",
+            "label": "Second (Medium)"
+          }, {
+            "value": "3",
+            "label": "Third (Slow)"
+          }
+        ],
+        "default": "1",
+        "label": "Fade-in"
+      }, {
+        "type": "text",
+        "id": "anchor-id",
+        "label": "Anchor ID",
+        "info": "Useful for linking to this part of the page"
+      }, {
+        "type": "select",
+        "id": "visibility",
+        "options": [
+          {
+            "value": "show",
+            "label": "Desktop and Mobile"
+          }, {
+            "value": "hide-mobile-landscape",
+            "label": "Desktop Only"
+          }, {
+            "value": "show-mobile-landscape",
+            "label": "Mobile Only"
+          }, {
+            "value": "hidden",
+            "label": "Hidden"
+          }
+        ],
+        "default": "show",
+        "label": "Visibility"
+      }
+  ],
+  "blocks": [
+    {
+      "type": "q-a",
+      "name": "Q&A", 
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Lorem ipsum dolor sit amet?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> "
+        },
+        {
+          "type": "select",
+          "label": "Group",
+          "options": [
+            {
+              "label": "Group 1",
+              "value": "group-1"
+            },
+            {
+              "label": "Group 2",
+              "value": "group-2"
+            },
+            {
+              "label": "Group 3",
+              "value": "group-3"
+            },
+            {
+              "label": "Group 4",
+              "value": "group-4"
+            },
+            {
+              "label": "Group 5",
+              "value": "group-5"
+            },
+            {
+              "label": "Group 6",
+              "value": "group-6"
+            }
+          ],
+          "id": "group",
+          "default": "group-1"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

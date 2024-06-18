@@ -1,0 +1,460 @@
+{% if section.settings.show_banner == true %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
+<script> 
+ var currentSessionAction;
+  var subscribed;
+  if (!!Cookies.get('subscribed')) {
+   subscribed = true;
+  };
+ if (!!Cookies.get('currentSessionAction')) {
+   currentSessionAction = true;
+  };
+  
+  if (!!Cookies.get('visitscookie') && !Cookies.get('currentSession')) {
+    var visitsCookie = parseInt(Cookies.get('visitscookie'));
+    visitsCookie += 1;
+  } else if (!!Cookies.get('visitscookie')) {
+    var visitsCookie = parseInt(Cookies.get('visitscookie'));
+  } else {
+    var visitsCookie = 1;
+  }
+  Cookies.set('visitscookie', visitsCookie, { expires: {{ section.settings.cookie-days }}, sameSite: 'strict', secure: true });
+  Cookies.set('currentSession', true, { expires: 0.05, sameSite: 'strict', secure: true });
+  
+</script>
+{% endif %}
+<div class="nav-component">
+{% if section.settings.show_banner == true %}
+<div id="banner" style="display:none;" class="banner-wrapper bg-color-{{ section.settings.banner-bg }} 
+{% if section.settings.show_popup == true %}banner-wrapper-clickable" onclick="remove(this){% endif %}">
+
+<div data-w-id="41950cc4-b1d8-6abe-a816-684c84a27af4" class="banner-text-wrapper">{% if section.settings.banner-link %}<a href="{{section.settings.banner-link}}"{% else %}<div {% endif %} class="banner" data-w-id="a864a441-e04f-7518-c2f8-8b9be2873462">{{section.settings.banner-text}}{% if section.settings.banner-link %}</a>{% else %}</div>{% endif %}</div>
+  <a data-w-id="900e0127-2566-0405-a3b2-6fa9bf780808" href="#" name="close" class="banner-close w-inline-block">
+    <div class="w-embed"><svg width="100%" height="100%" viewbox="0 0 18 18" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.6452 15.4091L1.7832 1.68506" stroke="currentColor"></path>
+        <path d="M1.68417 15.3542L15.4082 1.49219" stroke="currentColor"></path>
+      </svg></div>
+  </a>
+</div>
+
+{% if section.settings.show_popup == true and customer.accepts_marketing != true %}
+<script>
+  $(document).ready(function () {
+    if (visitsCookie <= {{ section.settings.cookie-visits }} & subscribed != true) {
+      document.getElementById("banner").style.display = "flex";
+    } else {
+      document.getElementById("banner").style.display = "none";
+    }
+  });
+</script>
+{% elsif section.settings.show_popup == true and customer.accepts_marketing == true %}
+  <script>
+  $(document).ready(function () {
+    document.getElementById("banner").style.display = "none";
+  });
+</script>
+{% else %}
+<script>
+  document.getElementById("banner").style.display = "flex";
+</script>
+{% endif %}
+{% endif %}
+
+
+<div class="nav-menu-component">
+  <div data-w-id="6a4b46f0-d81b-3270-fe88-a54271a8b712" data-animation="over-left" data-collapse="medium"
+    data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="nav w-nav">
+    <nav role="navigation" class="nav-menu-layout page-padding w-nav-menu bg-color-{{section.settings.nav-bg}}">
+      <div class="nav-logo-wrapper">
+        <a href="{{ shop.url }}" aria-current="page" class="nav-logo-link" name="Eyeswoon Home" alt="Eyeswoon Home">
+
+          {% if section.settings.logo_image != blank %}
+          <img src="{{ section.settings.logo_image | image_url }}" alt="Eyeswoon Logo" class="nav-logo" loading="lazy">
+
+          {% else %}
+
+          {% render 'wordmark.svg' %}
+
+          {% endif %}
+
+        </a>
+      </div>
+
+
+
+      <div class="nav-link-wrapper">
+
+        {% for link in linklists.main-menu.links %}
+        {% if link.links.size == 0 %}
+        <a href="{{ link.url }}" class="nav-link w-nav-link">{{ link.title }}</a>
+        {% else %}
+        <div class="nav-dropdown-wrapper _2">
+          <div class="nav-link _2">{{ link.title }}</div>
+          <div class="nav-dropdown-list _2 bg-color-{{ section.settings.dropdown-bg }}">
+            <div class="nav-dropdown-header-back _2 bg-color-{{ section.settings.dropdown-bg }}">{{ link.title }}</div>
+            <div class="nav-dropdown-layout _2">
+              {% for child_link in link.links %}
+              <div id="w-node-_6a4b46f0-d81b-3270-fe88-a54271a8b721-71a8b711" class="nav-dropdown-column _2">
+                
+                <a href="{{ child_link.url }}" class="dropdown-sublink-header hide-tablet">{{ child_link.title }}</a>
+                {% if child_link.links.size == 0 %}
+                <a href="{{ child_link.url }}" class="dropdown-sublink-header _2">{{ child_link.title }}</a>
+                
+               {% elsif forloop.index == 1 %}
+                {% comment %}{% elsif forloop.index == 1 and child_link.title contains "Shop" %}{% endcomment %}
+                <a href="{{ child_link.url }}" class="dropdown-sublink-header _2">{{ child_link.title }}</a>
+                  {% for grandchild_link in child_link.links %}
+                  <a href="{{ grandchild_link.url }}" style="margin-top:24px;" class="dropdown-sublink-header hide-tablet">{{ grandchild_link.title }}</a>
+                  <a href="{{ grandchild_link.url }}" style="margin-top:45px;" class="dropdown-sublink-header _2">{{ grandchild_link.title }}</a>
+                  {% endfor %}
+                
+                {% else %}
+                <div class="dropdown-sublink-header _2">{{ child_link.title }}</div><img src="{{ 'arrow-down.svg' | asset_url }}" height="18" width="14" alt="Dropdown" loading="lazy" class="dropdown-sublink-header-arrow">
+                <div class="dropdown-sublink-wrapper _2">
+                  {% for grandchild_link in child_link.links %}
+                  <a href="{{ grandchild_link.url }}" class="dropdown-sublink">{{ grandchild_link.title }}</a>
+                  {% endfor %}
+                </div>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+
+        {% endfor %}
+      </div>
+
+      <div class="nav-link-wrapper">
+        <a href="{{ routes.search_url }}" class="nav-link hide-tablet w-nav-link" name="search">Search</a>
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
+            <a class="nav-link w-nav-link" href="{{ routes.account_url }}">Account</a>
+          {% else %}
+            <a class="nav-link w-nav-link" href="{{ routes.account_login_url }}">Login</a>
+          {% endif %}
+        {% endif %}
+        <a href="/" class="nav-link hide-tablet w-inline-block wishlist-king-temp">
+        <div>{% render 'wishlist.svg' %}</div>
+       </a>
+        <a id="menu-cart" href="{{ routes.cart_url }}" class="nav-link w-nav-link">bag (<span style="display:inline" class="cart-count" id="menu-cart-count">{{- cart.item_count -}}</span>)</a>
+    </nav>
+    <div class="nav-mobile-bar-layout bg-color-{{ section.settings.nav-bg }}">
+      <div class="nav-mobile-left">
+        <div class="nav-menu-button w-nav-button">
+          <div data-w-id="6a4b46f0-d81b-3270-fe88-a54271a8b7d1" data-is-ix2-target="1" class="icon-small menu"
+            data-animation-type="lottie" data-src="{{ 'menu-open-close.json' | asset_url}}" data-loop="0"
+            data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.5625" data-duration="1"
+            data-ix2-initial-state="0" id="nav-lottie" onclick="window.scroll()"></div>
+        </div>
+        <a href="/" aria-current="page" class="nav-logo-link w-nav-brand w--current" name="Eyeswoon Home">
+
+          {% if section.settings.logo_image != blank %}
+          <img src="{{ section.settings.logo_image | image_url}}" alt="Eyeswoon Logo" class="nav-logo" loading="lazy">
+
+          {% else %}
+
+          {% render 'wordmark.svg' %}
+
+          {% endif %}
+
+        </a>
+      </div>
+      <div class="nav-mobile-right">
+        <a href="{{ routes.search_url }}" name="search" class="nav-link is-mobile-bar w-inline-block"><div class="icon-xsmall">
+        {% render 'search.svg' %}
+        </div></a>
+        <a href="/" class="nav-link is-mobile-bar w-inline-block wishlist-king-temp">
+        <div>{% render 'wishlist.svg' %}</div>
+        </a>
+        <a id="cart-mobile" href="{{ routes.cart_url }}" class="nav-link is-mobile-bar w-inline-block" name="my bag"><div class="icon-xsmall">
+        {% render 'bag.svg' %}
+        </div></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="nav-padding"></div>
+
+{% if section.settings.show_popup == true or section.settings.show_timed_popup == true %}
+<div class="popup bg-color-{{ section.settings.popup-bg }}">
+  <div class="padding-small">
+    <div class="popup-content">
+      <div class="max-width-large">
+
+        {% form 'customer', class: 'popup_form-wrapper' %}
+
+        {% if form.posted_successfully? %}
+        <script>Cookies.set('subscribed', true, { expires: 365, sameSite: 'strict', secure: true });</script>
+        <div class="margin-bottom margin-xxsmall">
+          <h3 class="heading-l">You're Subscribed</h3>
+        </div>
+        <div>{{ section.settings.subscribed-text }}</div>
+      </div>
+      <a data-w-id="3797e7d7-db8c-bf6e-2daa-4655b04de59e" href="#" class="popup-close w-inline-block"></a>
+      <script>  $('.popup').css('display', 'block'); </script>
+      {% else %}
+      <div class="margin-bottom margin-xxsmall">
+        <h2 class="heading-l">Subscribe to<br><em>Our</em> Newsletter</h2>
+      </div>
+      <div>{{ section.settings.popup-text }}</div>
+    </div>
+    <a data-w-id="3797e7d7-db8c-bf6e-2daa-4655b04de59e" href="#" class="popup-close w-inline-block"></a>
+    <div class="popup_form-block w-form">
+    <input type="hidden" name="contact[tags]" value="newsletter">
+      <input id="NewsletterForm-popup" type="email" name="contact[email]" class="form-input w-input"
+        value="{{ form.email }}" aria-required="true" autocorrect="off" autocapitalize="off" autocomplete="email" {% if
+        form.errors %} autofocus aria-invalid="true" aria-describedby="Newsletter-error-popup" {% endif %} {% if
+        form.posted_successfully? %} aria-describedby="Newsletter-success-popup" {% endif %} placeholder="Enter email"
+        required>
+      <div class="popup_form-submit-wrapper">
+        <input type="submit" name="commit" aria-label="Subscribe" value="Submit"
+          class="button-text hide-mobile-landscape w-button"><input type="submit" name="commit"
+          aria-label="Subscribe" value="Submit" class="button is-fullwidth show-mobile-landscape w-button">
+      </div>
+      {% endif %}
+
+      {% endform %}
+
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if section.settings.show_timed_popup == true and customer.accepts_marketing != true %}
+  <script>
+    if (visitsCookie <= {{ section.settings.cookie-visits }} && currentSessionAction != true && subscribed != true) {
+      let delay = {{ section.settings.popup_delay }}*1000;
+      setTimeout(() => {
+        $('.popup').css('display', 'block'); 
+        Cookies.set('currentSessionAction', true, { expires: 0.05, sameSite: 'strict', secure: true });
+      }, delay)
+    };
+  </script>
+{% endif %}
+
+      
+<div class="hidden w-embed w-script">
+<script>
+setTopPadding();
+</script>
+</div>
+</div>
+</div>
+
+{% schema %}
+{
+  "name": "Menu, Banner & Popup",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "nav-bg",
+      "options": [
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "extralight",
+          "label": "Extra Light"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "extradark",
+          "label": "Extra Dark"
+        }
+      ],
+      "default": "medium",
+      "label": "Nav Bar Color"
+    },
+    {
+      "type": "select",
+      "id": "dropdown-bg",
+      "options": [
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "extralight",
+          "label": "Extra Light"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "extradark",
+          "label": "Extra Dark"
+        }
+      ],
+      "default": "extralight",
+      "label": "Dropdown Color"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_banner",
+      "label": "Show banner?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "banner-text",
+      "label": "Banner Text",
+      "default": "Enjoy 10% off now! Subscribe to our newsletter to get your code."
+    },
+    {
+      "type": "richtext",
+      "id": "popup-text",
+      "label": "Popup Text",
+      "default": "<p>Enjoy 10% off now! Subscribe to our newsletter to get your code.</p>"
+    },
+    {
+      "type": "url",
+      "id": "banner-link",
+      "label": "Banner Link",
+      "info": "Optional. Only use this if you have subscribe popup disabled."
+    },
+    {
+      "type": "select",
+      "id": "banner-bg",
+      "options": [
+        {
+          "value": "black",
+          "label": "Black"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "extralight",
+          "label": "Extra Light"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "extradark",
+          "label": "Extra Dark"
+        }
+      ],
+      "default": "dark",
+      "label": "Banner Color"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_popup",
+      "label": "Show subscribe popup when banner is clicked?",
+      "info": "If this is checked, users who are already subscribed will not see this banner.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_timed_popup",
+      "label": "Show popup automatically after a set amount of time?",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "popup_delay",
+      "label": "How many seconds until the popup appears?",
+      "info": "This only applies of popup is set to appear automatically",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "popup-bg",
+      "options": [
+        {
+          "value": "black",
+          "label": "Black"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "extralight",
+          "label": "Extra Light"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "extradark",
+          "label": "Extra Dark"
+        }
+      ],
+      "default": "medium",
+      "label": "Popup Color"
+    },
+    {
+      "type": "richtext",
+      "id": "subscribed-text",
+      "label": "Subscription Success Text",
+      "default": "<p>You're subscribed. Welcome to Eyeswoon</p>"
+    },
+    {
+      "type": "number",
+      "id": "cookie-visits",
+      "label": "Hide banner/popup after #___ visits",
+      "info": "How many times does a user need to visit until the banner/popup is hidden? (Only applies if banner is set to popup mode)",
+      "default": 3
+    },
+    {
+      "type": "number",
+      "id": "cookie-days",
+      "label": "Days to hide banner and popup",
+      "info": "How many days until the banner shows up again on the same device?",
+      "default": 365
+    }
+  ]
+}
+{% endschema %}

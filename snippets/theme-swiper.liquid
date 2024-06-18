@@ -1,0 +1,124 @@
+themeSwiper = function() {
+    const allSliders = document.querySelectorAll('.swiper');
+    for (var i = 0; i < allSliders.length; i++) {
+        let currentSwiper = allSliders[i]
+        if (!currentSwiper.classList.contains("swiper-initialized")) {
+            navNext = currentSwiper.nextElementSibling.nextElementSibling;
+            navPrev = currentSwiper.nextElementSibling;
+            pagination = currentSwiper.nextElementSibling.nextElementSibling.nextElementSibling;
+            var swipername = new Swiper(currentSwiper, {
+                slidesPerView: "auto",
+                slidesPerGroupAuto: true,
+                speed: 400,
+                loop: true,
+                initialSlide: 0,
+                centeredSlides: false,
+                touchAngle: 15,
+                passiveListeners: true,
+                loadPrevNext: true,
+                loadPrevNextAmount: 3,
+                threshold: 30,
+                touchRatio: 1,
+                resistance: false,
+                preloadImages: true,
+                updateOnImagesReady: true,
+                freeMode: false,
+                breakpoints: {
+                    767: {
+                        speed: 800,
+                    }
+                },
+                mousewheel: {
+                    releaseOnEdges: true,
+                    forceToAxis: true,
+                    sensitivity: 0.5,
+                },
+                navigation: {
+                    nextEl: navNext,
+                    prevEl: navPrev,
+                },
+                pagination: {
+                    el: pagination,
+                    type: 'bullets',
+                    clickable: true
+                }
+            });
+        };
+    };
+
+    $('.slick-list').addClass('swiperOld');
+    $('.slick-track').addClass('swiper-wrapper');
+    $('.slick-slide').addClass('swiper-slide');
+
+    const allSlidersOld = document.querySelectorAll('.swiperOld');
+    for (var i = 0; i < allSlidersOld.length; i++) {
+        let currentSwiper = allSlidersOld[i]
+        if (!currentSwiper.classList.contains("swiper-initialized")) {
+            navNext = currentSwiper.parentElement.parentElement.firstElementChild.nextElementSibling;
+            navPrev = currentSwiper.parentElement.parentElement.firstElementChild;
+            var swipername = new Swiper(currentSwiper, {
+                slidesPerView: "auto",
+                slidesPerGroupAuto: false,
+                speed: 400,
+                //spaceBetween: 45,
+                loop: false,
+                initialSlide: 0,
+                centeredSlides: false,
+                loadPrevNext: true,
+                loadPrevNextAmount: 3,
+                shortSwipes: true,
+                threshold: 20,
+                passiveListeners: true,
+                mousewheel: {
+                    releaseOnEdges: false,
+                    forceToAxis: true,
+                    preloadImages: true,
+                    lazy: false,
+                    sensitivity: 0.5,
+                },
+                navigation: {
+                    nextEl: navNext,
+                    prevEl: navPrev,
+                }
+            });
+        };
+    };
+
+};
+window.reloadProductThumbnails = function() {
+      try {
+        currentSwiper = $('.swiper-thumbnails')[0];
+        navNext = currentSwiper.nextElementSibling.nextElementSibling;
+        navPrev = currentSwiper.nextElementSibling;
+        pagination = currentSwiper.nextElementSibling.nextElementSibling.nextElementSibling;
+        var swipername = new Swiper(currentSwiper, {
+            slidesPerView: "auto",
+            slidesPerGroupAuto: false,
+            speed: 250,
+            //spaceBetween: 45,
+            loop: false,
+            initialSlide: 0,
+            shortSwipes: true,
+            loadPrevNext: true,
+            loadPrevNextAmount: 3,
+            threshold: 20,
+            passiveListeners: true,
+            centeredSlides: false,
+            mousewheel: {
+                releaseOnEdges: false,
+                forceToAxis: true,
+                sensitivity: 0.5,
+            },
+            navigation: {
+                nextEl: navNext,
+                prevEl: navPrev,
+            },
+            pagination: {
+                el: pagination,
+                type: "bullets",
+                clickable: "false",
+            },
+        });
+    } catch {};
+}
+reloadProductThumbnails();

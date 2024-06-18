@@ -1,0 +1,209 @@
+<script src="{{ 'customer.js' | asset_url }}" defer></script>
+
+<div class="account wf-section">
+  <div class="page-padding">
+    <div class="container-large w-container">
+      <h1 class="heading-l"><em>My</em> Addresses</h1>
+      <div class="account_layout">
+       <div class="account_menu">
+          <a href="{{ routes.account_url }}" class="text-link is-tab favorites w-inline-block">
+            <div>My Info</div>
+          </a>
+          <a href="/pages/orders" class="text-link is-tab favorites w-inline-block">
+            <div>Orders</div>
+          <a href="{{ routes.account_addresses_url }}" class="text-link is-tab favorites w-inline-block">
+            <div>Addresses</div>
+          </a>
+          <a href="/pages/favorites" class="text-link is-tab favorites w-inline-block">
+            <div>My Favorites</div>
+          </a>
+          <a href="{{ routes.account_logout_url }}" class="text-link is-tab favorites w-inline-blockk">
+            <div>Log Out</div>
+          </a>
+        </div>
+        <div class="tabs-content">
+          <div class="account_addresses">
+
+            <div class="account_address-wrapper">
+              <div class="account_address-title">
+                <h2 class="heading-m">Default Address</h2>
+
+              </div>
+              <div class="account_address">
+                {{ customer.default_address | format_address }}
+                {{customer.default_address.phone}}
+              </div>
+              <div class="account_address-form-wrapper" style="display:none;">
+                {% form 'customer_address', customer.default_address, class: 'account_address-form' %}
+                <input type="text" class="form-input w-input" maxlength="256" name="address[first_name]"
+                  data-name="First Name" placeholder="First name" required="" value="{{customer.default_address.first_name}}">
+                <input type="text" class="form-input w-input" maxlength="256" name="address[last_name]"
+                  data-name="Last Name" placeholder="Last name" required="" value="{{customer.default_address.last_name}}">
+                <input type="text" class="form-input w-input" maxlength="256" name="address[company]"
+                  data-name="Company" placeholder="Company" value="{{customer.default_address.company}}">
+                <input type="tel" class="form-input w-input" maxlength="256" name="address[phone]" data-name="Phone"
+                  placeholder="Phone" value="{{customer.default_address.phone}}">
+                <input type="text" class="form-input w-node-_818e9f58-6153-507e-9ae9-3d4a5ce1bc18-44565af9 w-input"
+                  maxlength="256" name="address[address1]" data-name="Address line 1" placeholder="Address Line 1" required="" value="{{customer.default_address.address1}}">
+                <input type="text" class="form-input w-node-_88993c71-6dc4-059e-c2ff-92fe0017f120-44565af9 w-input"
+                  maxlength="256" name="address[address2]" data-name="Address line 2" placeholder="Address Line 2" value="{{customer.default_address.address2}}">
+                <input type="text" class="form-input w-input" maxlength="256" name="address[city]" data-name="city"
+                  placeholder="City" required="" value="{{customer.default_address.city}}">
+                  <input type="text" class="form-input w-input" maxlength="256" name="address[province]" data-name="province"
+                  placeholder="State or province" required="" value="{{customer.default_address.province}}">
+                  
+                <select
+                  class="form-input is-select"
+                  name="address[country]"
+                  data-default="{{ customer.default_address.country }}"
+                  autocomplete="country"
+                >
+                  {{ all_country_option_tags }}
+                </select>
+               
+                <input type="text" class="form-input w-input" maxlength="256" name="address[zip]" data-name="ZIP"
+                  placeholder="ZIP" required="" value="{{customer.default_address.zip}}">
+                <div id="w-node-_0037107f-edb5-37b7-5771-b8dda84ea2f2-44565af9" class="account_address-submit-wrapper margin-bottom margin-xsmall">
+                  <button id="w-node-_0037107f-edb5-37b7-5771-b8dda84ea2f0-44565af9" type="submit" value="Save"
+                    class="button is-fullwidth w-button">Save Address</button>
+                </div>
+                {% endform %}
+                <a href="#" class="button-text" onclick="$(this).parent().css('display', 'none');$(this).parent().siblings('.account_address-footer').css('display', 'block');$(this).parent().siblings('.account_address').css('display', 'block');">Cancel</a>
+              </div>
+              <div class="account_address-footer">
+                <div class="account_address-button-wrapper">
+
+                  <a href="#" onclick="$(this).parent().parent().css('display', 'none');$(this).parent().parent().siblings('.account_address-form-wrapper').css('display', 'block');$(this).parent().parent().siblings('.account_address').css('display', 'none');" class="edit-address button-text">Edit</a>
+                  
+                </div>
+              </div>
+            </div>
+
+
+            {% for address in customer.addresses %}
+            {% if address.id != customer.default_address.id %}
+            
+            <div class="account_address-wrapper">
+              <div class="account_address-title">
+                <h2 class="heading-m">Saved Address</h2>
+
+              </div>
+              <div class="account_address">
+                {{ address | format_address }}
+                {{address.phone}}
+              </div>
+              <div class="account_address-form-wrapper" style="display:none;">
+                {% form 'customer_address', address, class: 'account_address-form' %}
+                <input type="text" class="form-input w-input" maxlength="256" name="address[first_name]"
+                  data-name="First Name" placeholder="First name" required="" value="{{address.first_name}}">
+                <input type="text" class="form-input w-input" maxlength="256" name="address[last_name]"
+                  data-name="Last Name" placeholder="Last name" required="" value="{{address.last_name}}">
+                <input type="text" class="form-input w-input" maxlength="256" name="address[company]"
+                  data-name="Company" placeholder="Company" value="{{address.company}}">
+                <input type="tel" class="form-input w-input" maxlength="256" name="address[phone]" data-name="Phone"
+                  placeholder="Phone" value="{{address.phone}}">
+                <input type="text" class="form-input w-node-_818e9f58-6153-507e-9ae9-3d4a5ce1bc18-44565af9 w-input"
+                  maxlength="256" name="address[address1]" data-name="Address line 1" placeholder="Address Line 1" required="" value="{{address.address1}}">
+                <input type="text" class="form-input w-node-_88993c71-6dc4-059e-c2ff-92fe0017f120-44565af9 w-input"
+                  maxlength="256" name="address[address2]" data-name="Address line 2" placeholder="Address Line 2" value="{{address.address2}}">
+                <input type="text" class="form-input w-input" maxlength="256" name="address[city]" data-name="city"
+                  placeholder="City" required="" value="{{address.city}}">
+                  <input type="text" class="form-input w-input" maxlength="256" name="address[province]" data-name="province"
+                  placeholder="State or province" required="" value="{{address.province}}">
+                  
+                <select
+                  class="form-input is-select"
+                  name="address[country]"
+                  data-default="{{ address.country }}"
+                  autocomplete="country"
+                >
+                  {{ all_country_option_tags }}
+                </select>
+               
+                <input type="text" class="form-input w-input" maxlength="256" name="address[zip]" data-name="ZIP"
+                  placeholder="ZIP" required="" value="{{ address.zip }}">
+                <div id="w-node-_0037107f-edb5-37b7-5771-b8dda84ea2f2-44565af9" class="account_address-submit-wrapper margin-bottom margin-xsmall">
+                  <button id="w-node-_0037107f-edb5-37b7-5771-b8dda84ea2f0-44565af9" type="submit" value="Save"
+                    class="button is-fullwidth w-button">Save Address</button>
+                </div>
+                {% endform %}
+                <a href="#" class="button-text" onclick="$(this).parent().css('display', 'none');$(this).parent().siblings('.account_address-footer').css('display', 'block');$(this).parent().siblings('.account_address').css('display', 'block');">Cancel</a>
+              </div>
+              <div class="account_address-footer">
+                <div class="account_address-button-wrapper">
+
+                  <a href="#" onclick="$(this).parent().parent().css('display', 'none');$(this).parent().parent().siblings('.account_address-form-wrapper').css('display', 'block');$(this).parent().parent().siblings('.account_address').css('display', 'none');" class="edit-address button-text">Edit</a>
+                  {%- form 'customer_address', address -%}
+                  <input style="display:none;" type="checkbox" checked="checked" id="address_default_address_{{address.id}}" name="address[default]">
+                  <button class="button-text" type="submit">Make Default</button>
+                  {%- endform -%}
+                  <form class="address-delete-form" method="post" action="/account/addresses/{{ address.id }}">
+                    <input type="hidden" name="_method" value="delete">
+                    <button class="button-text" type="submit">Delete</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            {% endif %}
+            {% endfor %}
+
+
+
+          
+          <a href="#" onclick="$(this).css('display', 'none');$('.add-address-form').css('display', 'block');" class="add-address-btn button w-button">ADD A NEW ADDRESS</a>
+          
+          <div class="add-address-form account_address-form-wrapper" style="display:none;">
+            <div class="account_address-title">
+              <h2 class="heading-m">Add a New Address</h2>
+
+            </div>
+              {%  form 'customer_address', customer.new_address, class: 'account_address-form' %}
+              <input type="text" class="form-input w-input" maxlength="256" name="address[first_name]"
+                data-name="First Name" placeholder="First name" required="" value="">
+              <input type="text" class="form-input w-input" maxlength="256" name="address[last_name]"
+                data-name="Last Name" placeholder="Last name" required="" value="">
+              <input type="text" class="form-input w-input" maxlength="256" name="address[company]"
+                data-name="Company" placeholder="Company" value="">
+              <input type="tel" class="form-input w-input" maxlength="256" name="address[phone]" data-name="Phone"
+                placeholder="Phone" value="">
+              <input type="text" class="form-input w-node-_818e9f58-6153-507e-9ae9-3d4a5ce1bc18-44565af9 w-input"
+                maxlength="256" name="address[address1]" data-name="Address line 1" placeholder="Address Line 1" required="" value="">
+              <input type="text" class="form-input w-node-_88993c71-6dc4-059e-c2ff-92fe0017f120-44565af9 w-input"
+                maxlength="256" name="address[address2]" data-name="Address line 2" placeholder="Address Line 2" value="">
+              <input type="text" class="form-input w-input" maxlength="256" name="address[city]" data-name="city"
+                placeholder="City" required="" value="">
+                <input type="text" class="form-input w-input" maxlength="256" name="address[province]" data-name="province"
+                placeholder="State or province" required="" value="">
+                
+              <select
+                class="form-input is-select"
+                name="address[country]"
+                data-default="United States"
+                autocomplete="country"
+              >
+                {{ all_country_option_tags }}
+              </select>
+             
+              <input type="text" class="form-input w-input" maxlength="256" name="address[zip]" data-name="ZIP"
+                placeholder="ZIP" required="" value="">
+              <div id="w-node-_0037107f-edb5-37b7-5771-b8dda84ea2f2-44565af9" class="account_address-submit-wrapper margin-bottom margin-xsmall">
+                <button id="w-node-_0037107f-edb5-37b7-5771-b8dda84ea2f0-44565af9" type="submit" value="Save"
+                  class="button is-fullwidth w-button">Save Address</button>
+              </div>
+              {% endform %}
+              <a href="#" class="button-text" onclick="$(this).parent().css('display', 'none');$('.add-address-btn').css('display', 'inline-block');">Cancel</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "main-addresses"
+}
+{% endschema %}

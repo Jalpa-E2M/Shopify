@@ -1,0 +1,83 @@
+<div id="{{ section.settings.anchor-id }}" class="divider-line bg-color-{{ section.settings.bg-color }} fade-in-{{ section.settings.fade-in }}"></div>
+
+{% schema %}
+    {
+        "name": "Divider Line",
+        "tag": "div",
+        "settings": [
+        {
+            "type": "select",
+            "id": "bg-color",
+            "options": [
+            {
+                "value": "black",
+                "label": "Black"
+            },
+            {
+                "value": "white",
+                "label": "White"
+            },
+            {
+                "value": "extralight",
+                "label": "Extra Light"
+            },
+            {
+                "value": "light",
+                "label": "Light"
+            },
+            {
+                "value": "medium",
+                "label": "Medium"
+            },
+            {
+                "value": "dark",
+                "label": "Dark"
+            },
+            {
+                "value": "extradark",
+                "label": "Extra Dark"
+            }
+            ],
+            "default": "white",
+            "label": "Color"
+        },
+        {
+            "type": "select",
+            "id": "fade-in",
+            "options": [
+            {
+                "value": "1",
+                "label": "Fade In Fast"
+            },
+            {
+                "value": "2",
+                "label": "Fade-in Normal"
+            },
+            {
+                "value": "3",
+                "label": "Fade-in Slow"
+            },
+            {
+                "value": "0",
+                "label": "No Fade-in"
+            }
+            ],
+            "default": "0",
+            "label": "Fade-in",
+            "info": "Should this section have a fade-in on scroll?"
+        },
+        {
+            "type": "text",
+            "id": "anchor-id",
+            "label": "Anchor ID",
+            "info": "Useful for linking to this part of the page"
+        }
+        ],
+        "presets": [
+            {
+                "name": "Divider Line",
+                "category": "Utilities"
+            }
+        ]
+    }
+{% endschema %}

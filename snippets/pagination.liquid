@@ -1,0 +1,98 @@
+{% comment %}
+  Renders a set of links for paginated results. Must be used within paginate tags.
+
+  Usage:
+  {% paginate results by 2 %}
+    {% render 'pagination', paginate: paginate, anchor: '#yourID' %}
+  {% endpaginate %}
+
+  Accepts:
+  - paginate: {Object}
+  - anchor: {String} (optional) This can be added so that on page reload it takes you to wherever you've placed your anchor tag.
+{% endcomment %}
+
+{% comment %}
+   {%- if paginate.parts.size > 0 -%}
+    <div class="pagination-wrapper">
+      <nav class="pagination" role="navigation">
+        <ul class="pagination__list list-unstyled" role="list">
+        {%- if paginate.previous -%}
+          <li>
+            <a href="{{ paginate.previous.url }}{{ anchor }}" class="pagination__item pagination__item--next pagination__item-arrow link motion-reduce" aria-label="Prevoius Page">
+              {% render 'icon-caret' %}
+            </a>
+          </li>
+        {%- endif -%}
+
+        {%- for part in paginate.parts -%}
+          <li>
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}{{ anchor }}" class="pagination__item link">{{ part.title }}</a>
+            {%- else -%}
+              {%- if part.title == paginate.current_page -%}
+                <a role="link" aria-disabled="true" class="pagination__item pagination__item--current light" aria-current="page" ">{{ part.title }}</a>
+              {%- else -%}
+                <span class="pagination__item">{{ part.title }}</span>
+              {%- endif -%}
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+
+        {%- if paginate.next -%}
+          <li>
+            <a href="{{ paginate.next.url }}{{ anchor }}" class="pagination__item pagination__item--prev pagination__item-arrow link motion-reduce" aria-label="Next Page" >
+              {%- render 'icon-caret' -%}
+            </a>
+          </li>
+        {%- endif -%}
+        </ul>
+      </nav>
+    </div>
+  {%- endif -%}
+{% endcomment %}
+
+{%- if paginate.parts.size > 0 -%}
+  <div class="pagination wf-section">
+    <div>
+      <div class="padding-top padding-large">
+        <div class="page-padding">
+          <div class="container-large w-container">
+            <div class="pagination_layout">
+              <div class="pagination_top">
+                <a href="{{ paginate.previous.url }}" class="pagination_newer">
+                  {%- if paginate.previous -%}
+                    <div class="swiper-button-left is-pagination"></div>
+                    <div class="text-tag">PREV</div>
+                  {%- endif -%}
+                </a>
+
+                <div class="pagination_page-numbers">
+                  {%- for part in paginate.parts -%}
+                    <a
+                      href="{{ part.url }}"
+                      class="pagination_page-link w-inline-block{% if part.title == paginate.current_page %} w--current{% endif %}"
+                    >
+                      <div class="text-tag">{{ part.title }}</div>
+                    </a>
+                  {%- endfor -%}
+                </div>
+
+                <a href="{{ paginate.next.url }}" class="pagination_older-text">
+                  {%- if paginate.next -%}
+                    <div class="text-tag">NEXT</div>
+                    <div class="swiper-button-next is-pagination"></div>
+                  {%- endif -%}
+                </a>
+              </div>
+              <div class="pagination_btm">
+                <div onclick="window.scrollTo(0, 0);" class="pagination_go-up-btn">
+                  <div class="text-tag">TOP</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

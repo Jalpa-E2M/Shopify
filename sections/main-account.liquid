@@ -1,0 +1,65 @@
+<script src="{{ 'customer.js' | asset_url }}" defer></script>
+
+<div class="account wf-section">
+  <div class="page-padding">
+    <div class="container-large w-container">
+      <h1 class="heading-l"><em>My</em> Info</h1>
+      <div class="account_layout">
+        <div class="account_menu">
+          <a href="{{ routes.account_url }}" class="text-link is-tab favorites w-inline-block">
+            <div>My Info</div>
+          </a>
+          <a href="/pages/orders" class="text-link is-tab favorites w-inline-block">
+            <div>Orders</div>
+          <a href="{{ routes.account_addresses_url }}" class="text-link is-tab favorites w-inline-block">
+            <div>Addresses</div>
+          </a>
+          <a href="/pages/favorites" class="text-link is-tab favorites w-inline-block">
+            <div>My Favorites</div>
+          </a>
+          <a href="{{ routes.account_logout_url }}" class="text-link is-tab favorites w-inline-blockk">
+            <div>Log Out</div>
+          </a>
+        </div>
+        <div class="tabs-content">
+          {% if customer.default_address %}
+          <div class="account_myinfo">
+            <div>
+              <div class="account_myinfo-form-wrapper w-form">
+                {% form 'customer_address', customer.default_address, class: 'account_myinfo-form' %}
+
+                <input class="form-input w-input" id="First-Name" maxlength="256" name="address[first_name]"
+                  placeholder="First name" required="" type="text" value="{{customer.default_address.first_name}}">
+                <input class="form-input w-input" id="Last-Name" maxlength="256" name="address[last_name]"
+                  placeholder="Last name" required="" type="text" value="{{customer.default_address.last_name}}">
+                <div><input class="form-input w-input no-margin disabled" id="Email-address" maxlength="256"
+                    placeholder="Email address" type="email" value="{{ customer.email }}" disabled>
+                  <a href="https://eyeswoon-dev.myshopify.com/account/login#recover"
+                    class="button-text is-subtle is-lowercase">Update your password</a>
+                </div>
+                <input class="form-input w-input" id="Mobile-number" maxlength="256" name="address[phone]"
+                  placeholder="Mobile phone" type="tel" value="{{customer.default_address.phone}}">
+                <button type="submit" class="button is-fullwidth w-button">Save Changes</button>
+                {% endform %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  window.onload = () => {
+    typeof CustomerAddresses !== 'undefined' && new CustomerAddresses();
+  }
+</script>
+
+{% schema %}
+{
+"name": "main-account"
+}
+{% endschema %}

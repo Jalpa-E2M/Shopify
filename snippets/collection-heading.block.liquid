@@ -1,0 +1,16 @@
+{% comment schema %}
+{
+    "name":"Collection Heading"
+}
+{% endcomment %}
+
+<div class="shop_title-wrapper">
+  <div class="page-padding">
+    <h1 class="heading-l">
+    {% if request.path contains "vendors" or collection.url == request.path %}
+
+   {{ collection.title }}{% else %}{{ collection.tags[0] }}{% endif %}
+
+    </h1>
+  </div>
+</div>

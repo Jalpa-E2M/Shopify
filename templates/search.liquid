@@ -1,0 +1,313 @@
+<div class="search-section">
+  <div class="search wf-section">
+    <div class="padding-vertical padding-large">
+      <div class="page-padding">
+        <div class="container-xsmall w-container">
+          <div class="search_form w-form">
+            <form name="search" class="search_input-wrapper" action="{{ routes.search_url }}">
+              <input
+                type="text"
+                placeholder="SEARCH FOR SOMETHING"
+                name="q"
+                class="form-input is-search w-input"
+                value="{{ search.terms | escape }}"
+              >
+              <button type="submit" style="background-color:transparent" class="search-button w-inline-block"></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-results wf-section">
+    <div class="padding-xlarge padding-vertical" id="product-results">
+      <div class="page-padding">
+        <div class="container-large w-container">
+          <div class="list_wrapper">
+            <div>
+              <div class="list-header-wrapper">
+                <div class="text-align-center">
+                  <div class="heading-m">SHOP</div>
+                </div>
+                <div class="flex-grow text-align-right">
+                  <div class="view-switcher-layout">
+                    <div class="text-tag">view:</div>
+                    <a href="#" class="view-switcher_grid w-inline-block"></a>
+                    <a href="#" class="view-switcher_col w-inline-block"></a>
+                  </div>
+                </div>
+              </div>
+              <div class="list_layout is-5-col"></div>
+              <button onclick="productsFetch()"
+                style="display:none;"
+                class="load-more button-text text-align-center width-full margin-top margin-medium"
+              >
+                LOAD MORE
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="padding-xlarge padding-vertical" id="articles-results">
+      <div class="page-padding">
+        <div class="container-large w-container">
+          <div class="list_wrapper">
+            <div>
+              <div class="list-header-wrapper">
+                <div class="text-align-center">
+                  <div class="heading-m">JOURNAL</div>
+                </div>
+                <div class="flex-grow text-align-right">
+                  <div class="view-switcher-layout">
+                    <div class="text-tag">view:</div>
+                    <a href="#" class="view-switcher_grid w-inline-block"></a>
+                    <a href="#" class="view-switcher_col w-inline-block"></a>
+                  </div>
+                </div>
+              </div>
+              <div class="list_layout is-3-col"></div>
+              <button onclick="articlesFetch()"
+                style="display:none;"
+                class="load-more button-text text-align-center width-full margin-top margin-medium"
+              >
+                LOAD MORE
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if search.results_count == 0 and search.terms %}
+      <div class="padding-vertical padding-medium opacity50 text-align-center">
+        Sorry, we couldn't find any matches for your search
+      </div>
+    {% endif %}
+  </div>
+
+  {% if search.results_count == 0 %}
+    {% section 'divider-line' %}
+    {% section 'collection-list' %}
+  {% endif %}
+</div>
+
+
+<div id="results-content" style="display:none;visibility:hidden">
+    {% paginate search.results by 10 %}
+      {% for item in search.results %}
+        {%- case item.object_type -%}
+          {%- when 'product' -%}
+            {%- capture product_settings -%}featured_image,url,compare_at_price,images,id,variants,selected_or_first_available_variant,title,price{%- endcapture -%}
+            <div class="list_item-wrapper of-5 w-inline-block">
+              <div class="list_item-layout">
+                <div class="list_item-visual-content">
+                  <a href="{{ item.url }}" class="img-portrait-sm"
+                    ><img
+                      srcset="{{ item.featured_image | image_url: width: 800 }} 800w"
+                      width="auto"
+                      loading="lazy"
+                      alt=""
+                      class="img-base"
+                    >
+                    {% if item.compare_at_price %}
+                      <div class="list_item-tag">
+                        <div>Sale</div>
+                      </div>
+                    {% endif %}
+                  </a>
+
+                  <a href="{{ item.url }}" name="{{ item.title }}" alt="{{ item.title }}" class="img-overlay">
+                    {%- if item.images[1] != null -%}
+                      <img
+                        srcset="{{ item.images[1] | image_url: width: 800 }} 800w"
+                        width="auto"
+                        loading="lazy"
+                        class="list_item-image"
+                      >
+                    {%- endif %}
+                    <div buttons-product-id="{{ item.id }}" class="list_item-overlay-button-wrapper">
+                      {%- form 'product', item, class: 'flex-grow' -%}
+                        <select name="id" style="display:none;">
+                          {% for variant in item.variants %}
+                            <option
+                              value="{{ variant.id }}"
+                              {% if variant == item.selected_or_first_available_variant %}
+                                selected="selected"
+                              {% endif %}
+                            >
+                              {{ variant.title }}
+                            </option>
+                          {% endfor %}
+                        </select>
+                        {% if item.metafields.custom.affiliate_link == null %}
+                          <div class="product-form__buttons"></div>
+                        {% endif %}
+                      {%- endform -%}
+                    </div>
+                  </a>
+                </div>
+                <div class="list_item-info">
+                  <div class="list_item-header-wrapper is-price-btm">
+                    <a class="list_item-title" href="{{ item.url }}">
+                      <div class="text-item text-style-1lines">
+                        {{ item.title }}
+                      </div>
+                    </a>
+                    <div class="list_item-price">
+                      <div class="text-item opacity50 text-style-1lines margin-right margin-xxsmall">
+                        {{ item.vendor }}
+                      </div>
+                      <div class="text-item opacity50">
+                        {% if item.price > 0 %}
+                          {{ item.price | money_without_trailing_zeros }}
+                        {% else -%}
+                          FREE
+                        {%- endif %}
+                      </div>
+                      {% if item.compare_at_price %}
+                        <div class="text-item text-style-strikethrough text-color-black20">
+                          ${{ item.compare_at_price | money_without_trailing_zeros }}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+     {% unless paginate.next.is_link %}
+       <div id="end-results-products"></div>
+      {% endunless %}
+    {% endpaginate %}
+    {% paginate search.results by 6 %}
+      {% for item in search.results %}
+        {%- case item.object_type -%}
+          {%- when 'article' -%}
+            {%- capture article_settings -%}featured_image,url{%- endcapture -%}
+            <div class="list_item-wrapper of-3 w-inline-block">
+              <div class="list_item-layout">
+                <div class="list_item-visual-content">
+                  <a href="{{ item.url }}" class="img-square"
+                    ><img
+                      srcset="{{ item.image | image_url: width: 1000 }} 1000w"
+                      width="auto"
+                      loading="lazy"
+                      alt=""
+                      class="img-base"
+                    >
+                  </a>
+
+                  <a href="{{ item.url }}" alt="{{ item.title }}" class="img-overlay"> </a>
+                </div>
+                <div class="list_item-info">
+                  <div class="list_item-header-wrapper">
+                    <a class="list_item-title" href="{{ item.url }}">
+                      <div class="text-item serif text-style-3lines">
+                        {{ item.title }}
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        {%- endcase -%}
+      {% endfor %}
+      {% unless paginate.next.is_link %}
+       <div id="end-results-articles"></div>
+      {% endunless %}
+    {% endpaginate %}
+</div>
+
+
+
+<script>
+  
+const productsSection = document.querySelector("#product-results");
+const articlesSection = document.querySelector("#articles-results");
+const productsLoadMore = document.querySelector("#product-results .load-more");
+const articlesLoadMore = document.querySelector("#articles-results .load-more");
+const productsContainer = document.querySelector("#product-results .list_layout");
+const articlesContainer = document.querySelector("#articles-results .list_layout");
+var productPage = 1;
+var articlePage = 1;
+
+const fadeInObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const images = entry.target.querySelectorAll("img");
+      const imagesLoaded = Array.from(images).map(image => {
+        return new Promise(resolve => {
+          if (image.complete) {
+            resolve();
+          } else {
+            image.addEventListener("load", resolve);
+          }
+        });
+      });
+
+      Promise.all(imagesLoaded).then(() => {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }
+  });
+});
+
+const appendItemWithFadeIn = (container, item) => {
+  item.classList.add("fade-in-1");
+  container.appendChild(item);
+  fadeInObserver.observe(item);
+};
+
+const productsFetch = function() {
+  fetch(`/search?q={{ search.terms }}&type=product&page=${productPage}`)
+  .then(response => response.text())
+  .then(html => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    const products = doc.querySelectorAll("#results-content .list_item-wrapper");
+    if (products.length > 0) {
+      products.forEach(product => {
+        appendItemWithFadeIn(productsContainer, product);
+      });
+      productPage += 1;
+      productsLoadMore.style.display = "block";
+    } else if (productPage == 1) {
+      productsSection.style.display = "none";
+      productsLoadMore.style.display = "none";
+    } else {productsLoadMore.style.display = "none";}
+    if (doc.querySelector("#end-results-products")) {
+      productsLoadMore.style.display = "none";
+    }
+  });
+};
+const articlesFetch = function() {
+fetch(`/search?q={{ search.terms }}&type=article&page=${articlePage}`)
+.then(response => response.text())
+.then(html => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+  const articles = doc.querySelectorAll("#results-content .list_item-wrapper");
+  if (articles.length > 0) {
+      articles.forEach(article => {
+        appendItemWithFadeIn(articlesContainer, article);
+    });
+    articlePage += 1;
+    articlesLoadMore.style.display = "block";
+  } else if (articlePage == 1) {
+      articlesSection.style.display = "none";
+      articlesLoadMore.style.display = "none";
+    } else {articlesLoadMore.style.display = "none";}
+  if (doc.querySelector("#end-results-articles")) {
+      articlesLoadMore.style.display = "none";
+    }
+});
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+  productsFetch();
+  articlesFetch();
+});
+</script>

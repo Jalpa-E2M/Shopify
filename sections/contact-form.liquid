@@ -1,0 +1,260 @@
+<div id="{{ section.settings.anchor-id }}" class="contact wf-section bg-color-{{ section.settings.bg-color }} {{ section.settings.visibility }}">
+       <div class="padding-top padding-{{ section.settings.padding-top }}">
+    <div class="padding-bottom padding-{{ section.settings.padding-bottom }}">
+    <div class="fade-in-{{ section.settings.fade }}">
+          <div class="page-padding">
+            <div class="container-{{ section.settings.container-width }} w-container">
+          <div class="margin-bottom margin-large text-align-center">
+            <div>{{ section.settings.info }}</div>
+          </div>
+          <div class="contact-form_form-wrapper w-form">
+          {% form 'contact' %}
+           <input type="text" name="contact[name]"class="form-input w-input" maxlength="256" placeholder="Your name" required="">
+           <input type="email" class="form-input w-input" maxlength="256" name="contact[email]" data-name="Email" placeholder="Email address" required="">
+
+            <select name="contact[reason]" class="form-input is-select w-select">
+                  <option style="color:gray;" value="" disabled="" selected="">How can we help you?</option>
+                  <option value="press">Press</option>
+                  <option value="sell-with-us">Sell with us</option>
+                  <option value="partnerships">Partnerships</option>
+                  <option value="order-issue">Order issue</option>
+                  <option value="general-question">General question</option>
+            </select>
+
+
+              <textarea placeholder="Your message" maxlength="5000" name="contact[body]" required="" data-name="field" class="form-input is-text-area w-input"></textarea>
+
+              <div class="contact-form_submit-wrapper"><input type="submit" value="Send message" data-wait="Please wait..." class="button-text w-button"></div>
+
+              <div class="hidden w-embed w-script">
+                <script>
+                    $( ".form-input .is-select option:first-child" ).attr("disabled","disabled");
+                    </script>
+              </div>
+
+            {{ form.errors | default_errors }}
+            {% endform %}
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% schema %}
+{
+  "name": "Contact",
+  "tag": "section",
+  "presets": [
+      {
+        "name": "Contact"
+      }
+    ],
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "info",
+      "default": "<p>Have a question or comment?</p><p>Enter your details and we'll be happy to get back to you.</p>",
+      "label": "Info text"
+    },
+      {
+        "type": "select",
+        "id": "bg-color",
+        "options": [
+          {
+            "value": "white",
+            "label": "White"
+          },
+           {
+            "value": "black",
+            "label": "Black"
+          },
+          {
+            "value": "extralight",
+            "label": "Extra Light"
+          },
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "dark",
+            "label": "Dark"
+          }, {
+            "value": "extradark",
+            "label": "Extra Dark"
+          }
+        ],
+        "default": "light",
+        "label": "Bg Color"
+      },
+      {
+        "type": "select",
+        "id": "container-width",
+        "options": [
+          {
+            "value": "small",
+            "label": "Small"
+          }, {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "large",
+            "label": "Large"
+          }, {
+            "value": "xlarge",
+            "label": "X Large"
+          }, {
+            "value": "none",
+            "label": "No container"
+          }
+        ],
+        "default": "large",
+        "label": "Container Width"
+      },
+      {
+        "type": "select",
+        "id": "padding-top",
+        "options": [
+          {
+            "value": "0",
+            "label": "None"
+          },
+          {
+            "value": "tiny",
+            "label": "Tiny"
+          },
+          {
+            "value": "xxsmall",
+            "label": "XX Small"
+          },
+          {
+            "value": "xsmall",
+            "label": "X Small"
+          }, {
+            "value": "small",
+            "label": "Small"
+          }, {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "large",
+            "label": "Large"
+          }, {
+            "value": "xlarge",
+            "label": "X Large"
+          }, {
+            "value": "xxlarge",
+            "label": "XX Large"
+          }, {
+            "value": "huge",
+            "label": "Huge"
+          }, {
+            "value": "xhuge",
+            "label": "X Huge"
+          }, {
+            "value": "xxhuge",
+            "label": "XX Huge"
+          }
+        ],
+        "default": "xxlarge",
+        "label": "Top Padding"
+      }, {
+        "type": "select",
+        "id": "padding-bottom",
+        "options": [
+          {
+            "value": "0",
+            "label": "None"
+          },
+          {
+            "value": "tiny",
+            "label": "Tiny"
+          },
+          {
+            "value": "xxsmall",
+            "label": "XX Small"
+          },
+          {
+            "value": "xsmall",
+            "label": "X Small"
+          }, {
+            "value": "small",
+            "label": "Small"
+          }, {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "large",
+            "label": "Large"
+          }, {
+            "value": "xlarge",
+            "label": "X Large"
+          }, {
+            "value": "xxlarge",
+            "label": "XX Large"
+          }, {
+            "value": "huge",
+            "label": "Huge"
+          }, {
+            "value": "xhuge",
+            "label": "X Huge"
+          }, {
+            "value": "xxhuge",
+            "label": "XX Huge"
+          }
+        ],
+        "default": "huge",
+        "label": "Bottom Padding"
+      }, {
+        "type": "select",
+        "id": "fade",
+        "options": [
+          {
+            "value": "0",
+            "label": "None"
+          }, {
+            "value": "1",
+            "label": "First (Fast)"
+          }, {
+            "value": "2",
+            "label": "Second (Medium)"
+          }, {
+            "value": "3",
+            "label": "Third (Slow)"
+          }
+        ],
+        "default": "1",
+        "label": "Fade-in"
+      }, {
+        "type": "text",
+        "id": "anchor-id",
+        "label": "Anchor ID",
+        "info": "Useful for linking to this part of the page"
+      }, {
+        "type": "select",
+        "id": "visibility",
+        "options": [
+          {
+            "value": "show",
+            "label": "Desktop and Mobile"
+          }, {
+            "value": "hide-mobile-landscape",
+            "label": "Desktop Only"
+          }, {
+            "value": "show-mobile-landscape",
+            "label": "Mobile Only"
+          }, {
+            "value": "hidden",
+            "label": "Hidden"
+          }
+        ],
+        "default": "show",
+        "label": "Visibility"
+      }
+  ]
+}
+{% endschema %}

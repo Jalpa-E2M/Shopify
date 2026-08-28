@@ -23,7 +23,7 @@
                                     {%- form 'product', product, class:'flex-grow' -%}
                                       <select name="id" style="display:none;">
                                         {% for variant in product.variants %}
-                                          <option value="{{ variant.id }}" {% if variant==product.selected_or_first_available_variant %} selected="selected"{% endif %}>
+                                          <option value="{{ variant.id }}" {% if variant.product.selected_or_first_available_variant %} selected="selected"{% endif %}>
                                             {{ variant.title }}
                                           </option>
                                         {% endfor %}
@@ -90,7 +90,7 @@
                                     {%- form 'product', product, class:'flex-grow' -%}
                                       <select name="id" style="display:none;">
                                         {% for variant in product.variants %}
-                                          <option value="{{ variant.id }}" {% if variant==product.selected_or_first_available_variant %} selected="selected"{% endif %}>
+                                          <option value="{{ variant.id }}" {% if variant.product.selected_or_first_available_variant %} selected="selected"{% endif %}>
                                             {{ variant.title }}
                                           </option>
                                         {% endfor %}
@@ -184,3 +184,16 @@
                               </div>
                             </div>
                           </div>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% if variant==product.selected_or_first_available_variant %}"
+  to: "{% if variant.product.selected_or_first_available_variant %}"
+  position: 2718..2778
+- from: "{% if variant==product.selected_or_first_available_variant %}"
+  to: "{% if variant.product.selected_or_first_available_variant %}"
+  position: 8250..8310
+{% endcomment %}
